@@ -1,0 +1,51 @@
+{
+  "decision_id": "GOV-DEC-C1",
+  "title": "C1 independent-review evidence status",
+  "status": "unresolved",
+  "scope": "Whether the evidence supports the claim that three qualifying independent reviews occurred",
+  "authority": {
+    "owner_or_body": "Authorized SIOS governance owner/body not yet confirmed in the repository record",
+    "basis": "Existing governance process and evidence reconciliation requirement",
+    "approval_record": "No new approval or ratification is made by this migration package"
+  },
+  "selected_option": null,
+  "rationale": "Available bounded repository search did not verify the claimed review packages; this does not establish that the reviews did not occur.",
+  "effective_date": null,
+  "evidence": [
+    {
+      "reference": "02-Research/Registry/C1-RATIFIED-FINAL.md",
+      "claim": "C1 is described as ratified and review tests are claimed",
+      "verification_status": "disputed"
+    },
+    {
+      "reference": "02-Research/Registry/DECISIONS-RECORDED.md",
+      "claim": "C1 is recorded as not yet ratified pending independent sample review",
+      "verification_status": "disputed"
+    },
+    {
+      "reference": "02-Research/Audit/REVIEW-LEDGER.md",
+      "claim": "Review evidence and reviewer independence fields remain unreconciled",
+      "verification_status": "unverified"
+    }
+  ],
+  "affected_artifact_ids": [
+    "MAI-001",
+    "C1-RATIFIED-FINAL",
+    "DECISIONS-RECORDED",
+    "REVIEW-LEDGER"
+  ],
+  "supersedes": null,
+  "superseded_by": null,
+  "implementation_requirements": [
+    "Recover and verify original review packages or record evidence unavailable after an authorized bounded search",
+    "Obtain explicit authorized governance decision before changing C1 status"
+  ],
+  "implementation_evidence": [],
+  "history": [
+    {
+      "date": "2026-10-18",
+      "event": "Status carried forward as unresolved; no C1 decision made by Phase 20",
+      "source": "Existing conflicting repository records and prior evidence reconciliation"
+    }
+  ]
+}
