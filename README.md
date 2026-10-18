@@ -8,6 +8,9 @@ This is the SIOS Enterprise Workspace, as originally frozen 2026-07-14, **plus t
 - `WORKSPACE_MANIFEST.md` — workspace identity and principles (original)
 - `13-Workspace/ARS-001.md` — a 15-minute narrative walkthrough of what actually happened, told through one real finding
 - `13-Workspace/Reports/FINAL-REPORT.md` — compact pilot results summary
-- `13-Workspace/Reports/COMPREHENSIVE-STATUS-REPORT.md` — where the project stands today
+- `13-Workspace/Reports/COMPREHENSIVE-STATUS-REPORT.md` — the historical comprehensive status report
+- `13-Workspace/Reports/CURRENT-STATE-RECONCILIATION-2026-10.md` — current conflicts and decisions required before implementation
 - `02-Research/Audit/ICRAA-Part1.md` — the most rigorous available check on everything else in this archive
+- `02-Research/Audit/REVIEW-LEDGER.md` — review claims and evidence ledger
+- `02-Research/Audit/INDEPENDENT-REVIEW-PROTOCOL.md` — proposed method for independent review
 - `CHANGELOG.md` — every change made to the original Frozen baseline, in one place
