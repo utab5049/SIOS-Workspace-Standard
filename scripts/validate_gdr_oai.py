@@ -14,6 +14,7 @@ GDR_SCHEMA = ROOT / "02-Research/Registry/schemas/gdr.schema.json"
 OAI_SCHEMA = ROOT / "02-Research/Registry/schemas/oai.schema.json"
 STAGED_GDR = ROOT / "02-Research/Registry/migration/staged/gdr"
 STAGED_OAI = ROOT / "02-Research/Registry/migration/staged/oai"
+PROPOSED_OAI = ROOT / "02-Research/Registry/migration/proposals/phase-27-oai-candidates"
 
 
 def load_json(path: Path):
@@ -74,6 +75,32 @@ def validate_package():
             if record_id in expected and staged_record != expected[record_id]:
                 errors.append(f"{label} staged record differs from migration map: {record_id}.json")
 
+    # Phase 27 proposals are schema-validated separately and never counted as staged/canonical records.
+    proposed_paths = sorted(PROPOSED_OAI.glob("*.json")) if PROPOSED_OAI.is_dir() else []
+    proposed_records = []
+    proposed_ids = []
+    for proposed_path in proposed_paths:
+        try:
+            record = load_json(proposed_path)
+        except ValueError as exc:
+            errors.append(str(exc))
+            continue
+        proposed_records.append((proposed_path, record))
+        proposed_ids.append(record.get("artifact_id"))
+        for error in sorted(oai_validator.iter_errors(record), key=lambda e: list(map(str, e.path))):
+            errors.append(f"Phase 27 proposed OAI {proposed_path.name}: {error.message}")
+        if proposed_path.stem != record.get("artifact_id"):
+            errors.append(f"Phase 27 proposed OAI filename does not match artifact_id: {proposed_path.name}")
+        for provenance in record.get("provenance", []):
+            source_path = provenance.get("source_path")
+            if source_path and not (ROOT / source_path).is_file():
+                errors.append(
+                    f"Phase 27 proposed OAI {record.get('artifact_id')} provenance source does not exist: {source_path}"
+                )
+
+    if len(proposed_ids) != len(set(proposed_ids)):
+        errors.append("duplicate artifact_id in Phase 27 proposed OAI records")
+
     decision_ids = [record.get("decision_id") for record in decisions]
     artifact_ids = [record.get("artifact_id") for record in artifacts]
     if len(decision_ids) != len(set(decision_ids)):
@@ -87,6 +114,13 @@ def validate_package():
             if decision_id not in known_decisions:
                 errors.append(
                     f"operational_inventory[{index}] references unknown decision_id {decision_id!r}"
+                )
+
+    for proposed_path, artifact in proposed_records:
+        for decision_id in artifact.get("source_decision_ids", []):
+            if decision_id not in known_decisions:
+                errors.append(
+                    f"Phase 27 proposed OAI {artifact.get('artifact_id')} references unknown decision_id {decision_id!r}"
                 )
 
     for index, artifact in enumerate(artifacts):
