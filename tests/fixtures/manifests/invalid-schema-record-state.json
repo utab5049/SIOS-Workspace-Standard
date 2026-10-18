@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0.0",
+  "authority_state": "proposed",
+  "artifacts": [
+    {
+      "artifact_id": "EXAMPLE-002",
+      "status": "Draft",
+      "version": null,
+      "path": null,
+      "record_state": "not-a-state"
+    }
+  ]
+}
