@@ -1,0 +1,494 @@
+{
+  "crosswalk_id": "XWALK-025",
+  "repository": "utab5049/SIOS-Workspace-Standard",
+  "source_commit": "5bc0ff427e7937139e85d3222e65cb0f4b1ab11b",
+  "source_tree_sha": "5bc0ff427e7937139e85d3222e65cb0f4b1ab11b",
+  "source_artifact": "01-Foundation/Registry/MAI-001.md",
+  "matching_rule": "Exact filename basename equals artifact identifier plus .md or .json; no fuzzy substring matching.",
+  "summary": {
+    "candidate_identifiers": 48,
+    "exactly_one_path": 47,
+    "no_exact_path": 1,
+    "multiple_exact_paths": 0
+  },
+  "records": [
+    {
+      "artifact_id": "SIOS-BASELINE-001",
+      "source": "01-Foundation/Registry/MAI-001.md",
+      "path_match_status": "exact_basename_match",
+      "matched_paths": [
+        "01-Foundation/Constitution/SIOS-BASELINE-001.md"
+      ],
+      "content_status": "not_verified_by_filename_scan",
+      "registry_status_claim": "not independently validated"
+    },
+    {
+      "artifact_id": "SIOS-MAN-001",
+      "source": "01-Foundation/Registry/MAI-001.md",
+      "path_match_status": "exact_basename_match",
+      "matched_paths": [
+        "01-Foundation/Constitution/SIOS-MAN-001.md"
+      ],
+      "content_status": "not_verified_by_filename_scan",
+      "registry_status_claim": "not independently validated"
+    },
+    {
+      "artifact_id": "AERA-001A",
+      "source": "01-Foundation/Registry/MAI-001.md",
+      "path_match_status": "exact_basename_match",
+      "matched_paths": [
+        "01-Foundation/Enterprise-Architecture/AERA-001A.md"
+      ],
+      "content_status": "not_verified_by_filename_scan",
+      "registry_status_claim": "not independently validated"
+    },
+    {
+      "artifact_id": "AERA-001B",
+      "source": "01-Foundation/Registry/MAI-001.md",
+      "path_match_status": "exact_basename_match",
+      "matched_paths": [
+        "01-Foundation/Enterprise-Architecture/AERA-001B.md"
+      ],
+      "content_status": "not_verified_by_filename_scan",
+      "registry_status_claim": "not independently validated"
+    },
+    {
+      "artifact_id": "AERA-001C",
+      "source": "01-Foundation/Registry/MAI-001.md",
+      "path_match_status": "exact_basename_match",
+      "matched_paths": [
+        "01-Foundation/Enterprise-Architecture/AERA-001C.md"
+      ],
+      "content_status": "not_verified_by_filename_scan",
+      "registry_status_claim": "not independently validated"
+    },
+    {
+      "artifact_id": "AERA-001D",
+      "source": "01-Foundation/Registry/MAI-001.md",
+      "path_match_status": "exact_basename_match",
+      "matched_paths": [
+        "01-Foundation/Enterprise-Architecture/AERA-001D.md"
+      ],
+      "content_status": "not_verified_by_filename_scan",
+      "registry_status_claim": "not independently validated"
+    },
+    {
+      "artifact_id": "AERA-001E",
+      "source": "01-Foundation/Registry/MAI-001.md",
+      "path_match_status": "exact_basename_match",
+      "matched_paths": [
+        "01-Foundation/Enterprise-Architecture/AERA-001E.md"
+      ],
+      "content_status": "not_verified_by_filename_scan",
+      "registry_status_claim": "not independently validated"
+    },
+    {
+      "artifact_id": "AERA-001F",
+      "source": "01-Foundation/Registry/MAI-001.md",
+      "path_match_status": "exact_basename_match",
+      "matched_paths": [
+        "01-Foundation/Enterprise-Architecture/AERA-001F.md"
+      ],
+      "content_status": "not_verified_by_filename_scan",
+      "registry_status_claim": "not independently validated"
+    },
+    {
+      "artifact_id": "CSL-001",
+      "source": "01-Foundation/Registry/MAI-001.md",
+      "path_match_status": "exact_basename_match",
+      "matched_paths": [
+        "01-Foundation/Standards/CSL-001.md"
+      ],
+      "content_status": "not_verified_by_filename_scan",
+      "registry_status_claim": "not independently validated"
+    },
+    {
+      "artifact_id": "SIOS-ID-001",
+      "source": "01-Foundation/Registry/MAI-001.md",
+      "path_match_status": "exact_basename_match",
+      "matched_paths": [
+        "01-Foundation/Standards/SIOS-ID-001.md"
+      ],
+      "content_status": "not_verified_by_filename_scan",
+      "registry_status_claim": "not independently validated"
+    },
+    {
+      "artifact_id": "MAI-001",
+      "source": "01-Foundation/Registry/MAI-001.md",
+      "path_match_status": "exact_basename_match",
+      "matched_paths": [
+        "01-Foundation/Registry/MAI-001.md"
+      ],
+      "content_status": "not_verified_by_filename_scan",
+      "registry_status_claim": "not independently validated"
+    },
+    {
+      "artifact_id": "AC-001",
+      "source": "01-Foundation/Registry/MAI-001.md",
+      "path_match_status": "exact_basename_match",
+      "matched_paths": [
+        "01-Foundation/Architecture-Candidates/AC-001.md"
+      ],
+      "content_status": "not_verified_by_filename_scan",
+      "registry_status_claim": "not independently validated"
+    },
+    {
+      "artifact_id": "ADR-0001",
+      "source": "01-Foundation/Registry/MAI-001.md",
+      "path_match_status": "exact_basename_match",
+      "matched_paths": [
+        "01-Foundation/ADR/ADR-0001.md"
+      ],
+      "content_status": "not_verified_by_filename_scan",
+      "registry_status_claim": "not independently validated"
+    },
+    {
+      "artifact_id": "ADR-0002",
+      "source": "01-Foundation/Registry/MAI-001.md",
+      "path_match_status": "exact_basename_match",
+      "matched_paths": [
+        "01-Foundation/ADR/ADR-0002.md"
+      ],
+      "content_status": "not_verified_by_filename_scan",
+      "registry_status_claim": "not independently validated"
+    },
+    {
+      "artifact_id": "ADR-0003",
+      "source": "01-Foundation/Registry/MAI-001.md",
+      "path_match_status": "exact_basename_match",
+      "matched_paths": [
+        "01-Foundation/ADR/ADR-0003.md"
+      ],
+      "content_status": "not_verified_by_filename_scan",
+      "registry_status_claim": "not independently validated"
+    },
+    {
+      "artifact_id": "ADR-0004",
+      "source": "01-Foundation/Registry/MAI-001.md",
+      "path_match_status": "exact_basename_match",
+      "matched_paths": [
+        "01-Foundation/ADR/ADR-0004.md"
+      ],
+      "content_status": "not_verified_by_filename_scan",
+      "registry_status_claim": "not independently validated"
+    },
+    {
+      "artifact_id": "ENR-000001",
+      "source": "01-Foundation/Registry/MAI-001.md",
+      "path_match_status": "exact_basename_match",
+      "matched_paths": [
+        "01-Foundation/External-References/ENR-000001.md"
+      ],
+      "content_status": "not_verified_by_filename_scan",
+      "registry_status_claim": "not independently validated"
+    },
+    {
+      "artifact_id": "ENR-000002",
+      "source": "01-Foundation/Registry/MAI-001.md",
+      "path_match_status": "exact_basename_match",
+      "matched_paths": [
+        "01-Foundation/External-References/ENR-000002.md"
+      ],
+      "content_status": "not_verified_by_filename_scan",
+      "registry_status_claim": "not independently validated"
+    },
+    {
+      "artifact_id": "RQD-001",
+      "source": "01-Foundation/Registry/MAI-001.md",
+      "path_match_status": "exact_basename_match",
+      "matched_paths": [
+        "02-Research/Questions/RQD-001.md"
+      ],
+      "content_status": "not_verified_by_filename_scan",
+      "registry_status_claim": "not independently validated"
+    },
+    {
+      "artifact_id": "SFA-001",
+      "source": "01-Foundation/Registry/MAI-001.md",
+      "path_match_status": "exact_basename_match",
+      "matched_paths": [
+        "02-Research/Questions/SFA-001.md"
+      ],
+      "content_status": "not_verified_by_filename_scan",
+      "registry_status_claim": "not independently validated"
+    },
+    {
+      "artifact_id": "SFA-002",
+      "source": "01-Foundation/Registry/MAI-001.md",
+      "path_match_status": "exact_basename_match",
+      "matched_paths": [
+        "02-Research/Questions/SFA-002.md"
+      ],
+      "content_status": "not_verified_by_filename_scan",
+      "registry_status_claim": "not independently validated"
+    },
+    {
+      "artifact_id": "SQP-001",
+      "source": "01-Foundation/Registry/MAI-001.md",
+      "path_match_status": "exact_basename_match",
+      "matched_paths": [
+        "02-Research/Search/SQP-001.md"
+      ],
+      "content_status": "not_verified_by_filename_scan",
+      "registry_status_claim": "not independently validated"
+    },
+    {
+      "artifact_id": "SRE-001",
+      "source": "01-Foundation/Registry/MAI-001.md",
+      "path_match_status": "exact_basename_match",
+      "matched_paths": [
+        "02-Research/Search/SRE-001.md"
+      ],
+      "content_status": "not_verified_by_filename_scan",
+      "registry_status_claim": "not independently validated"
+    },
+    {
+      "artifact_id": "SRC-000001",
+      "source": "01-Foundation/Registry/MAI-001.md",
+      "path_match_status": "exact_basename_match",
+      "matched_paths": [
+        "02-Research/Search/SRC-000001.md"
+      ],
+      "content_status": "not_verified_by_filename_scan",
+      "registry_status_claim": "not independently validated"
+    },
+    {
+      "artifact_id": "SRL-001",
+      "source": "01-Foundation/Registry/MAI-001.md",
+      "path_match_status": "exact_basename_match",
+      "matched_paths": [
+        "02-Research/Search/SRL-001.md"
+      ],
+      "content_status": "not_verified_by_filename_scan",
+      "registry_status_claim": "not independently validated"
+    },
+    {
+      "artifact_id": "COR-001",
+      "source": "01-Foundation/Registry/MAI-001.md",
+      "path_match_status": "exact_basename_match",
+      "matched_paths": [
+        "02-Research/Corpus/COR-001.md"
+      ],
+      "content_status": "not_verified_by_filename_scan",
+      "registry_status_claim": "not independently validated"
+    },
+    {
+      "artifact_id": "COR-002",
+      "source": "01-Foundation/Registry/MAI-001.md",
+      "path_match_status": "exact_basename_match",
+      "matched_paths": [
+        "02-Research/Corpus/COR-002.md"
+      ],
+      "content_status": "not_verified_by_filename_scan",
+      "registry_status_claim": "not independently validated"
+    },
+    {
+      "artifact_id": "COR-003",
+      "source": "01-Foundation/Registry/MAI-001.md",
+      "path_match_status": "exact_basename_match",
+      "matched_paths": [
+        "02-Research/Corpus/COR-003.md"
+      ],
+      "content_status": "not_verified_by_filename_scan",
+      "registry_status_claim": "not independently validated"
+    },
+    {
+      "artifact_id": "OUM-001",
+      "source": "01-Foundation/Registry/MAI-001.md",
+      "path_match_status": "exact_basename_match",
+      "matched_paths": [
+        "02-Research/Observation/OUM-001.md"
+      ],
+      "content_status": "not_verified_by_filename_scan",
+      "registry_status_claim": "not independently validated"
+    },
+    {
+      "artifact_id": "EUM-001",
+      "source": "01-Foundation/Registry/MAI-001.md",
+      "path_match_status": "exact_basename_match",
+      "matched_paths": [
+        "02-Research/Evidence/EUM-001.md"
+      ],
+      "content_status": "not_verified_by_filename_scan",
+      "registry_status_claim": "not independently validated"
+    },
+    {
+      "artifact_id": "ERS-001",
+      "source": "01-Foundation/Registry/MAI-001.md",
+      "path_match_status": "exact_basename_match",
+      "matched_paths": [
+        "02-Research/Evidence/ERS-001.md"
+      ],
+      "content_status": "not_verified_by_filename_scan",
+      "registry_status_claim": "not independently validated"
+    },
+    {
+      "artifact_id": "EUM-001B",
+      "source": "01-Foundation/Registry/MAI-001.md",
+      "path_match_status": "exact_basename_match",
+      "matched_paths": [
+        "02-Research/Evidence/EUM-001B.md"
+      ],
+      "content_status": "not_verified_by_filename_scan",
+      "registry_status_claim": "not independently validated"
+    },
+    {
+      "artifact_id": "OPS-001",
+      "source": "01-Foundation/Registry/MAI-001.md",
+      "path_match_status": "exact_basename_match",
+      "matched_paths": [
+        "02-Research/Operations/OPS-001.md"
+      ],
+      "content_status": "not_verified_by_filename_scan",
+      "registry_status_claim": "not independently validated"
+    },
+    {
+      "artifact_id": "SRE-000001-A",
+      "source": "01-Foundation/Registry/MAI-001.md",
+      "path_match_status": "no_exact_basename_match",
+      "matched_paths": [],
+      "content_status": "not_verified_by_filename_scan",
+      "registry_status_claim": "not independently validated"
+    },
+    {
+      "artifact_id": "SRE-000001-B",
+      "source": "01-Foundation/Registry/MAI-001.md",
+      "path_match_status": "exact_basename_match",
+      "matched_paths": [
+        "02-Research/Search/SRE-000001-B.md"
+      ],
+      "content_status": "not_verified_by_filename_scan",
+      "registry_status_claim": "not independently validated"
+    },
+    {
+      "artifact_id": "SRE-000001-C",
+      "source": "01-Foundation/Registry/MAI-001.md",
+      "path_match_status": "exact_basename_match",
+      "matched_paths": [
+        "02-Research/Search/SRE-000001-C.md"
+      ],
+      "content_status": "not_verified_by_filename_scan",
+      "registry_status_claim": "not independently validated"
+    },
+    {
+      "artifact_id": "SRE-000001-D",
+      "source": "01-Foundation/Registry/MAI-001.md",
+      "path_match_status": "exact_basename_match",
+      "matched_paths": [
+        "02-Research/Search/SRE-000001-D.md"
+      ],
+      "content_status": "not_verified_by_filename_scan",
+      "registry_status_claim": "not independently validated"
+    },
+    {
+      "artifact_id": "SRE-000001-E",
+      "source": "01-Foundation/Registry/MAI-001.md",
+      "path_match_status": "exact_basename_match",
+      "matched_paths": [
+        "02-Research/Search/SRE-000001-E.md"
+      ],
+      "content_status": "not_verified_by_filename_scan",
+      "registry_status_claim": "not independently validated"
+    },
+    {
+      "artifact_id": "CIR-001",
+      "source": "01-Foundation/Registry/MAI-001.md",
+      "path_match_status": "exact_basename_match",
+      "matched_paths": [
+        "02-Research/Corpus/CIR-001.md"
+      ],
+      "content_status": "not_verified_by_filename_scan",
+      "registry_status_claim": "not independently validated"
+    },
+    {
+      "artifact_id": "EIR-001",
+      "source": "01-Foundation/Registry/MAI-001.md",
+      "path_match_status": "exact_basename_match",
+      "matched_paths": [
+        "02-Research/Evidence/EIR-001.md"
+      ],
+      "content_status": "not_verified_by_filename_scan",
+      "registry_status_claim": "not independently validated"
+    },
+    {
+      "artifact_id": "KOM-001",
+      "source": "01-Foundation/Registry/MAI-001.md",
+      "path_match_status": "exact_basename_match",
+      "matched_paths": [
+        "03-Framework/Specifications/KOM-001.md"
+      ],
+      "content_status": "not_verified_by_filename_scan",
+      "registry_status_claim": "not independently validated"
+    },
+    {
+      "artifact_id": "KSM-001",
+      "source": "01-Foundation/Registry/MAI-001.md",
+      "path_match_status": "exact_basename_match",
+      "matched_paths": [
+        "03-Framework/Specifications/KSM-001.md"
+      ],
+      "content_status": "not_verified_by_filename_scan",
+      "registry_status_claim": "not independently validated"
+    },
+    {
+      "artifact_id": "ARR-001",
+      "source": "01-Foundation/Registry/MAI-001.md",
+      "path_match_status": "exact_basename_match",
+      "matched_paths": [
+        "04-Runner/Providers/ARR-001.md"
+      ],
+      "content_status": "not_verified_by_filename_scan",
+      "registry_status_claim": "not independently validated"
+    },
+    {
+      "artifact_id": "ARR-001A",
+      "source": "01-Foundation/Registry/MAI-001.md",
+      "path_match_status": "exact_basename_match",
+      "matched_paths": [
+        "04-Runner/Providers/ARR-001A.md"
+      ],
+      "content_status": "not_verified_by_filename_scan",
+      "registry_status_claim": "not independently validated"
+    },
+    {
+      "artifact_id": "ARR-001B",
+      "source": "01-Foundation/Registry/MAI-001.md",
+      "path_match_status": "exact_basename_match",
+      "matched_paths": [
+        "04-Runner/Providers/ARR-001B.md"
+      ],
+      "content_status": "not_verified_by_filename_scan",
+      "registry_status_claim": "not independently validated"
+    },
+    {
+      "artifact_id": "ARR-001C",
+      "source": "01-Foundation/Registry/MAI-001.md",
+      "path_match_status": "exact_basename_match",
+      "matched_paths": [
+        "04-Runner/Providers/ARR-001C.md"
+      ],
+      "content_status": "not_verified_by_filename_scan",
+      "registry_status_claim": "not independently validated"
+    },
+    {
+      "artifact_id": "APG-001",
+      "source": "01-Foundation/Registry/MAI-001.md",
+      "path_match_status": "exact_basename_match",
+      "matched_paths": [
+        "07-Tools/APG-001/APG-001.md"
+      ],
+      "content_status": "not_verified_by_filename_scan",
+      "registry_status_claim": "not independently validated"
+    },
+    {
+      "artifact_id": "ARS-001",
+      "source": "01-Foundation/Registry/MAI-001.md",
+      "path_match_status": "exact_basename_match",
+      "matched_paths": [
+        "13-Workspace/ARS-001.md"
+      ],
+      "content_status": "not_verified_by_filename_scan",
+      "registry_status_claim": "not independently validated"
+    }
+  ]
+}
