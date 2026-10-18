@@ -1,0 +1,33 @@
+name: Registry Validator CI
+
+on:
+  push:
+    paths:
+      - "tools/**"
+      - "tests/**"
+      - ".github/workflows/registry-validator.yml"
+  pull_request:
+    paths:
+      - "tools/**"
+      - "tests/**"
+      - ".github/workflows/registry-validator.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  unit-tests:
+    name: Unit tests (Python 3.11)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Compile Python sources
+        run: python -m compileall -q tools tests
+      - name: Run unit tests
+        run: python -m unittest discover -s tests -v
