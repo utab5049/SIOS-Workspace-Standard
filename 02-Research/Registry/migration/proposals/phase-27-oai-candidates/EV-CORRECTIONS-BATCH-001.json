@@ -1,0 +1,30 @@
+{
+  "artifact_id": "EV-CORRECTIONS-BATCH-001",
+  "title": "Corrected Evidence Records Batch 1",
+  "classification": "Evidence Correction Batch",
+  "path": "02-Research/Evidence/Records/EV-CORRECTIONS-BATCH-001.md",
+  "version": null,
+  "lifecycle_state": "candidate",
+  "owner": null,
+  "domain": "02-Research",
+  "collection": "Evidence Records",
+  "depends_on": [
+    "EV-BATCH-001",
+    "REVIEW-BATCH-001",
+    "REVIEW-BATCH-002"
+  ],
+  "source_decision_ids": [],
+  "provenance": [
+    {
+      "source_path": "02-Research/Evidence/Records/EV-CORRECTIONS-BATCH-001.md",
+      "source_commit": "5bc0ff427e7937139e85d3222e65cb0f4b1ab11b",
+      "source_version": null,
+      "source_claim": "Records corrections to evidence entries, including a split of EV-000002 and changes to quality/status fields.",
+      "source_status": "current"
+    }
+  ],
+  "reconciliation_status": "pending",
+  "notes": [
+    "Preserve before/after history and links to the review findings; do not overwrite the original batch."
+  ]
+}
