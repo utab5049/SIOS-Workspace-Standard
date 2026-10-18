@@ -1,0 +1,1489 @@
+{
+  "snapshot_id": "TREE-025",
+  "repository": "utab5049/SIOS-Workspace-Standard",
+  "source_commit": "5bc0ff427e7937139e85d3222e65cb0f4b1ab11b",
+  "source_tree_sha": "5bc0ff427e7937139e85d3222e65cb0f4b1ab11b",
+  "recursive": true,
+  "truncated": false,
+  "summary": {
+    "entries": 217,
+    "files": 168,
+    "directories": 49,
+    "markdown_files": 149,
+    "json_files": 6,
+    "source_domains": 122,
+    "audit_registry_report_paths": 40
+  },
+  "entries": [
+    {
+      "path": ".github",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "caf1a9195f7652aeff4f1a9f4527db3efcd2eb75"
+    },
+    {
+      "path": ".github/workflows",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "44c259c5ccc48fafece999bc3a78eb5235de80ae"
+    },
+    {
+      "path": ".github/workflows/registry-validator.yml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "16b735e77775fae9864790b88257b63296ccd8e5",
+      "size": 1088
+    },
+    {
+      "path": "00-Program",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "0b37cf6704c65fcf570c1484ebb0362a2c26dd79"
+    },
+    {
+      "path": "00-Program/INDEX.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "ec39c1cfb5bb4a7456e50fc949721d56a6665211",
+      "size": 59
+    },
+    {
+      "path": "00-Program/README.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "b4448b7fe114fc388b0b073ceedb85e2e34d096a",
+      "size": 118
+    },
+    {
+      "path": "01-Foundation",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "7f0240560a27051ddc5372d5110b483ec00d6b69"
+    },
+    {
+      "path": "01-Foundation/ADR",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "9cd7e6f0e8fe0be648a689776892414b41253d0c"
+    },
+    {
+      "path": "01-Foundation/ADR/ADR-0001.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "4e822e212a91ba5378cb3268c5681f757393777e",
+      "size": 263
+    },
+    {
+      "path": "01-Foundation/ADR/ADR-0002.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "29f60666733dc2b7b4030e4853acaea7fcf7d807",
+      "size": 182
+    },
+    {
+      "path": "01-Foundation/ADR/ADR-0003.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "927d2c3fb963dc085faec3bab5b6f1b6b21e302f",
+      "size": 232
+    },
+    {
+      "path": "01-Foundation/ADR/ADR-0004.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "2603254ab8c61d0a3e8caab987fdcda0278215ff",
+      "size": 221
+    },
+    {
+      "path": "01-Foundation/Architecture-Candidates",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "238d9b945cd0c7d28bd98d15d63cff2eae579cd5"
+    },
+    {
+      "path": "01-Foundation/Architecture-Candidates/AC-001.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "ceaf89d3d83e36afc3cd923ec875d96917ddc118",
+      "size": 593
+    },
+    {
+      "path": "01-Foundation/Constitution",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "5093ec77ac3533b46db999219538afb91d846f3f"
+    },
+    {
+      "path": "01-Foundation/Constitution/SIOS-BASELINE-001.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "cb84e9449c9bfa29305551f81f1d487ef62d7353",
+      "size": 1767
+    },
+    {
+      "path": "01-Foundation/Constitution/SIOS-MAN-001.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "f0f1765041ff4d9d62d4bc82219a3d31118c8b63",
+      "size": 1556
+    },
+    {
+      "path": "01-Foundation/Enterprise-Architecture",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "05c5bf79681eff5b2f347a46f7c66ec3e551ea14"
+    },
+    {
+      "path": "01-Foundation/Enterprise-Architecture/AERA-001A.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "770e979a4d8b09934aa872b64778df8d92da8208",
+      "size": 382
+    },
+    {
+      "path": "01-Foundation/Enterprise-Architecture/AERA-001B.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "82dec2bce8d0d680e3fa6c5aaa5a8f647b771ac6",
+      "size": 361
+    },
+    {
+      "path": "01-Foundation/Enterprise-Architecture/AERA-001C.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "ff93ea00ef04f1a1f3e07b6512dc7b62b757878b",
+      "size": 626
+    },
+    {
+      "path": "01-Foundation/Enterprise-Architecture/AERA-001D.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "c3040db2eb9cb8fe5b42c46116930d76770278df",
+      "size": 1423
+    },
+    {
+      "path": "01-Foundation/Enterprise-Architecture/AERA-001E.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "8fd75d731bebb2d87b01af5c3bad553f148bbfa0",
+      "size": 288
+    },
+    {
+      "path": "01-Foundation/Enterprise-Architecture/AERA-001F.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "bc63ec34771f1f6a102473be3de0a3f86340cf54",
+      "size": 581
+    },
+    {
+      "path": "01-Foundation/External-References",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "e29dd063c5f4f77ff471fc13f0252808222e0fb7"
+    },
+    {
+      "path": "01-Foundation/External-References/ENR-000001.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "8f162ab23da508ae0bb90bde15283436f539e972",
+      "size": 240
+    },
+    {
+      "path": "01-Foundation/External-References/ENR-000002.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "9f95340223d127da3fa8a12c4296213703c318cc",
+      "size": 403
+    },
+    {
+      "path": "01-Foundation/Governance",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "773ef488e3d06a895380cf1ae17cf87439ebe750"
+    },
+    {
+      "path": "01-Foundation/Governance/INDEX.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "422fdbebc138805d1cc19b5ba53ca5f81b88d365",
+      "size": 14
+    },
+    {
+      "path": "01-Foundation/Governance/README.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "74558c5838ed95263a81a7593ecb237095f5073c",
+      "size": 99
+    },
+    {
+      "path": "01-Foundation/INDEX.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "6d16647af6b969d41a0acf4ada0728067bd2c1d2",
+      "size": 186
+    },
+    {
+      "path": "01-Foundation/README.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "aeca02d0f54165b56e748d12aa80ac0e96fe9e15",
+      "size": 214
+    },
+    {
+      "path": "01-Foundation/Registry",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "66c79804f89d364ec5d5ea1e2ee256f6af6f9174"
+    },
+    {
+      "path": "01-Foundation/Registry/MAI-001.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "ce20f7557b4c5f300fb89367a1a8eee15f9e2a13",
+      "size": 1979
+    },
+    {
+      "path": "01-Foundation/Reviews",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "c47ae147634eb2b0faaeeeb9cb9b4f65228afa34"
+    },
+    {
+      "path": "01-Foundation/Reviews/INDEX.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "422fdbebc138805d1cc19b5ba53ca5f81b88d365",
+      "size": 14
+    },
+    {
+      "path": "01-Foundation/Reviews/README.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "58af2a850296acf5d4c2aaa3904df714b76e5aa0",
+      "size": 118
+    },
+    {
+      "path": "01-Foundation/Standards",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "6458d9945c4e8eafe35137275ba54ce56bdeeb08"
+    },
+    {
+      "path": "01-Foundation/Standards/CSL-001.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "6d711a14bfbabaa87da0bffc46423f1d2f69a4da",
+      "size": 1322
+    },
+    {
+      "path": "01-Foundation/Standards/SIOS-ID-001.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "aab511dbbcb5fa064e3114c80385364bba9f9e04",
+      "size": 302
+    },
+    {
+      "path": "02-Research",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "93ee58662a02f4b777f40bee35956374c60dcb58"
+    },
+    {
+      "path": "02-Research/Audit",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "cbbcf92d6e04af011a813511d14fb0b46789f380"
+    },
+    {
+      "path": "02-Research/Audit/AAVP-Part1.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "c82f84db767af413d0831b5a623ec2fff434e2ce",
+      "size": 15850
+    },
+    {
+      "path": "02-Research/Audit/AAVP-Part2.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "5a24105b9713d02e0c2605dcc2811458c90ae7be",
+      "size": 27334
+    },
+    {
+      "path": "02-Research/Audit/AAVP-Part3.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "fde4fb75d72984afaef1bc45aa321566ebc4f3e4",
+      "size": 19297
+    },
+    {
+      "path": "02-Research/Audit/Blind-Tests",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "17130f8e634fa218030cf057bcfc01a3c6cc5d38"
+    },
+    {
+      "path": "02-Research/Audit/Blind-Tests/BLIND-TEST-2-SCORING.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "e51b734739c88aabaca3babb6ecc8b7ebdfca95e",
+      "size": 2491
+    },
+    {
+      "path": "02-Research/Audit/Blind-Tests/Package-1.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "596065bf95178a2c278226c21c50302a912cd5c8",
+      "size": 8747
+    },
+    {
+      "path": "02-Research/Audit/Blind-Tests/Package-2.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "ac4eb713d2b91a7d9bb2b09fe4b47a2e6cff9085",
+      "size": 4500
+    },
+    {
+      "path": "02-Research/Audit/Blind-Tests/Package-3.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "94dbef02fc4c8e728dceb6f5f56a1e6c9885ce0a",
+      "size": 3990
+    },
+    {
+      "path": "02-Research/Audit/Blind-Tests/Package-4.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "f442d6111f8975b8d164af518bf0cc172e3cfe80",
+      "size": 5376
+    },
+    {
+      "path": "02-Research/Audit/Blind-Tests/TEST3-CORRECTION-AND-ERS-RULE.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "357ed3960edbc669ac327134132a42eb4c5b3d7e",
+      "size": 4300
+    },
+    {
+      "path": "02-Research/Audit/ICRAA-Part1.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "f2695ded7fdf224800ca19398dcebad971ea655c",
+      "size": 9963
+    },
+    {
+      "path": "02-Research/Audit/ICRAA-Part2.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "27312178593a46a455f9170a9ee6172428d62421",
+      "size": 13909
+    },
+    {
+      "path": "02-Research/Audit/INDEPENDENT-REVIEW-PROTOCOL.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "9335cfe7210daab0d11266c8e1cdc8cb713377f7",
+      "size": 4863
+    },
+    {
+      "path": "02-Research/Audit/PHASE-14-FINAL-MAIN-AUDIT-2026-10.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "3ce397bc5bb968f8837e77caef9714b9e07dcd3c",
+      "size": 3149
+    },
+    {
+      "path": "02-Research/Audit/PR-CHAIN-AUDIT-2026-10.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "29f4fe903cce2535078c5cee15b4f3028cb96d56",
+      "size": 4164
+    },
+    {
+      "path": "02-Research/Audit/REGISTRY-MACHINE-READABLE-CONTRACT.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "342ae8fb5832b8bb397182b3ab9be6295ee9167d",
+      "size": 3890
+    },
+    {
+      "path": "02-Research/Audit/REVIEW-LEDGER.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "5b49ad18b4565372c6a1f67f4b15182a1a2297b5",
+      "size": 4083
+    },
+    {
+      "path": "02-Research/Audit/VALIDATION-COVERAGE-MATRIX.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "988290cfe7eb70f58f21ded8a7248d62f7bc3569",
+      "size": 5109
+    },
+    {
+      "path": "02-Research/Corpus",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "b4a7b717bf897718db497b0db6d3622169b46acb"
+    },
+    {
+      "path": "02-Research/Corpus/CIR-001.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "8e03614dcce33a37446cd8dfdedd8bf30aa4b523",
+      "size": 3595
+    },
+    {
+      "path": "02-Research/Corpus/COR-001.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "b9a5a2d22ed10f4652461ea8fb2cb1c5842bfd42",
+      "size": 340
+    },
+    {
+      "path": "02-Research/Corpus/COR-002.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "50dac55905ea2dbeb7ba80595a8a491f68d3cfc1",
+      "size": 254
+    },
+    {
+      "path": "02-Research/Corpus/COR-003.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "52943bd59901b4502496addb9655174025641d2a",
+      "size": 193
+    },
+    {
+      "path": "02-Research/Corpus/Sources",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "a4c1834132972d7177557496a7bc399a35784d68"
+    },
+    {
+      "path": "02-Research/Corpus/Sources/SRC-000015-EXTRACTION.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "56aa212412c8864d3a20e9882098ab2999757d49",
+      "size": 4807
+    },
+    {
+      "path": "02-Research/Corpus/Sources/SRC-000016-RESOLUTION.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "d46edc79d312e6a4be35b10aea11d37e45dc5ff1",
+      "size": 5355
+    },
+    {
+      "path": "02-Research/Corpus/Sources/SRC-000017-Studer.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "808cc183f0a47607050421637040558e0eb10d64",
+      "size": 4146
+    },
+    {
+      "path": "02-Research/Corpus/Sources/SRC-000018-19.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "06ffc4eff28a701bb124c9f53aef0ff3ce0ddea8",
+      "size": 7074
+    },
+    {
+      "path": "02-Research/Corpus/Sources/SRC-Batch1.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "3cf542d84ef5f7e8929c8abc0c4728e90ce6f823",
+      "size": 5607
+    },
+    {
+      "path": "02-Research/Corpus/Sources/SRC-Batch2.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "427ea7cbad772de04f9ab7e76bf71bcec26ba3ba",
+      "size": 4955
+    },
+    {
+      "path": "02-Research/Corpus/Sources/SRC-Batch3.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "cef70718289f1b79d5f4ff7bba71f4582b112986",
+      "size": 4163
+    },
+    {
+      "path": "02-Research/Evidence",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "6a83280cf18bac5fb607bd89dc7a936de5ca5792"
+    },
+    {
+      "path": "02-Research/Evidence/EIR-001.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "db4b2986c488236d44b718322d156bcbeb260be0",
+      "size": 2468
+    },
+    {
+      "path": "02-Research/Evidence/ERS-001.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "dce438ce32de3b328aa54c4eb19a2daa9f45b0ff",
+      "size": 941
+    },
+    {
+      "path": "02-Research/Evidence/EUM-001.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "45228fe152d0b1e20eaa796b0df074f7dca4adac",
+      "size": 654
+    },
+    {
+      "path": "02-Research/Evidence/EUM-001B.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "b21ca6bd9ca81ae1a343825df4d1c2ac783fc447",
+      "size": 277
+    },
+    {
+      "path": "02-Research/Evidence/Records",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "e0d15a267c0a46b27a5111a5280638278e9ba702"
+    },
+    {
+      "path": "02-Research/Evidence/Records/APPLIED-CORRECTIONS-EV003-KSM001.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "4db8363f41e704073a45806f4b50287e06d068e0",
+      "size": 3549
+    },
+    {
+      "path": "02-Research/Evidence/Records/EV-BATCH-001.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "8719c9ffaac6195dbffdcbb4361e4c9739edde27",
+      "size": 15713
+    },
+    {
+      "path": "02-Research/Evidence/Records/EV-CORRECTIONS-BATCH-001.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "e3e8cba822ca434b12e7247c438c1a27c6e6831b",
+      "size": 4866
+    },
+    {
+      "path": "02-Research/INDEX.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "54a8adcc28b1054327857ca964f57f2a9ca21089",
+      "size": 161
+    },
+    {
+      "path": "02-Research/Observation",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "4b10b76ee822f6b89d8bad57098e4d36d67554fc"
+    },
+    {
+      "path": "02-Research/Observation/OUM-001.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "6e8571f9844f004e5c76cbc2bfe36948839e156d",
+      "size": 298
+    },
+    {
+      "path": "02-Research/Observation/Records",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "87e22c6218cb7c707bb5a0572fc57c0c83f6d082"
+    },
+    {
+      "path": "02-Research/Observation/Records/FULLTEXT-QUEUE-FINAL.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "8d34928db0a26bee145de36ff9e062fe4a8f9f52",
+      "size": 4213
+    },
+    {
+      "path": "02-Research/Observation/Records/FULLTEXT-UPGRADE-005-012.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "32d272fa920a9453e0bf2e15bcb9af5201ab28e4",
+      "size": 7705
+    },
+    {
+      "path": "02-Research/Observation/Records/FULLTEXT-UPGRADE-008-004.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "ef0b6ce347d2e9337055c61d47ae5814de99b3d8",
+      "size": 3935
+    },
+    {
+      "path": "02-Research/Observation/Records/FULLTEXT-UPGRADE-009.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "5dbead15210fb27437f8a1034ac758582f9e9ace",
+      "size": 4727
+    },
+    {
+      "path": "02-Research/Observation/Records/FULLTEXT-UPGRADE-010.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "85cac0569b96e7676e99047da6c8c01a694124ad",
+      "size": 4178
+    },
+    {
+      "path": "02-Research/Observation/Records/OBSU-BATCH-001.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "1c5c98cce8a1ded15939825031a85343cd43a11b",
+      "size": 9215
+    },
+    {
+      "path": "02-Research/Operations",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "9322538502af9dfb1adf65cff987615cfefb5320"
+    },
+    {
+      "path": "02-Research/Operations/OPS-001.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "f9fc6c9efd737783069e990354c3fcbbfaafa6bb",
+      "size": 401
+    },
+    {
+      "path": "02-Research/Questions",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "1af53420b4d89440e5fb80c9f1fb27582332dc59"
+    },
+    {
+      "path": "02-Research/Questions/RQD-001.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "d73f8e7406a2a9cfefe84118fa1638cf0253332c",
+      "size": 596
+    },
+    {
+      "path": "02-Research/Questions/SFA-001.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "b88949401ca48894c4f68bcdd9b0a8c72eedae29",
+      "size": 726
+    },
+    {
+      "path": "02-Research/Questions/SFA-002.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "61b2e9b521db6c70ed3c3c597dd22dc2c00ebc81",
+      "size": 250
+    },
+    {
+      "path": "02-Research/README.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "ea35d5423e8123c897753cdae434afaa76a8bee1",
+      "size": 178
+    },
+    {
+      "path": "02-Research/Registry",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "265e40bfce711d0f2407d1bb658a09c4142f3888"
+    },
+    {
+      "path": "02-Research/Registry/C1-RATIFIED-FINAL.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "292cfbe6ba56a1a5e63d29fcbe359495f6bb5258",
+      "size": 3763
+    },
+    {
+      "path": "02-Research/Registry/DECISION-MAI001-OPTION-B.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "4759922dddca95f3468e5a46f067de7ca0ffbc1f",
+      "size": 4190
+    },
+    {
+      "path": "02-Research/Registry/DECISIONS-RECORDED.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "cb1e5d15946233d0a660bf224250ca48ab9f0272",
+      "size": 2258
+    },
+    {
+      "path": "02-Research/Registry/GOVERNANCE-DECISION-PACKAGE.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "96c620289947c68bbc20e9288efaee5e1fd6b0fc",
+      "size": 2129
+    },
+    {
+      "path": "02-Research/Registry/MAI-001-FINAL-MERGE-V3.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "f0ec450c9e7274b3db56c125acf46719260fb1e6",
+      "size": 4761
+    },
+    {
+      "path": "02-Research/Registry/MAI-001-FINAL-MERGE-V4.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "7b96a4cd2f971afc814aed8b1aa7eccab0867094",
+      "size": 1385
+    },
+    {
+      "path": "02-Research/Registry/MAI-001-FINAL-MERGE-V5.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "43d6b7cb87f61962e8f130d37fc31a68c8de945a",
+      "size": 2517
+    },
+    {
+      "path": "02-Research/Registry/MAI-001-REGISTRY-DELTA-V2.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "840e0da2ffa906bfc09b4651ecf212128b070cea",
+      "size": 3987
+    },
+    {
+      "path": "02-Research/Registry/MAI-001-REGISTRY-DELTA.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "e824d8a93b741879f5a6cbbc8ed2edf24a234fe1",
+      "size": 4487
+    },
+    {
+      "path": "02-Research/Reviews",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "1fa293ca70c36f62298e6a5bf37b9283254aede1"
+    },
+    {
+      "path": "02-Research/Reviews/AC-001-REASSESSMENT.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "e7e19a2f9b54359e7e64ed6fa636e937941b95bf",
+      "size": 8737
+    },
+    {
+      "path": "02-Research/Reviews/CHANGE-PROPOSAL-EXTERNAL-REVIEWER-FINDINGS.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "8cd4c9668c54c4f7cb4c8953662b756be1a68084",
+      "size": 8908
+    },
+    {
+      "path": "02-Research/Reviews/CHANGE-PROPOSALS-EUM-ERS.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "ad094e20520849d26da8cad984a05852e9f15f97",
+      "size": 5589
+    },
+    {
+      "path": "02-Research/Reviews/REVIEW-BATCH-001.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "d60b7e5a15f3fe5c67215908ed77b756c9986ea4",
+      "size": 7358
+    },
+    {
+      "path": "02-Research/Reviews/REVIEW-BATCH-002.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "e5bca62910ba03d1e59c5f121fd59204733b07ac",
+      "size": 7334
+    },
+    {
+      "path": "02-Research/Reviews/TEST3-CORRECTION-AND-ERS-RULE.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "357ed3960edbc669ac327134132a42eb4c5b3d7e",
+      "size": 4300
+    },
+    {
+      "path": "02-Research/Search",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "6f4b5eb2f41b2d0ee1f747bef866ea7ae8a287a3"
+    },
+    {
+      "path": "02-Research/Search/SQP-001.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "2c59ab6dbccdfd48d8ad51d5ff02251869fe4786",
+      "size": 400
+    },
+    {
+      "path": "02-Research/Search/SRC-000001.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "3c743c8dce2d65594f87e6aa254a5d4ec9487c28",
+      "size": 258
+    },
+    {
+      "path": "02-Research/Search/SRE-000001-B.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "80812dbe947be5e534551baee714caf90aab6c5d",
+      "size": 6355
+    },
+    {
+      "path": "02-Research/Search/SRE-000001-C.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "fe03a7d3d2344625aea5a3e7a4a21c6e00d0662e",
+      "size": 3764
+    },
+    {
+      "path": "02-Research/Search/SRE-000001-D.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "dfd6dcb0e2b48db664847eacf77a2d64f1386aed",
+      "size": 4427
+    },
+    {
+      "path": "02-Research/Search/SRE-000001-E.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "3aaea1f505ead5456ceda3999bb8ec09bafe8988",
+      "size": 4915
+    },
+    {
+      "path": "02-Research/Search/SRE-001.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "2a54e640487d27d459497c5504e09d365791d1ad",
+      "size": 246
+    },
+    {
+      "path": "02-Research/Search/SRL-001.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "ca1317c5aeeca00978f7e072014214fe600b3907",
+      "size": 211
+    },
+    {
+      "path": "03-Framework",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "5f5eefbe93f839d620ab53dc13f677f38a848f1e"
+    },
+    {
+      "path": "03-Framework/INDEX.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "501da9f36c2037f4f7e21e469e529a7bade0ea4f",
+      "size": 79
+    },
+    {
+      "path": "03-Framework/README.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "629769a855a02889dc4bb7303d58d7ecfeb5dc92",
+      "size": 176
+    },
+    {
+      "path": "03-Framework/Specifications",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "acd08708e82d59988170a74d3d0a3408a4d8028a"
+    },
+    {
+      "path": "03-Framework/Specifications/KOM-001.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "f564a3d787cb8c11c3789fad773b9cb91ed1109a",
+      "size": 5183
+    },
+    {
+      "path": "03-Framework/Specifications/KSM-001.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "edbfe89b2f7ce49cdda028361ed08f7b6eeb7d74",
+      "size": 9212
+    },
+    {
+      "path": "04-Runner",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "a8da4cae4e2e235641788a2c7ad96a0cb6af0ee1"
+    },
+    {
+      "path": "04-Runner/INDEX.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "167a60608cbed5e33b094ca0eddbec5e5dda38d5",
+      "size": 83
+    },
+    {
+      "path": "04-Runner/Providers",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "0420e70866704343789e453fd32e285dcbd0277d"
+    },
+    {
+      "path": "04-Runner/Providers/ARR-001.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "5031a5999efdf7e722de951b54d6193995aaeadc",
+      "size": 427
+    },
+    {
+      "path": "04-Runner/Providers/ARR-001A.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "f3ccf56370fd209eff55993cb8eaabcada89a167",
+      "size": 188
+    },
+    {
+      "path": "04-Runner/Providers/ARR-001B.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "01a8fb8978844c513bd08a474d0eef4babc44cbf",
+      "size": 246
+    },
+    {
+      "path": "04-Runner/Providers/ARR-001C.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "1d1852cdd129d3d03dc7f27cdfa422af53d18f85",
+      "size": 324
+    },
+    {
+      "path": "04-Runner/README.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "d137076fd022d34d7f319c6f38b17bb8282e6f86",
+      "size": 132
+    },
+    {
+      "path": "05-Datasets",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "fd2c150fdc531a063308daea0771c5ebbfd28777"
+    },
+    {
+      "path": "05-Datasets/INDEX.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "772a2b3727a2cc936b7c8ab4625d5d13f9740a02",
+      "size": 60
+    },
+    {
+      "path": "05-Datasets/README.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "6a3a9975594c137aa49c786215d3854ba5d0f1b5",
+      "size": 107
+    },
+    {
+      "path": "06-Publications",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "e3acfecd0f04ceb9aaf2ed8210245a4eb3030dc8"
+    },
+    {
+      "path": "06-Publications/INDEX.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "4df8cd6c2b4af665f42aaee30a42a4328814d780",
+      "size": 64
+    },
+    {
+      "path": "06-Publications/README.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "c79da556a2388ef9daa268d0b9336d2d694c7fbe",
+      "size": 113
+    },
+    {
+      "path": "07-Tools",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "9b1799b59852a02a8bca48a38ac56b8da698f4a1"
+    },
+    {
+      "path": "07-Tools/APG-001",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "5a26711f04167ba140c68d78417a5779c17326fd"
+    },
+    {
+      "path": "07-Tools/APG-001/APG-001.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "2cf1cdc9dccb468fddc430ff59840f5a2b375101",
+      "size": 222
+    },
+    {
+      "path": "07-Tools/INDEX.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "8072a15a0b678f621eab9d65a0754f65a8542d33",
+      "size": 41
+    },
+    {
+      "path": "07-Tools/README.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "e84c2657029d5653a7e6e58b101f80edefb058f1",
+      "size": 60
+    },
+    {
+      "path": "08-Build",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "3024c1341f0d9255069c7f1750be6408feb02195"
+    },
+    {
+      "path": "08-Build/INDEX.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "7c8b2c3adc4ae2ab3390e53ef45b6b97d6ac7cb2",
+      "size": 57
+    },
+    {
+      "path": "08-Build/README.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "0ff046d1d318b2aefa551536b9d116032e01beae",
+      "size": 107
+    },
+    {
+      "path": "09-Releases",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "a574dcee59f3126d6ca5e5e47c4e867b0ef5d3e9"
+    },
+    {
+      "path": "09-Releases/INDEX.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "3345882fdbfdd38d97bee7d67306b9db7633e05c",
+      "size": 60
+    },
+    {
+      "path": "09-Releases/README.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "48bdd7bc53ad2c5d64a3d2c693756519be262b27",
+      "size": 113
+    },
+    {
+      "path": "10-Assets",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "fa09ec61559d4e935d2c19e5a838220f7e31b872"
+    },
+    {
+      "path": "10-Assets/INDEX.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "38f726b745e8a3ab9cbaef970556aa0d861846fc",
+      "size": 58
+    },
+    {
+      "path": "10-Assets/README.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "3d381b8d7a41973c2a614183f67abc8a00aa1500",
+      "size": 96
+    },
+    {
+      "path": "11-Templates",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "e3a612b3e628fbba8c97bd70263519c088b771db"
+    },
+    {
+      "path": "11-Templates/INDEX.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "7c615b04386d1cf5db10fc56c2f6474017b66b24",
+      "size": 61
+    },
+    {
+      "path": "11-Templates/README.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "692adca5cce79792c2fca9f6c7092edac0beb62c",
+      "size": 121
+    },
+    {
+      "path": "12-Registry",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "a1fc9e6f2589de6175bb498da7e51193884d92ab"
+    },
+    {
+      "path": "12-Registry/INDEX.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "a602d8e7027bff0459867dabe9ebe37164663d42",
+      "size": 60
+    },
+    {
+      "path": "12-Registry/README.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "a0f08c7d827305a0c443d4329e2ece22aa82bb9c",
+      "size": 120
+    },
+    {
+      "path": "13-Workspace",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "49aaa2ff88daf34a719d4804ff0c3ab6b5e528d8"
+    },
+    {
+      "path": "13-Workspace/ARS-001.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "0111ebeadf2440abf0fe1ea9b4455e992be900da",
+      "size": 7341
+    },
+    {
+      "path": "13-Workspace/INDEX.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "b494a26d0975e65a457e9072af36e49f5a260034",
+      "size": 85
+    },
+    {
+      "path": "13-Workspace/README.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "b1cef855a2b07c0868aa46df85c44944aafa7372",
+      "size": 153
+    },
+    {
+      "path": "13-Workspace/Reports",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "05e15e814a9d17e653ae51bc710c2a16ca83c622"
+    },
+    {
+      "path": "13-Workspace/Reports/COMPREHENSIVE-STATUS-REPORT.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "cf4522bba6c7fe7439a07131f47b2377b7c99885",
+      "size": 865
+    },
+    {
+      "path": "13-Workspace/Reports/CURRENT-STATE-RECONCILIATION-2026-10.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "5167dcda4f2c39cee7b9d91a4f5f5adde703ecae",
+      "size": 7614
+    },
+    {
+      "path": "13-Workspace/Reports/DECISION-PERSONA-DOMAIN.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "e85b34ef7bea483f868616df0e976df699d9c80f",
+      "size": 3029
+    },
+    {
+      "path": "13-Workspace/Reports/FINAL-REPORT.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "1d599aefae61d1d2d21e1342ee362da890b4979d",
+      "size": 6434
+    },
+    {
+      "path": "13-Workspace/Reports/KERNEL-DIAGRAM-RECONCILIATION.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "c6cec23ea0225a210a32992e441db91f0322df23",
+      "size": 8898
+    },
+    {
+      "path": "13-Workspace/Reports/OPENALEX-RETRY-FINAL.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "e3821e36c3f86e9ed5d2dbd0bd4438696ec98066",
+      "size": 2146
+    },
+    {
+      "path": "13-Workspace/Reports/P3-COMPLETE.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "b6fe64f5628ca1004e82705d35870f1cf642ebf2",
+      "size": 4354
+    },
+    {
+      "path": "13-Workspace/Reports/PHASE-5-KICKOFF.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "6c7e51d03618a2371fc165d58f226fe29bcf5240",
+      "size": 6205
+    },
+    {
+      "path": "13-Workspace/Reports/PILOT-SUMMARY-PHASES-0-4.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "1f62a8ca122ee8f04fc7eead11a5cfa9b782246d",
+      "size": 6378
+    },
+    {
+      "path": "13-Workspace/Reports/ROADMAP.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "84b8ee00b19d3ea76b9279144ba995f38aa7c626",
+      "size": 7488
+    },
+    {
+      "path": "13-Workspace/Reports/SESSION-REPORT-001.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "0def0c0d7e4f6681588f190b1c1f7367e857216a",
+      "size": 4640
+    },
+    {
+      "path": "14-Examples",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "3751e47e94ca5cac8cb28ebecd154b3280a3fefc"
+    },
+    {
+      "path": "14-Examples/INDEX.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "6d1ca44341b99bcb53bd25dfc09f72a2f490e16a",
+      "size": 60
+    },
+    {
+      "path": "14-Examples/README.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "93f4bd57680624f3e2bf1d0059b5961faf7d2981",
+      "size": 103
+    },
+    {
+      "path": "15-Tests",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "2099a0adf437eae6a8269d076fbdd2c734457e4e"
+    },
+    {
+      "path": "15-Tests/INDEX.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "e3ca50a675c8fdee36cdd66609dbe4e74d235cf5",
+      "size": 57
+    },
+    {
+      "path": "15-Tests/README.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "6cf8be6eb9f035c901aaa438c92403ff7efe5b92",
+      "size": 116
+    },
+    {
+      "path": "ARCHITECTURE.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "ea299a65b9788506c33b8ca4d433353f407a8d1e",
+      "size": 323
+    },
+    {
+      "path": "CHANGELOG.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "f09de6e21b79bb7e98b7f940e49a0936342f0d29",
+      "size": 1853
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "1222de1963c4ebe460581e58318f6937369d4de1",
+      "size": 484
+    },
+    {
+      "path": "LICENSE",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "f61e95c9f60a03b5449ecdb183e3720fec196784",
+      "size": 67
+    },
+    {
+      "path": "README.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "cb930dc7450b8fc55b0ca0c3cdd29513efb0d229",
+      "size": 1437
+    },
+    {
+      "path": "ROADMAP.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "59872b84f7099b0c5c98ee7af8bb40c558f0b6b6",
+      "size": 105
+    },
+    {
+      "path": "VERSION",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "9084fa2f716a7117829f3f32a5f4cef400e02903",
+      "size": 6
+    },
+    {
+      "path": "WORKSPACE_MANIFEST.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "c3ec4ecf60af61cd1697229142edafbba9d63d77",
+      "size": 1402
+    },
+    {
+      "path": "requirements-dev.txt",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "d1cfec3aeefd5dc8c157e12c27cc2468bc925b6e",
+      "size": 20
+    },
+    {
+      "path": "schemas",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "576c4250bc89fa5dfa65a4390b1d180fe44c57c8"
+    },
+    {
+      "path": "schemas/registry-manifest.schema.json",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "88b0cd2733245f0c3cc04f9db6ade1639d485ac7",
+      "size": 2165
+    },
+    {
+      "path": "tests",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "02a397f7f85c3de960d73dd30a71e586cde761aa"
+    },
+    {
+      "path": "tests/fixtures",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "3b7895b6cc2a1bfe2b0aeabe7bfae33f7c0ef3a1"
+    },
+    {
+      "path": "tests/fixtures/manifests",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "492a364b74a48733dacf34d3ec55f31a437a19f0"
+    },
+    {
+      "path": "tests/fixtures/manifests/app-rule-duplicate-ids.json",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "f42280ecc9e5c2e788e72ede27d28b64b746f791",
+      "size": 386
+    },
+    {
+      "path": "tests/fixtures/manifests/app-rule-unsafe-path.json",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "ff43bd2561768eaecdd944e28d0dcab098ca52c4",
+      "size": 248
+    },
+    {
+      "path": "tests/fixtures/manifests/invalid-schema-record-state.json",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "0ed934c46e7c36ad420f608e5eebc6ebed98b7d6",
+      "size": 239
+    },
+    {
+      "path": "tests/fixtures/manifests/valid-unknowns.json",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "872431c9e844b29233a1f5bc49cda7f7bf0678f4",
+      "size": 381
+    },
+    {
+      "path": "tests/test_jsonschema_conformance.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "f768477402bf7682d169ad7e752dde7cab5eb9a1",
+      "size": 2770
+    },
+    {
+      "path": "tests/test_manifest_validator.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "7f14cc6b676562ba64796a38f0834acf0d1c84c6",
+      "size": 6523
+    },
+    {
+      "path": "tests/test_phase14_final_main_audit.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "c4c98ab235bc0d9e57e20bd314ecfd2d550902e6",
+      "size": 1189
+    },
+    {
+      "path": "tests/test_registry_validator.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "fde02688036d7dc32d80360496f249f7f47d5021",
+      "size": 4480
+    },
+    {
+      "path": "tests/test_schema_compatibility.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "1b75029f03b9714b44aadc9d8ad77709987edd11",
+      "size": 2852
+    },
+    {
+      "path": "tests/test_validator_fixture_comparison.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "449634015b41e975d47be8638c4420c36e6b349a",
+      "size": 2763
+    },
+    {
+      "path": "tools",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "f3e445ad54239a63636e7debd9a6ccdd2c96b3de"
+    },
+    {
+      "path": "tools/README.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "0715a1078a7f3ea0f877725bf2e2a46cc9c5252b",
+      "size": 4282
+    },
+    {
+      "path": "tools/manifest_validator.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "5257691acbfb60399ae3ec1e59f17b7d31aa3905",
+      "size": 7768
+    },
+    {
+      "path": "tools/registry_validator.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "1edb2056aaef068855c01492e2ed22803816b5d9",
+      "size": 3147
+    },
+    {
+      "path": "workspace-tree.txt",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "e9c3f9345e31880a3fa1f4a11925a5c59e82eb82",
+      "size": 5119
+    },
+    {
+      "path": "workspace.json",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "928870ea203a11a4df51816c34c8e7efb00a310e",
+      "size": 1836
+    }
+  ]
+}
