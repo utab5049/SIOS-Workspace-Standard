@@ -101,6 +101,24 @@ class GdrOaiMigrationValidationTests(unittest.TestCase):
             for path in item.get("supplementary_paths", []):
                 self.assertTrue((ROOT / path).is_file(), path)
 
+    def test_phase_31_correction_package_is_proposal_only(self):
+        package_path = ROOT / "02-Research/Registry/migration/phase-31-correction-package.json"
+        package = json.loads(package_path.read_text(encoding="utf-8"))
+        self.assertEqual("proposed_not_applied", package["status"])
+        self.assertFalse(package["canonical_files_changed"])
+        self.assertFalse(package["staged_oai_or_gdr_changed"])
+        self.assertFalse(package["merge_authorized"])
+        self.assertEqual(14, package["known_reconciliations"]["cir_current_table_rows"])
+        self.assertEqual(5, package["known_reconciliations"]["cir_full_text_rows"])
+        self.assertEqual(9, package["known_reconciliations"]["cir_abstract_only_rows"])
+        for item in package["proposed_documents"]:
+            self.assertTrue((ROOT / item["path"]).is_file(), item["path"])
+        cir = (ROOT / package["proposed_documents"][0]["path"]).read_text(encoding="utf-8")
+        eir = (ROOT / package["proposed_documents"][1]["path"]).read_text(encoding="utf-8")
+        self.assertIn("SRC-000017", cir)
+        self.assertIn("EV-000012", eir)
+        self.assertIn("Disputed", eir)
+
     def test_c1_record_remains_unresolved(self):
         c1_path = STAGED_GDR / "GOV-DEC-C1.json"
         c1 = json.loads(c1_path.read_text(encoding="utf-8"))
