@@ -151,6 +151,59 @@ def validate_package():
     return []
 
 
+
+def validate_phase31_correction_package():
+    """Validate Phase 31 proposal paths and guard its proposal-only status."""
+    import re
+
+    errors = []
+    package_path = ROOT / "02-Research/Registry/migration/phase-31-correction-package.json"
+    package = load_json(package_path)
+    if package.get("status") != "proposed_not_applied":
+        errors.append("Phase 31 correction package must remain proposed_not_applied")
+    if package.get("canonical_files_changed") is not False:
+        errors.append("Phase 31 must not claim canonical files were changed")
+    if package.get("staged_oai_or_gdr_changed") is not False:
+        errors.append("Phase 31 must not claim staged GDR/OAI records were changed")
+    if package.get("merge_authorized") is not False:
+        errors.append("Phase 31 package must not authorize merge")
+
+    expected = {"CIR-001", "EIR-001"}
+    actual = {item.get("id") for item in package.get("proposed_documents", [])}
+    if actual != expected:
+        errors.append(f"Phase 31 proposed document IDs mismatch: expected {sorted(expected)}, got {sorted(actual)}")
+
+    for item in package.get("proposed_documents", []):
+        proposed = ROOT / item["path"]
+        canonical = ROOT / item["canonical_target"]
+        if not proposed.is_file():
+            errors.append(f"Phase 31 proposed document is missing: {item['path']}")
+            continue
+        if not canonical.is_file():
+            errors.append(f"Phase 31 canonical target is missing: {item['canonical_target']}")
+        draft = proposed.read_text(encoding="utf-8")
+        for reference in re.findall(r"`((?:01-Foundation|02-Research|12-Registry|13-Workspace)/[^\`]+)`", draft):
+            if not (ROOT / reference).is_file():
+                errors.append(f"Phase 31 {item['id']} contains unresolved repository path: {reference}")
+
+    cir_draft = ROOT / "02-Research/Registry/migration/proposals/phase-31-correction-package/CIR-001.proposed.md"
+    if cir_draft.is_file():
+        text = cir_draft.read_text(encoding="utf-8")
+        if "14 listed rows = 5 marked full-text and 9 marked abstract-only" not in text:
+            errors.append("Phase 31 CIR draft must state its arithmetic reconciliation")
+        if "SRC-000017" not in text or "SRC-000018 / SRC-000019" not in text:
+            errors.append("Phase 31 CIR draft must retain candidate IDs for owner review")
+
+    eir_draft = ROOT / "02-Research/Registry/migration/proposals/phase-31-correction-package/EIR-001.proposed.md"
+    if eir_draft.is_file():
+        text = eir_draft.read_text(encoding="utf-8")
+        for token in ("EV-000001", "EV-000003", "EV-000005", "EV-000012", "Disputed"):
+            if token not in text:
+                errors.append(f"Phase 31 EIR draft is missing required conflict/lineage marker: {token}")
+
+    return errors
+
+
 def main() -> int:
     try:
         errors = validate_package()
