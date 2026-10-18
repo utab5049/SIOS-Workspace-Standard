@@ -1,0 +1,32 @@
+{
+  "artifact_id": "REVIEW-BATCH-001",
+  "title": "Evidence Batch 1 Independent Review",
+  "classification": "Review Evidence Batch",
+  "path": "02-Research/Reviews/REVIEW-BATCH-001.md",
+  "version": null,
+  "lifecycle_state": "disputed",
+  "owner": null,
+  "domain": "02-Research",
+  "collection": "Reviews",
+  "depends_on": [
+    "EV-BATCH-001",
+    "OPS-001"
+  ],
+  "source_decision_ids": [
+    "GOV-DEC-C1"
+  ],
+  "provenance": [
+    {
+      "source_path": "02-Research/Reviews/REVIEW-BATCH-001.md",
+      "source_commit": "5bc0ff427e7937139e85d3222e65cb0f4b1ab11b",
+      "source_version": null,
+      "source_claim": "Labels the pass as an independent second pass but identifies a separate reasoning pass, not a genuinely separate reviewer.",
+      "source_status": "conflicting"
+    }
+  ],
+  "reconciliation_status": "disputed",
+  "notes": [
+    "This review batch is evidence of a review activity claim, not proof of qualifying independence under the current protocol.",
+    "GOV-DEC-C1 remains unresolved; preserve reviewer-independence qualification."
+  ]
+}
