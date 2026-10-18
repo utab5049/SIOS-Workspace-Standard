@@ -5,6 +5,8 @@ on:
     paths:
       - "tools/**"
       - "tests/**"
+      - "schemas/**"
+      - "02-Research/Audit/REGISTRY-MACHINE-READABLE-CONTRACT.md"
       - ".github/workflows/registry-validator.yml"
   pull_request:
     paths:
