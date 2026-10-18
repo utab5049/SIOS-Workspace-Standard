@@ -1,0 +1,318 @@
+{
+  "reconciliation_id": "RECON-028",
+  "repository": "utab5049/SIOS-Workspace-Standard",
+  "source_snapshot_commit": "5bc0ff427e7937139e85d3222e65cb0f4b1ab11b",
+  "reviewed_branch": "work/phase-27-oai-record-expansion",
+  "status": "proposed_reconciliation_not_applied",
+  "rules": [
+    "Resolve bare detail-location filenames to exact repository paths only when exactly one source-tree match exists.",
+    "Do not treat batch containers as individual source/evidence instances.",
+    "Preserve conflicting status claims and correction history.",
+    "Do not infer missing evidence means an event did not occur.",
+    "Do not change canonical registries or decide C1 in this reconciliation."
+  ],
+  "source_instance_reconciliation": [
+    {
+      "source_id": "SRC-000002",
+      "cir_detail_location": "SRC-CORPUS-001-ENTRIES.md",
+      "resolved_registration_path": "02-Research/Corpus/Sources/SRC-Batch1.md",
+      "location_status": "referenced_detail_filename_not_found_in_snapshot; source registration is in SRC-Batch1",
+      "notes": [
+        "SRC-Batch1 is a batch container, not a separate source instance."
+      ]
+    },
+    {
+      "source_id": "SRC-000003",
+      "cir_detail_location": "SRC-CORPUS-001-ENTRIES.md",
+      "resolved_registration_path": "02-Research/Corpus/Sources/SRC-Batch1.md",
+      "location_status": "referenced_detail_filename_not_found_in_snapshot; source registration is in SRC-Batch1",
+      "notes": [
+        "SRC-Batch1 is a batch container, not a separate source instance."
+      ]
+    },
+    {
+      "source_id": "SRC-000004",
+      "cir_detail_location": "SRC-CORPUS-001-ENTRIES.md",
+      "resolved_registration_path": "02-Research/Corpus/Sources/SRC-Batch1.md",
+      "location_status": "referenced_detail_filename_not_found_in_snapshot; source registration is in SRC-Batch1",
+      "notes": [
+        "SRC-Batch1 is a batch container, not a separate source instance."
+      ]
+    },
+    {
+      "source_id": "SRC-000005",
+      "cir_detail_location": "FULLTEXT-UPGRADE-005-012.md",
+      "resolved_registration_path": "02-Research/Corpus/Sources/SRC-Batch1.md",
+      "location_status": "ambiguous_bare_filename_resolved_to_existing_fulltext_report; source registration is in SRC-Batch1",
+      "notes": [
+        "SRC-Batch1 is a batch container, not a separate source instance."
+      ]
+    },
+    {
+      "source_id": "SRC-000006",
+      "cir_detail_location": "SRC-CORPUS-001-ENTRIES.md",
+      "resolved_registration_path": "02-Research/Corpus/Sources/SRC-Batch1.md",
+      "location_status": "referenced_detail_filename_not_found_in_snapshot; source registration is in SRC-Batch1",
+      "notes": [
+        "SRC-Batch1 is a batch container, not a separate source instance."
+      ]
+    },
+    {
+      "source_id": "SRC-000007",
+      "cir_detail_location": "SRC-CORPUS-001-ENTRIES-2.md",
+      "resolved_registration_path": "02-Research/Corpus/Sources/SRC-Batch2.md",
+      "location_status": "referenced_detail_filename_not_found_in_snapshot; source registration is in SRC-Batch2",
+      "notes": [
+        "Batch container contains multiple source registrations."
+      ]
+    },
+    {
+      "source_id": "SRC-000008",
+      "cir_detail_location": "SRC-CORPUS-001-ENTRIES-2.md",
+      "resolved_registration_path": "02-Research/Corpus/Sources/SRC-Batch2.md",
+      "location_status": "referenced_detail_filename_not_found_in_snapshot; source registration is in SRC-Batch2",
+      "notes": [
+        "Batch container contains multiple source registrations."
+      ]
+    },
+    {
+      "source_id": "SRC-000009",
+      "cir_detail_location": "SRC-CORPUS-001-ENTRIES-2.md",
+      "resolved_registration_path": "02-Research/Corpus/Sources/SRC-Batch2.md",
+      "location_status": "referenced_detail_filename_not_found_in_snapshot; source registration is in SRC-Batch2",
+      "notes": [
+        "Batch container contains multiple source registrations."
+      ]
+    },
+    {
+      "source_id": "SRC-000010",
+      "cir_detail_location": "SRC-CORPUS-001-ENTRIES-2.md",
+      "resolved_registration_path": "02-Research/Corpus/Sources/SRC-Batch2.md",
+      "location_status": "referenced_detail_filename_not_found_in_snapshot; source registration is in SRC-Batch2",
+      "notes": [
+        "Batch container contains multiple source registrations."
+      ]
+    },
+    {
+      "source_id": "SRC-000012",
+      "cir_detail_location": "FULLTEXT-UPGRADE-005-012.md",
+      "resolved_registration_path": "02-Research/Corpus/Sources/SRC-Batch3.md",
+      "supplementary_path": "02-Research/Observation/Records/FULLTEXT-UPGRADE-005-012.md",
+      "location_status": "bare_filename_resolves_to_supplementary_report; registration resides in SRC-Batch3",
+      "notes": [
+        "CIR location should distinguish source registration from full-text upgrade report."
+      ]
+    },
+    {
+      "source_id": "SRC-000013",
+      "cir_detail_location": "SRE-000001-D.md",
+      "resolved_registration_path": "02-Research/Corpus/Sources/SRC-Batch3.md",
+      "supplementary_path": "02-Research/Search/SRE-000001-D.md",
+      "location_status": "bare_filename_resolves_to_search_record; source registration resides in SRC-Batch3",
+      "notes": [
+        "Separate source registration from normative-text/search evidence."
+      ]
+    },
+    {
+      "source_id": "SRC-000014",
+      "cir_detail_location": "SRE-000001-D.md",
+      "resolved_registration_path": "02-Research/Corpus/Sources/SRC-Batch3.md",
+      "supplementary_path": "02-Research/Search/SRE-000001-D.md",
+      "location_status": "bare_filename_resolves_to_search_record; source registration resides in SRC-Batch3",
+      "notes": [
+        "Separate source registration from normative-text/search evidence."
+      ]
+    },
+    {
+      "source_id": "SRC-000015",
+      "cir_detail_location": "SRC-000015-EXTRACTION.md",
+      "resolved_registration_path": "02-Research/Corpus/Sources/SRC-000015-EXTRACTION.md",
+      "location_status": "referenced basename exists under different directory",
+      "notes": [
+        "CIR should use full repository-relative path."
+      ]
+    },
+    {
+      "source_id": "SRC-000016",
+      "cir_detail_location": "SRC-000016-RESOLUTION.md",
+      "resolved_registration_path": "02-Research/Corpus/Sources/SRC-000016-RESOLUTION.md",
+      "location_status": "referenced basename exists under different directory",
+      "notes": [
+        "CIR should use full repository-relative path."
+      ]
+    },
+    {
+      "source_id": "SRC-000017",
+      "cir_detail_location": null,
+      "resolved_registration_path": "02-Research/Corpus/Sources/SRC-000017-Studer.md",
+      "location_status": "not listed in CIR-001 but registration file exists",
+      "notes": [
+        "File marks SRC-000017 Accepted, Full-Text; also contains OBSU-000026. Reconcile CIR's count and competing definition references."
+      ]
+    },
+    {
+      "source_id": "SRC-000018",
+      "cir_detail_location": null,
+      "resolved_registration_path": "02-Research/Corpus/Sources/SRC-000018-19.md",
+      "location_status": "not listed in CIR-001; embedded in a completion report",
+      "notes": [
+        "Verify whether it meets the full source registration contract before counting it as a registered source."
+      ]
+    },
+    {
+      "source_id": "SRC-000019",
+      "cir_detail_location": null,
+      "resolved_registration_path": "02-Research/Corpus/Sources/SRC-000018-19.md",
+      "location_status": "not listed in CIR-001; embedded in a completion report",
+      "notes": [
+        "Verify whether it meets the full source registration contract before counting it as a registered source."
+      ]
+    },
+    {
+      "source_id": "SRC-000001",
+      "cir_detail_location": "MAI-001 Search",
+      "resolved_registration_path": null,
+      "location_status": "CIR states grandfathered separately; exact source instance not reconciled here",
+      "notes": [
+        "Do not infer absence or registration status from the CIR note alone."
+      ]
+    },
+    {
+      "source_id": "SRC-000011",
+      "cir_detail_location": null,
+      "resolved_registration_path": null,
+      "location_status": "CIR states reserved and unused; not independently revalidated in this phase",
+      "notes": [
+        "Check SIOS-ID-001 and source history before confirming this status."
+      ]
+    }
+  ],
+  "evidence_instance_reconciliation": [
+    {
+      "evidence_id": "EV-000001",
+      "detail_locations": [
+        "02-Research/Evidence/Records/EV-BATCH-001.md",
+        "02-Research/Evidence/Records/EV-CORRECTIONS-BATCH-001.md",
+        "02-Research/Reviews/REVIEW-BATCH-002.md"
+      ],
+      "status_conflict": "EIR says Needs Revision; correction batch says Approved as low-confidence; review batch flags competing definition issue.",
+      "reconciliation_status": "disputed"
+    },
+    {
+      "evidence_id": "EV-000002a",
+      "detail_locations": [
+        "02-Research/Evidence/Records/EV-CORRECTIONS-BATCH-001.md"
+      ],
+      "status_conflict": "EIR says Approved; correction batch says approved after split, with caveats.",
+      "reconciliation_status": "pending"
+    },
+    {
+      "evidence_id": "EV-000002b",
+      "detail_locations": [
+        "02-Research/Evidence/Records/EV-CORRECTIONS-BATCH-001.md"
+      ],
+      "status_conflict": "EIR says Approved; correction batch says approved after split, low-medium confidence.",
+      "reconciliation_status": "pending"
+    },
+    {
+      "evidence_id": "EV-000003",
+      "detail_locations": [
+        "02-Research/Evidence/Records/EV-BATCH-001.md",
+        "02-Research/Evidence/Records/APPLIED-CORRECTIONS-EV003-KSM001.md",
+        "02-Research/Reviews/REVIEW-BATCH-002.md"
+      ],
+      "status_conflict": "EIR points to original batch and review; a separate applied-corrections artifact records version 1.1 and split-by-temporal-scope changes.",
+      "reconciliation_status": "pending"
+    },
+    {
+      "evidence_id": "EV-000004",
+      "detail_locations": [
+        "02-Research/Evidence/Records/EV-BATCH-001.md",
+        "02-Research/Reviews/REVIEW-BATCH-002.md"
+      ],
+      "status_conflict": "EIR says approved/strengthened; preserve the review lineage and corroboration queue.",
+      "reconciliation_status": "pending"
+    },
+    {
+      "evidence_id": "EV-000005",
+      "detail_locations": [
+        "02-Research/Evidence/Records/EV-CORRECTIONS-BATCH-001.md"
+      ],
+      "status_conflict": "EIR marks superseded by EV-000009; correction batch also contains a revision entry for EV-000005. Version and supersession chronology need explicit representation.",
+      "reconciliation_status": "disputed"
+    },
+    {
+      "evidence_id": "EV-000006",
+      "detail_locations": [
+        "02-Research/Corpus/Sources/SRC-000016-RESOLUTION.md"
+      ],
+      "status_conflict": "EIR uses a bare filename; full repository path is under Corpus/Sources.",
+      "reconciliation_status": "pending"
+    },
+    {
+      "evidence_id": "EV-000007",
+      "detail_locations": [
+        "02-Research/Corpus/Sources/SRC-000015-EXTRACTION.md"
+      ],
+      "status_conflict": "EIR uses a bare filename; full repository path is under Corpus/Sources.",
+      "reconciliation_status": "pending"
+    },
+    {
+      "evidence_id": "EV-000008",
+      "detail_locations": [
+        "02-Research/Observation/Records/FULLTEXT-UPGRADE-005-012.md"
+      ],
+      "status_conflict": "EIR uses a bare filename; full repository path is under Observation/Records.",
+      "reconciliation_status": "pending"
+    },
+    {
+      "evidence_id": "EV-000009",
+      "detail_locations": [
+        "02-Research/Observation/Records/FULLTEXT-UPGRADE-005-012.md"
+      ],
+      "status_conflict": "EIR uses a bare filename; full repository path is under Observation/Records.",
+      "reconciliation_status": "pending"
+    },
+    {
+      "evidence_id": "EV-000012",
+      "detail_locations": [
+        "02-Research/Corpus/Sources/SRC-000018-19.md"
+      ],
+      "status_conflict": "Evidence ID is embedded in a source completion report but absent from EIR-001; verify schema and whether it is an evidence record or report-local result.",
+      "reconciliation_status": "unverified"
+    }
+  ],
+  "counts_and_gaps": {
+    "cir_claimed_sources": 16,
+    "source_ids_listed_in_cir_table": 14,
+    "additional_source_ids_found_in_later_files": [
+      "SRC-000017",
+      "SRC-000018",
+      "SRC-000019"
+    ],
+    "cir_detail_location_filenames_not_found_in_snapshot": [
+      "SRC-CORPUS-001-ENTRIES.md",
+      "SRC-CORPUS-001-ENTRIES-2.md"
+    ],
+    "eir_rows": 10,
+    "additional_evidence_id_found_in_later_report": [
+      "EV-000012"
+    ],
+    "observation_ids_in_OBSU_BATCH_001": 10,
+    "additional_observation_ids_in_later_source_files": [
+      "OBSU-000026",
+      "OBSU-000027",
+      "OBSU-000028"
+    ],
+    "unresolved_decisions": [
+      "GOV-DEC-C1"
+    ]
+  },
+  "recommendations": [
+    "Revise CIR-001 only in a separate migration PR after governance review; replace bare filenames with repository-relative paths and reconcile the 16-source count against SRC-000017 through SRC-000019.",
+    "Revise EIR-001 only in a separate migration PR after content verification; add EV-000012 only if it meets the evidence-record contract, and record revision/supersession lineage explicitly.",
+    "Inventory individual SRC, EV and OBSU instances separately from batch/report containers.",
+    "Keep REVIEW-BATCH-001/002 as disputed evidence about review activity; do not treat them as proof of independent review.",
+    "Keep C1 unresolved until an authorized governance decision is recorded."
+  ]
+}
