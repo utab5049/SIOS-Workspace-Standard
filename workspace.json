@@ -1,0 +1,38 @@
+{
+  "$schema": "https://schema.sios.dev/workspace-discovery/v1",
+  "protocol": { "id": "SIOS-WDP-001", "version": "1.0.0", "status": "frozen" },
+  "workspace": { "id": "SIOS-WS-001", "version": "1.1.0", "status": "frozen-plus-amendments" },
+  "project": {
+    "id": "SIOS",
+    "constitution": "01-Foundation/Constitution/SIOS-BASELINE-001.md",
+    "manifest": "01-Foundation/Constitution/SIOS-MAN-001.md",
+    "artifactRegistry": "01-Foundation/Registry/MAI-001.md"
+  },
+  "domains": [
+    { "id": "00", "path": "00-Program", "title": "Program" },
+    { "id": "01", "path": "01-Foundation", "title": "Foundation" },
+    { "id": "02", "path": "02-Research", "title": "Research" },
+    { "id": "03", "path": "03-Framework", "title": "Framework" },
+    { "id": "04", "path": "04-Runner", "title": "Runner" },
+    { "id": "05", "path": "05-Datasets", "title": "Datasets" },
+    { "id": "06", "path": "06-Publications", "title": "Publications" },
+    { "id": "07", "path": "07-Tools", "title": "Tools" },
+    { "id": "08", "path": "08-Build", "title": "Build" },
+    { "id": "09", "path": "09-Releases", "title": "Releases" },
+    { "id": "10", "path": "10-Assets", "title": "Assets" },
+    { "id": "11", "path": "11-Templates", "title": "Templates" },
+    { "id": "12", "path": "12-Registry", "title": "Registry" },
+    { "id": "13", "path": "13-Workspace", "title": "Workspace" },
+    { "id": "14", "path": "14-Examples", "title": "Examples" },
+    { "id": "15", "path": "15-Tests", "title": "Tests" }
+  ],
+  "pilotCycle2026_08": {
+    "sourcesRegistered": 19,
+    "evidenceRecords": 12,
+    "frameworkArtifacts": ["KOM-001", "KSM-001"],
+    "amendedDocuments": ["AERA-001D", "MAI-001", "EUM-001", "ERS-001", "SFA-001"],
+    "ratifiedDecisions": ["C1", "C3"],
+    "blindReviews": 4,
+    "auditProtocols": ["AAVP-22-phase", "ICRAA"]
+  }
+}
