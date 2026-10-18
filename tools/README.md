@@ -22,3 +22,13 @@ It never edits files and does not automatically choose which conflicting
 document is authoritative. Governance owners must resolve findings explicitly.
 The validator is not the SIOS Runner and does not claim to execute the research
 pipeline.
+
+## Continuous integration
+
+The GitHub Actions workflow at `.github/workflows/registry-validator.yml` compiles
+the Python sources and runs the unit-test suite on pushes and pull requests that
+change tool or test files. It does not gate merges on the repository-wide
+validator result yet, because the current workspace contains a known registry
+status contradiction that requires an explicit governance resolution. This
+keeps CI failures actionable and avoids silently treating a disputed source as
+authoritative.
