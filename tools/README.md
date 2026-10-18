@@ -56,7 +56,7 @@ contract. A structurally valid manifest is not evidence that its records are
 factually correct. Errors return exit code `1`; warnings alone return `0`.
 The validator never edits files.
 
-## Schema compatibility and fixture comparisons
+## Schema compatibility, fixture comparison, and coverage
 
 `tests/test_schema_compatibility.py` compares the schema's field sets,
 required fields, version and proposed-authority constants, artifact ID pattern,
@@ -74,6 +74,11 @@ extracted from MAI-001 or any other project source. The tests document two
 intentional differences: JSON Schema alone does not enforce unique
 `artifact_id` values across records, and the current schema does not encode
 repository path traversal safety. The application validator rejects both cases.
+
+See `02-Research/Audit/VALIDATION-COVERAGE-MATRIX.md` for the rule-by-rule
+coverage audit, test gaps, and issues that require governance or source review.
+The matrix is an engineering assessment, not an approval of the proposed
+contract.
 
 These tests cover representative cases, not every possible input or every
 semantic/governance rule. Neither validator proves source accuracy, path
