@@ -1,0 +1,234 @@
+{
+  "phase": 26,
+  "repository": "utab5049/SIOS-Workspace-Standard",
+  "source_commit": "5bc0ff427e7937139e85d3222e65cb0f4b1ab11b",
+  "classification_rule": "Classification is based on inspected document title/header and stated purpose, not filename alone. A classification does not establish governance authority or lifecycle truth.",
+  "records": [
+    {
+      "path": "01-Foundation/Registry/MAI-001.md",
+      "class": "registry_candidate",
+      "authority_claim": "declares itself authoritative source of truth",
+      "observed_state": "Frozen v1.1.0 amended; §5 claims post-ratification",
+      "reconciliation": "conflicts with 12-Registry README and INDEX; claims require governance reconciliation",
+      "confidence": "high"
+    },
+    {
+      "path": "02-Research/Registry/MAI-001-FINAL-MERGE-V3.md",
+      "class": "registry_change_proposal_or_revision",
+      "authority_claim": "none established from inspected header",
+      "observed_state": "says it supersedes MAI-001-REGISTRY-DELTA-V2; documents structural inconsistency",
+      "reconciliation": "historical proposal/version; do not treat as canonical registry",
+      "confidence": "high"
+    },
+    {
+      "path": "02-Research/Registry/MAI-001-FINAL-MERGE-V4.md",
+      "class": "registry_change_proposal_or_revision",
+      "authority_claim": "none established from inspected header",
+      "observed_state": "basis is DECISION-MAI001-OPTION-B; contains SRE-000001-A row",
+      "reconciliation": "conflicts with pinned tree path absence for SRE-000001-A; inspect history and exact file references",
+      "confidence": "high"
+    },
+    {
+      "path": "02-Research/Registry/MAI-001-FINAL-MERGE-V5.md",
+      "class": "registry_change_proposal_or_revision",
+      "authority_claim": "claims P0 approval and pending decisions ratified",
+      "observed_state": "post-ratification wording",
+      "reconciliation": "conflicts with DECISIONS-RECORDED and other unresolved-governance evidence; treat as disputed claim",
+      "confidence": "high"
+    },
+    {
+      "path": "02-Research/Registry/MAI-001-REGISTRY-DELTA.md",
+      "class": "registry_delta_proposal",
+      "authority_claim": "explicitly says it is a proposed delta, not modification of frozen MAI-001",
+      "observed_state": "says pilot files remain outside MAI-001 until formally reviewed and merged",
+      "reconciliation": "proposal/evidence of known registration gap; not canonical inventory",
+      "confidence": "high"
+    },
+    {
+      "path": "02-Research/Registry/MAI-001-REGISTRY-DELTA-V2.md",
+      "class": "registry_delta_proposal",
+      "authority_claim": "explicitly marked proposed for editorial review merge",
+      "observed_state": "supersedes delta v1",
+      "reconciliation": "proposal/revision history; not canonical inventory",
+      "confidence": "high"
+    },
+    {
+      "path": "02-Research/Registry/C1-RATIFIED-FINAL.md",
+      "class": "governance_decision_claim",
+      "authority_claim": "claims C1 ratified by explicit decision",
+      "observed_state": "ratified based on three blind tests #1, #2, #4",
+      "reconciliation": "directly conflicts with DECISIONS-RECORDED and audit records saying C1 remains blocked; GDR must preserve conflict, no auto-resolution",
+      "confidence": "high"
+    },
+    {
+      "path": "02-Research/Registry/DECISIONS-RECORDED.md",
+      "class": "governance_decision_claim",
+      "authority_claim": "records C1 as 1B, do not ratify yet",
+      "observed_state": "blocked on independent sample review; C3 executed",
+      "reconciliation": "conflicts with C1-RATIFIED-FINAL and MAI-001-FINAL-MERGE-V5; decision owner review required",
+      "confidence": "high"
+    },
+    {
+      "path": "02-Research/Registry/DECISION-MAI001-OPTION-B.md",
+      "class": "governance_decision_record",
+      "authority_claim": "states Option B implemented under delegated pilot authority",
+      "observed_state": "decision for sub-registries CIR-001 and EIR-001",
+      "reconciliation": "record separately from canonical adoption; current GDR entry should preserve delegated scope and pending board review",
+      "confidence": "high"
+    },
+    {
+      "path": "02-Research/Registry/GOVERNANCE-DECISION-PACKAGE.md",
+      "class": "decision_request_package",
+      "authority_claim": "asks for actual authority decision on C1 and C3",
+      "observed_state": "presents 1A ratify now vs 1B do not ratify yet",
+      "reconciliation": "historical decision request; compare with later recorded decisions and evidence",
+      "confidence": "high"
+    },
+    {
+      "path": "02-Research/Audit/REVIEW-LEDGER.md",
+      "class": "audit_evidence_template",
+      "authority_claim": "explicitly says it does not ratify decisions or certify independence",
+      "observed_state": "template; evidence not yet reconciled",
+      "reconciliation": "not proof that reviews did or did not occur; record current evidence availability separately",
+      "confidence": "high"
+    },
+    {
+      "path": "02-Research/Audit/INDEPENDENT-REVIEW-PROTOCOL.md",
+      "class": "proposed_review_protocol",
+      "authority_claim": "explicitly proposed and requires maintainer approval",
+      "observed_state": "v0.1.0; describes independence evidence requirements",
+      "reconciliation": "normative status unverified; useful schema for evidence requests",
+      "confidence": "high"
+    },
+    {
+      "path": "02-Research/Audit/REGISTRY-MACHINE-READABLE-CONTRACT.md",
+      "class": "proposed_schema_contract",
+      "authority_claim": "explicitly proposal only, not ratified or authoritative",
+      "observed_state": "describes separate JSON manifest shape",
+      "reconciliation": "do not elevate to canonical authority; compare with adopted GDR/OAI schemas",
+      "confidence": "high"
+    },
+    {
+      "path": "02-Research/Audit/VALIDATION-COVERAGE-MATRIX.md",
+      "class": "engineering_audit_report",
+      "authority_claim": "explicitly not a governance decision",
+      "observed_state": "covers validator/test layers through Phase 11",
+      "reconciliation": "audit/report evidence, not an inventory authority",
+      "confidence": "high"
+    },
+    {
+      "path": "12-Registry/README.md",
+      "class": "registry_entry_point",
+      "authority_claim": "no artifacts currently registered",
+      "observed_state": "empty-registry statement",
+      "reconciliation": "contradicts MAI-001's registry claims; must be preserved as conflict evidence",
+      "confidence": "high"
+    },
+    {
+      "path": "12-Registry/INDEX.md",
+      "class": "registry_entry_point",
+      "authority_claim": "no artifacts currently registered",
+      "observed_state": "empty-registry statement",
+      "reconciliation": "contradicts MAI-001's registry claims; must be preserved as conflict evidence",
+      "confidence": "high"
+    }
+  ],
+  "additionalCandidateClassification": [
+    {
+      "path": "02-Research/Corpus/CIR-001.md",
+      "class": "instance_registry_candidate",
+      "reason": "path/name and decision Option B identify it as Corpus Instance Registry; content/schema and authority require inspection"
+    },
+    {
+      "path": "02-Research/Evidence/EIR-001.md",
+      "class": "evidence_registry_candidate",
+      "reason": "path/name and decision Option B identify it as Evidence Instance Registry; content/schema and authority require inspection"
+    },
+    {
+      "path": "02-Research/Corpus/Sources/SRC-000015-EXTRACTION.md",
+      "class": "source_or_extraction_record",
+      "reason": "explicit source/extraction filename; likely evidence-bearing record, not necessarily an independent governance artifact"
+    },
+    {
+      "path": "02-Research/Corpus/Sources/SRC-000016-RESOLUTION.md",
+      "class": "source_or_resolution_record",
+      "reason": "explicit source/resolution filename; needs ID and content relationship check"
+    },
+    {
+      "path": "02-Research/Corpus/Sources/SRC-000017-Studer.md",
+      "class": "source_record",
+      "reason": "source-named file; classify as content/evidence pending header review"
+    },
+    {
+      "path": "02-Research/Corpus/Sources/SRC-000018-19.md",
+      "class": "batched_source_record",
+      "reason": "filename indicates grouped sources; must not silently expand to separate IDs"
+    },
+    {
+      "path": "02-Research/Corpus/Sources/SRC-Batch1.md",
+      "class": "source_batch",
+      "reason": "batch record; inventory role depends on whether batch is an artifact or transport container"
+    },
+    {
+      "path": "02-Research/Corpus/Sources/SRC-Batch2.md",
+      "class": "source_batch",
+      "reason": "batch record; inventory role depends on whether batch is an artifact or transport container"
+    },
+    {
+      "path": "02-Research/Corpus/Sources/SRC-Batch3.md",
+      "class": "source_batch",
+      "reason": "batch record; inventory role depends on whether batch is an artifact or transport container"
+    },
+    {
+      "path": "02-Research/Evidence/Records/EV-BATCH-001.md",
+      "class": "evidence_batch",
+      "reason": "evidence batch record; distinguish package ID from individual evidence IDs"
+    },
+    {
+      "path": "02-Research/Evidence/Records/EV-CORRECTIONS-BATCH-001.md",
+      "class": "evidence_correction_batch",
+      "reason": "correction history/provenance candidate"
+    },
+    {
+      "path": "02-Research/Observation/Records/OBSU-BATCH-001.md",
+      "class": "observation_batch",
+      "reason": "observation batch record; verify whether it needs a distinct OAI record"
+    },
+    {
+      "path": "02-Research/Reviews/REVIEW-BATCH-001.md",
+      "class": "review_batch",
+      "reason": "review evidence container; link individual review events to review ledger"
+    },
+    {
+      "path": "02-Research/Reviews/REVIEW-BATCH-002.md",
+      "class": "review_batch",
+      "reason": "review evidence container; link individual review events to review ledger"
+    },
+    {
+      "path": "02-Research/Audit/Blind-Tests/Package-1.md",
+      "class": "blind_test_package",
+      "reason": "test evidence package; not itself a governance decision"
+    },
+    {
+      "path": "02-Research/Audit/Blind-Tests/Package-2.md",
+      "class": "blind_test_package",
+      "reason": "test evidence package; not itself a governance decision"
+    },
+    {
+      "path": "02-Research/Audit/Blind-Tests/Package-3.md",
+      "class": "blind_test_package",
+      "reason": "test evidence package; related to unresolved C1 evidence dispute"
+    },
+    {
+      "path": "02-Research/Audit/Blind-Tests/Package-4.md",
+      "class": "blind_test_package",
+      "reason": "test evidence package; not itself a governance decision"
+    }
+  ],
+  "unresolved": [
+    "The canonical C1 outcome cannot be derived by counting documents or choosing the latest-looking filename; the decision owner/authorized governance process must reconcile contradictory records.",
+    "SRE-000001-A has no exact basename path in the pinned tree although MAI-001-FINAL-MERGE-V4 names a path for it. History and references must be checked before status is inferred.",
+    "Content-level inspection is partial: the 16 primary governance/registry documents above were inspected at their headers and stated purpose; 18 additional files are only preliminary folder/name classifications.",
+    "No record in this phase is promoted into canonical OAI; the file is a proposed classification dataset for review."
+  ]
+}
