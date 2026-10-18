@@ -1,0 +1,29 @@
+{
+  "artifact_id": "SRC-000018-19",
+  "title": "P2.2/P2.3 Completion Report",
+  "classification": "Research Resolution Report",
+  "path": "02-Research/Corpus/Sources/SRC-000018-19.md",
+  "version": null,
+  "lifecycle_state": "candidate",
+  "owner": null,
+  "domain": "02-Research",
+  "collection": "Research Resolution Report",
+  "depends_on": [
+    "CIR-001",
+    "EIR-001"
+  ],
+  "source_decision_ids": [],
+  "provenance": [
+    {
+      "source_path": "02-Research/Corpus/Sources/SRC-000018-19.md",
+      "source_commit": "5bc0ff427e7937139e85d3222e65cb0f4b1ab11b",
+      "source_version": null,
+      "source_claim": "Documents unresolved axis-independence question and includes records for SRC-000018, SRC-000019, OBSU-000027, OBSU-000028 and EV-000012.",
+      "source_status": "current"
+    }
+  ],
+  "reconciliation_status": "pending",
+  "notes": [
+    "Mixed-purpose report with embedded instance IDs; do not treat the filename alone as proof that SRC-000018 and SRC-000019 are fully registered."
+  ]
+}

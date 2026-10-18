@@ -41,6 +41,29 @@ class GdrOaiMigrationValidationTests(unittest.TestCase):
             },
         )
 
+    def test_phase_28_proposed_oai_records_and_reconciliation_dataset(self):
+        proposal_dir = ROOT / "02-Research/Registry/migration/proposals/phase-28-oai-candidates"
+        proposals = sorted(proposal_dir.glob("*.json"))
+        self.assertEqual(7, len(proposals))
+        records = [json.loads(path.read_text(encoding="utf-8")) for path in proposals]
+        self.assertEqual(
+            {path.stem for path in proposals},
+            {record["artifact_id"] for record in records},
+        )
+        self.assertIn("SRC-000017", {record["artifact_id"] for record in records})
+        self.assertIn("EV-000012", {
+            evidence["evidence_id"]
+            for evidence in json.loads(
+                (ROOT / "02-Research/Registry/migration/phase-28-instance-evidence-reconciliation.json").read_text(encoding="utf-8")
+            )["evidence_instance_reconciliation"]
+        })
+        self.assertEqual(
+            "proposed_reconciliation_not_applied",
+            json.loads(
+                (ROOT / "02-Research/Registry/migration/phase-28-instance-evidence-reconciliation.json").read_text(encoding="utf-8")
+            )["status"],
+        )
+
     def test_c1_record_remains_unresolved(self):
         c1_path = STAGED_GDR / "GOV-DEC-C1.json"
         c1 = json.loads(c1_path.read_text(encoding="utf-8"))

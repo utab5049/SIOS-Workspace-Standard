@@ -1,0 +1,29 @@
+{
+  "artifact_id": "FULLTEXT-UPGRADE-005-012",
+  "title": "Full-Text Upgrade for SRC-000005 and SRC-000012",
+  "classification": "Full-Text Upgrade Report",
+  "path": "02-Research/Observation/Records/FULLTEXT-UPGRADE-005-012.md",
+  "version": null,
+  "lifecycle_state": "candidate",
+  "owner": null,
+  "domain": "02-Research",
+  "collection": "Full-Text Upgrade Report",
+  "depends_on": [
+    "CIR-001",
+    "EIR-001"
+  ],
+  "source_decision_ids": [],
+  "provenance": [
+    {
+      "source_path": "02-Research/Observation/Records/FULLTEXT-UPGRADE-005-012.md",
+      "source_commit": "5bc0ff427e7937139e85d3222e65cb0f4b1ab11b",
+      "source_version": null,
+      "source_claim": "Contains full-text findings for SRC-000005 and SRC-000012 and affects evidence claims, including the Gruber/Studer reconciliation.",
+      "source_status": "current"
+    }
+  ],
+  "reconciliation_status": "pending",
+  "notes": [
+    "CIR-001's bare detail location is ambiguous; canonical repository-relative path is recorded here."
+  ]
+}
