@@ -1,0 +1,29 @@
+{
+  "artifact_id": "MAI-001",
+  "title": "Master Artifact Index",
+  "classification": "Registry",
+  "path": "01-Foundation/Registry/MAI-001.md",
+  "version": "1.1.0",
+  "lifecycle_state": "disputed",
+  "owner": null,
+  "domain": "01-Foundation",
+  "collection": "Registry",
+  "depends_on": [],
+  "source_decision_ids": [
+    "GOV-DEC-001",
+    "GOV-DEC-C1"
+  ],
+  "provenance": [
+    {
+      "source_path": "01-Foundation/Registry/MAI-001.md",
+      "source_commit": "5bc0ff427e7937139e85d3222e65cb0f4b1ab11b",
+      "source_version": "Frozen v1.1.0 (amended)",
+      "source_claim": "MAI-001 declares itself authoritative and lists registered artifacts",
+      "source_status": "conflicting"
+    }
+  ],
+  "reconciliation_status": "disputed",
+  "notes": [
+    "Historical claim preserved as source evidence; no change to the source file is made in this phase."
+  ]
+}
