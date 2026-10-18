@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sios.invalid/schemas/registry-manifest.schema.json",
+  "title": "SIOS Registry Manifest (Proposed)",
+  "description": "Proposed machine-readable registry contract. Not authoritative until explicitly ratified.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "authority_state", "artifacts"],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "authority_state": {
+      "const": "proposed"
+    },
+    "source_document": {
+      "type": ["string", "null"],
+      "description": "Source document used to prepare this manifest; null until selected by governance."
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["artifact_id", "status", "version", "path", "record_state"],
+        "properties": {
+          "artifact_id": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+          },
+          "status": {
+            "type": ["string", "null"],
+            "minLength": 1,
+            "description": "Preserve the source status wording; null means unresolved, not inferred."
+          },
+          "version": {
+            "type": ["string", "null"],
+            "description": "Version as stated in the source; null means not specified."
+          },
+          "path": {
+            "type": ["string", "null"],
+            "description": "Repository-relative path; null means not yet verified."
+          },
+          "record_state": {
+            "enum": ["explicit", "grouped", "ambiguous", "unverified"],
+            "description": "Explicit means one ID is stated directly. Grouped/ambiguous records must not be silently expanded."
+          },
+          "source_location": {
+            "type": ["string", "null"],
+            "description": "Section, heading, or row locator in the source document."
+          },
+          "notes": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    }
+  }
+}
