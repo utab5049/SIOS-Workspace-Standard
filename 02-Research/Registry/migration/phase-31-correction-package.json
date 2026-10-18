@@ -1,0 +1,54 @@
+{
+  "package_id": "CORRECTION-PACKAGE-031",
+  "status": "proposed_not_applied",
+  "source_snapshot_commit": "5bc0ff427e7937139e85d3222e65cb0f4b1ab11b",
+  "parent_review_matrix": "02-Research/Registry/migration/phase-30-instance-review-matrix.json",
+  "proposed_documents": [
+    {
+      "id": "CIR-001",
+      "path": "02-Research/Registry/migration/proposals/phase-31-correction-package/CIR-001.proposed.md",
+      "canonical_target": "02-Research/Corpus/CIR-001.md",
+      "scope": [
+        "repository-relative paths",
+        "row/full-text counts",
+        "candidate IDs separated from currently listed records"
+      ],
+      "approval_required": true
+    },
+    {
+      "id": "EIR-001",
+      "path": "02-Research/Registry/migration/proposals/phase-31-correction-package/EIR-001.proposed.md",
+      "canonical_target": "02-Research/Evidence/EIR-001.md",
+      "scope": [
+        "repository-relative paths",
+        "conflicting lifecycle claims visible",
+        "correction/supersession lineage retained",
+        "EV-000012 excluded pending verification"
+      ],
+      "approval_required": true
+    }
+  ],
+  "known_reconciliations": {
+    "cir_current_table_rows": 14,
+    "cir_full_text_rows": 5,
+    "cir_abstract_only_rows": 9,
+    "cir_count_claim_discrepancy": "Current table has 14 rows, but its summary claims 16 sources and 4 full-text / 12 abstract-only. Proposed draft corrects the arithmetic for the current table only and lists SRC-000017/018/019 as candidates requiring decisions.",
+    "eir_current_table_rows": 10,
+    "ev_000001": "Disputed; preserve EIR Needs Revision, correction-batch scoped Approved, and later review finding. No single canonical status assigned.",
+    "ev_000003": "Preserve version 1.1 temporal-scope split and Needs Revision pending independent review, plus retarget recommendation.",
+    "ev_000005": "Preserve correction history and supersession link to EV-000009.",
+    "ev_000012": "Mentioned in completion report, not promoted to EIR without contract verification.",
+    "c1": "Unresolved; no change authorized."
+  },
+  "implementation_gates": [
+    "Owner reviews whether SRC-000017 should be added to CIR-001.",
+    "Owner validates source contract and corpus scope for SRC-000018 and SRC-000019.",
+    "ID ledger confirms SRC-000001 grandfathering and SRC-000011 reserved status.",
+    "Evidence owner adjudicates EV-000001 and EV-000003 status conflicts, or explicitly records that they remain disputed.",
+    "Record boundaries and schema compliance are verified for EV-000006 through EV-000009.",
+    "Canonical edit is made in a separate migration PR only after approvals; original history remains intact."
+  ],
+  "canonical_files_changed": false,
+  "staged_oai_or_gdr_changed": false,
+  "merge_authorized": false
+}
