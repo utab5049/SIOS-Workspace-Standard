@@ -21,6 +21,26 @@ class GdrOaiMigrationValidationTests(unittest.TestCase):
             len(list(STAGED_OAI.glob("*.json"))),
         )
 
+    def test_phase_27_proposed_oai_records_are_schema_validated(self):
+        proposal_dir = ROOT / "02-Research/Registry/migration/proposals/phase-27-oai-candidates"
+        proposals = sorted(proposal_dir.glob("*.json"))
+        self.assertEqual(7, len(proposals))
+        records = [json.loads(path.read_text(encoding="utf-8")) for path in proposals]
+        self.assertEqual(
+            {path.stem for path in proposals},
+            {record["artifact_id"] for record in records},
+        )
+        self.assertIn("CIR-001", {record["artifact_id"] for record in records})
+        self.assertIn("EIR-001", {record["artifact_id"] for record in records})
+        self.assertEqual(
+            {"disputed"},
+            {
+                record["reconciliation_status"]
+                for record in records
+                if record["artifact_id"].startswith("REVIEW-BATCH-")
+            },
+        )
+
     def test_c1_record_remains_unresolved(self):
         c1_path = STAGED_GDR / "GOV-DEC-C1.json"
         c1 = json.loads(c1_path.read_text(encoding="utf-8"))

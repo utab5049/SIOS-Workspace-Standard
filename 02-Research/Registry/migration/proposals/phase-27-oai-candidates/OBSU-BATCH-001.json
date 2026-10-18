@@ -1,0 +1,29 @@
+{
+  "artifact_id": "OBSU-BATCH-001",
+  "title": "Observation Extraction Batch 1",
+  "classification": "Observation Batch",
+  "path": "02-Research/Observation/Records/OBSU-BATCH-001.md",
+  "version": null,
+  "lifecycle_state": "candidate",
+  "owner": null,
+  "domain": "02-Research",
+  "collection": "Observation Records",
+  "depends_on": [
+    "OUM-001"
+  ],
+  "source_decision_ids": [],
+  "provenance": [
+    {
+      "source_path": "02-Research/Observation/Records/OBSU-BATCH-001.md",
+      "source_commit": "5bc0ff427e7937139e85d3222e65cb0f4b1ab11b",
+      "source_version": null,
+      "source_claim": "Contains observation extractions and explicitly records abstract-only source limitations and provenance.",
+      "source_status": "current"
+    }
+  ],
+  "reconciliation_status": "pending",
+  "notes": [
+    "Batch container may be an operational record rather than a normative artifact; classify separately from individual OBSU IDs.",
+    "Keep stated source-access limitations attached to dependent evidence records."
+  ]
+}
