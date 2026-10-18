@@ -1,0 +1,455 @@
+{
+  "matrix_id": "REVIEW-MATRIX-030",
+  "source_snapshot_commit": "5bc0ff427e7937139e85d3222e65cb0f4b1ab11b",
+  "status": "review_matrix_proposed_not_applied",
+  "purpose": "Per-instance reconciliation matrix for CIR-001 source IDs and EIR-001 evidence IDs; this is an audit aid, not a canonical registry.",
+  "rules": [
+    "Every path is repository-relative and refers to the current reviewed branch unless otherwise stated.",
+    "Registration evidence, supplementary evidence, and batch/container files are distinct roles.",
+    "Presence in a report does not automatically prove registration or conformance to the record contract.",
+    "Conflicting lifecycle or review claims are preserved, not silently resolved.",
+    "Counts distinguish listed registry rows from later candidate IDs and from missing/unverified IDs.",
+    "C1 remains unresolved; this matrix makes no governance decision."
+  ],
+  "source_instances": [
+    {
+      "source_id": "SRC-000001",
+      "cir_listed": false,
+      "source_title": "Grandfathered schema/example source",
+      "registration_path": "01-Foundation/Registry/MAI-001.md",
+      "supplementary_paths": [
+        "02-Research/Registry/DECISION-MAI001-OPTION-B.md"
+      ],
+      "status": "explicitly_excluded_from_CIR-001",
+      "full_text_status": "not assessed here",
+      "review_state": "needs_owner_confirmation",
+      "notes": [
+        "CIR-001 says SRC-000001 predates the corpus and is grandfathered separately in MAI-001 Search; verify exact canonical identity/path before migration."
+      ]
+    },
+    {
+      "source_id": "SRC-000002",
+      "cir_listed": true,
+      "source_title": "Gruber 1993, ontology definition",
+      "registration_path": "02-Research/Corpus/Sources/SRC-Batch1.md",
+      "supplementary_paths": [],
+      "status": "Accepted",
+      "full_text_status": "Abstract-only",
+      "review_state": "registration_location_resolved_in_batch",
+      "notes": [
+        "CIR's detail filename SRC-CORPUS-001-ENTRIES.md does not exist in the pinned tree; the source entry is inside SRC-Batch1."
+      ]
+    },
+    {
+      "source_id": "SRC-000003",
+      "cir_listed": true,
+      "source_title": "OEM taxonomy review",
+      "registration_path": "02-Research/Corpus/Sources/SRC-Batch1.md",
+      "supplementary_paths": [],
+      "status": "Accepted",
+      "full_text_status": "Abstract-only",
+      "review_state": "registration_location_resolved_in_batch",
+      "notes": [
+        "Batch container, not a dedicated source file."
+      ]
+    },
+    {
+      "source_id": "SRC-000004",
+      "cir_listed": true,
+      "source_title": "IJIEEB ontology development review",
+      "registration_path": "02-Research/Corpus/Sources/SRC-Batch1.md",
+      "supplementary_paths": [],
+      "status": "Accepted",
+      "full_text_status": "Abstract-only",
+      "review_state": "registration_location_resolved_in_batch",
+      "notes": [
+        "Batch container, not a dedicated source file."
+      ]
+    },
+    {
+      "source_id": "SRC-000005",
+      "cir_listed": true,
+      "source_title": "LLMs for Ontology Engineering SLR",
+      "registration_path": "02-Research/Corpus/Sources/SRC-Batch1.md",
+      "supplementary_paths": [
+        "02-Research/Observation/Records/FULLTEXT-UPGRADE-005-012.md"
+      ],
+      "status": "Accepted",
+      "full_text_status": "Full-text",
+      "review_state": "registration_and_supplement_separated",
+      "notes": [
+        "Full-text upgrade report states a later SAGE-published version should be authoritative over an earlier preprint; bibliographic record update requires review."
+      ]
+    },
+    {
+      "source_id": "SRC-000006",
+      "cir_listed": true,
+      "source_title": "2025 systematic review of OEMs",
+      "registration_path": "02-Research/Corpus/Sources/SRC-Batch1.md",
+      "supplementary_paths": [],
+      "status": "Accepted",
+      "full_text_status": "Abstract-only",
+      "review_state": "registration_location_resolved_in_batch",
+      "notes": []
+    },
+    {
+      "source_id": "SRC-000007",
+      "cir_listed": true,
+      "source_title": "PRISMA 2020",
+      "registration_path": "02-Research/Corpus/Sources/SRC-Batch2.md",
+      "supplementary_paths": [],
+      "status": "Accepted",
+      "full_text_status": "Abstract-only",
+      "review_state": "registration_location_resolved_in_batch",
+      "notes": [
+        "CIR detail filename SRC-CORPUS-001-ENTRIES-2.md does not exist in the pinned tree."
+      ]
+    },
+    {
+      "source_id": "SRC-000008",
+      "cir_listed": true,
+      "source_title": "Zeng and Mayr, KOS in Semantic Web",
+      "registration_path": "02-Research/Corpus/Sources/SRC-Batch2.md",
+      "supplementary_paths": [],
+      "status": "Accepted",
+      "full_text_status": "Abstract-only",
+      "review_state": "registration_location_resolved_in_batch",
+      "notes": []
+    },
+    {
+      "source_id": "SRC-000009",
+      "cir_listed": true,
+      "source_title": "KOS survey, MIT Press QSS",
+      "registration_path": "02-Research/Corpus/Sources/SRC-Batch2.md",
+      "supplementary_paths": [],
+      "status": "Accepted",
+      "full_text_status": "Abstract-only",
+      "review_state": "registration_location_resolved_in_batch",
+      "notes": []
+    },
+    {
+      "source_id": "SRC-000010",
+      "cir_listed": true,
+      "source_title": "NRC 1995, Standards Development",
+      "registration_path": "02-Research/Corpus/Sources/SRC-Batch2.md",
+      "supplementary_paths": [],
+      "status": "Accepted",
+      "full_text_status": "Abstract-only",
+      "review_state": "registration_location_resolved_in_batch",
+      "notes": []
+    },
+    {
+      "source_id": "SRC-000011",
+      "cir_listed": false,
+      "source_title": "Reserved/unused ID",
+      "registration_path": null,
+      "supplementary_paths": [
+        "02-Research/Corpus/CIR-001.md",
+        "01-Foundation/Registry/MAI-001.md"
+      ],
+      "status": "claimed_reserved_never_used",
+      "full_text_status": "not applicable",
+      "review_state": "claim_not_independently_verified",
+      "notes": [
+        "CIR-001 states this ID was reserved but never used under SIOS-ID-001; do not create an instance record without checking the ID ledger."
+      ]
+    },
+    {
+      "source_id": "SRC-000012",
+      "cir_listed": true,
+      "source_title": "Ioannidis et al. 2023, systematic review guidance",
+      "registration_path": "02-Research/Corpus/Sources/SRC-Batch3.md",
+      "supplementary_paths": [
+        "02-Research/Observation/Records/FULLTEXT-UPGRADE-005-012.md"
+      ],
+      "status": "Accepted",
+      "full_text_status": "Full-text",
+      "review_state": "registration_and_supplement_separated",
+      "notes": [
+        "CIR's bare filename refers to a supplementary report; registration is inside SRC-Batch3."
+      ]
+    },
+    {
+      "source_id": "SRC-000013",
+      "cir_listed": true,
+      "source_title": "RFC 2119",
+      "registration_path": "02-Research/Corpus/Sources/SRC-Batch3.md",
+      "supplementary_paths": [
+        "02-Research/Search/SRE-000001-D.md"
+      ],
+      "status": "Accepted",
+      "full_text_status": "Full-text (short standard)",
+      "review_state": "registration_and_search_record_separated",
+      "notes": []
+    },
+    {
+      "source_id": "SRC-000014",
+      "cir_listed": true,
+      "source_title": "RFC 8174",
+      "registration_path": "02-Research/Corpus/Sources/SRC-Batch3.md",
+      "supplementary_paths": [
+        "02-Research/Search/SRE-000001-D.md"
+      ],
+      "status": "Accepted",
+      "full_text_status": "Full-text (short standard)",
+      "review_state": "registration_and_search_record_separated",
+      "notes": []
+    },
+    {
+      "source_id": "SRC-000015",
+      "cir_listed": true,
+      "source_title": "Galárraga et al. 2014, canonicalization",
+      "registration_path": "02-Research/Corpus/Sources/SRC-000015-EXTRACTION.md",
+      "supplementary_paths": [],
+      "status": "Accepted",
+      "full_text_status": "Abstract-only",
+      "review_state": "exact_path_resolved",
+      "notes": [
+        "The document contains observations and EV-000007; source instance and embedded records must remain distinct."
+      ]
+    },
+    {
+      "source_id": "SRC-000016",
+      "cir_listed": true,
+      "source_title": "Klein and Fensel 2001, ontology versioning",
+      "registration_path": "02-Research/Corpus/Sources/SRC-000016-RESOLUTION.md",
+      "supplementary_paths": [],
+      "status": "Accepted",
+      "full_text_status": "Full-text",
+      "review_state": "exact_path_resolved",
+      "notes": [
+        "The document contains OBSU-000011 and EV-000006; source instance and embedded records must remain distinct."
+      ]
+    },
+    {
+      "source_id": "SRC-000017",
+      "cir_listed": false,
+      "source_title": "Studer, Benjamins and Fensel 1998",
+      "registration_path": "02-Research/Corpus/Sources/SRC-000017-Studer.md",
+      "supplementary_paths": [
+        "02-Research/Observation/Records/FULLTEXT-UPGRADE-005-012.md",
+        "02-Research/Reviews/REVIEW-BATCH-002.md"
+      ],
+      "status": "Accepted",
+      "full_text_status": "Full-Text",
+      "review_state": "candidate_missing_from_cir",
+      "notes": [
+        "Dedicated source file says Accepted, Full-Text; absent from CIR-001's table. Related review material corrects the earlier framing of Gruber vs Studer as two directly competing definitions."
+      ]
+    },
+    {
+      "source_id": "SRC-000018",
+      "cir_listed": false,
+      "source_title": "Gettier 1963, Is Justified True Belief Knowledge?",
+      "registration_path": "02-Research/Corpus/Sources/SRC-000018-19.md",
+      "supplementary_paths": [],
+      "status": "Accepted (as stated in completion report)",
+      "full_text_status": "Partial",
+      "review_state": "embedded_in_completion_report_record_contract_unverified",
+      "notes": [
+        "Embedded section in a mixed-purpose completion report; confirm formal registration fields and contract before treating as a fully registered instance."
+      ]
+    },
+    {
+      "source_id": "SRC-000019",
+      "cir_listed": false,
+      "source_title": "The Analysis of Knowledge (Stanford Encyclopedia of Philosophy)",
+      "registration_path": "02-Research/Corpus/Sources/SRC-000018-19.md",
+      "supplementary_paths": [],
+      "status": "Accepted (as stated in completion report)",
+      "full_text_status": "not fully established by this matrix",
+      "review_state": "embedded_in_completion_report_record_contract_unverified",
+      "notes": [
+        "Embedded section in a mixed-purpose completion report; confirm formal registration fields and contract before treating as a fully registered instance."
+      ]
+    }
+  ],
+  "evidence_instances": [
+    {
+      "evidence_id": "EV-000001",
+      "eir_listed": true,
+      "record_or_container_path": "02-Research/Evidence/Records/EV-BATCH-001.md",
+      "supplementary_paths": [
+        "02-Research/Evidence/Records/EV-CORRECTIONS-BATCH-001.md",
+        "02-Research/Reviews/REVIEW-BATCH-002.md"
+      ],
+      "status_claims": [
+        "EIR-001: Needs Revision per REVIEW-BATCH-002",
+        "correction batch: Approved as low-confidence/limited claim",
+        "review batch: competing-definition concern; later full-text context revises the framing"
+      ],
+      "review_state": "conflicted_preserve_all_claims",
+      "notes": [
+        "Version 1.1 downgraded support/confidence and changed approval language; REVIEW-BATCH-002 later raises a competing-definition issue. Do not reduce this to a single unqualified Approved state."
+      ]
+    },
+    {
+      "evidence_id": "EV-000002a",
+      "eir_listed": true,
+      "record_or_container_path": "02-Research/Evidence/Records/EV-CORRECTIONS-BATCH-001.md",
+      "supplementary_paths": [
+        "02-Research/Evidence/Records/EV-BATCH-001.md"
+      ],
+      "status_claims": [
+        "Approved in correction batch"
+      ],
+      "review_state": "split_record_in_correction_container",
+      "notes": [
+        "Split from compound EV-000002; validate record-contract fields before independent promotion."
+      ]
+    },
+    {
+      "evidence_id": "EV-000002b",
+      "eir_listed": true,
+      "record_or_container_path": "02-Research/Evidence/Records/EV-CORRECTIONS-BATCH-001.md",
+      "supplementary_paths": [
+        "02-Research/Evidence/Records/EV-BATCH-001.md"
+      ],
+      "status_claims": [
+        "Approved in correction batch"
+      ],
+      "review_state": "split_record_in_correction_container",
+      "notes": [
+        "Split from compound EV-000002; trend claim has lower confidence and abstract-level traceability."
+      ]
+    },
+    {
+      "evidence_id": "EV-000003",
+      "eir_listed": true,
+      "record_or_container_path": "02-Research/Evidence/Records/EV-BATCH-001.md",
+      "supplementary_paths": [
+        "02-Research/Evidence/Records/EV-CORRECTIONS-BATCH-001.md",
+        "02-Research/Reviews/REVIEW-BATCH-002.md",
+        "02-Research/Evidence/Records/APPLIED-CORRECTIONS-EV003-KSM001.md"
+      ],
+      "status_claims": [
+        "EIR-001: Approved",
+        "review batch: retarget recommendation to AERA-001D"
+      ],
+      "review_state": "correction_and_retarget_history_required",
+      "notes": [
+        "A separate correction artifact APPLIED-CORRECTIONS-EV003-KSM001.md records version 1.1 and a temporal-scope split; path/ID lineage must be checked against Phase 28 matrix before promotion."
+      ]
+    },
+    {
+      "evidence_id": "EV-000004",
+      "eir_listed": true,
+      "record_or_container_path": "02-Research/Evidence/Records/EV-BATCH-001.md",
+      "supplementary_paths": [
+        "02-Research/Reviews/REVIEW-BATCH-002.md"
+      ],
+      "status_claims": [
+        "EIR-001: Approved, strengthened"
+      ],
+      "review_state": "corroboration_added",
+      "notes": [
+        "Review batch identifies an additional corroborating source; preserve the amendment lineage."
+      ]
+    },
+    {
+      "evidence_id": "EV-000005",
+      "eir_listed": true,
+      "record_or_container_path": "02-Research/Evidence/Records/EV-BATCH-001.md",
+      "supplementary_paths": [
+        "02-Research/Evidence/Records/EV-CORRECTIONS-BATCH-001.md"
+      ],
+      "status_claims": [
+        "EIR-001: Superseded by EV-000009",
+        "correction batch: revised consistency field"
+      ],
+      "review_state": "supersession_and_revision_both_retained",
+      "notes": [
+        "Do not erase correction history because a later evidence record supersedes the original claim."
+      ]
+    },
+    {
+      "evidence_id": "EV-000006",
+      "eir_listed": true,
+      "record_or_container_path": "02-Research/Corpus/Sources/SRC-000016-RESOLUTION.md",
+      "supplementary_paths": [],
+      "status_claims": [
+        "EIR-001: Approved"
+      ],
+      "review_state": "embedded_record_in_source_resolution_file",
+      "notes": [
+        "EV record is embedded in a source-resolution document; verify it conforms to the evidence record contract independently."
+      ]
+    },
+    {
+      "evidence_id": "EV-000007",
+      "eir_listed": true,
+      "record_or_container_path": "02-Research/Corpus/Sources/SRC-000015-EXTRACTION.md",
+      "supplementary_paths": [],
+      "status_claims": [
+        "EIR-001: Approved"
+      ],
+      "review_state": "embedded_record_in_source_extraction_file",
+      "notes": [
+        "EV record is embedded in a source-extraction document; verify it conforms to the evidence record contract independently."
+      ]
+    },
+    {
+      "evidence_id": "EV-000008",
+      "eir_listed": true,
+      "record_or_container_path": "02-Research/Observation/Records/FULLTEXT-UPGRADE-005-012.md",
+      "supplementary_paths": [],
+      "status_claims": [
+        "EIR-001: Approved"
+      ],
+      "review_state": "embedded_record_or_upgrade_report",
+      "notes": [
+        "Confirm the exact evidence-record section and its contract boundary before migration."
+      ]
+    },
+    {
+      "evidence_id": "EV-000009",
+      "eir_listed": true,
+      "record_or_container_path": "02-Research/Observation/Records/FULLTEXT-UPGRADE-005-012.md",
+      "supplementary_paths": [
+        "02-Research/Evidence/Records/EV-BATCH-001.md"
+      ],
+      "status_claims": [
+        "EIR-001: Approved"
+      ],
+      "review_state": "superseding_record_embedded_in_upgrade_report",
+      "notes": [
+        "Preserve the link to EV-000005 and identify whether the authoritative record is embedded or separately materialized."
+      ]
+    },
+    {
+      "evidence_id": "EV-000012",
+      "eir_listed": false,
+      "record_or_container_path": "02-Research/Corpus/Sources/SRC-000018-19.md",
+      "supplementary_paths": [],
+      "status_claims": [
+        "Mentioned in completion report; not in EIR-001 table"
+      ],
+      "review_state": "candidate_not_yet_verified_as_evidence_record",
+      "notes": [
+        "Do not add to EIR/OAI as a registered evidence record until ID identity, evidence contract, source link, and lifecycle are confirmed."
+      ]
+    }
+  ],
+  "registry_level_findings": {
+    "cir_rows": 14,
+    "cir_stated_total": 16,
+    "cir_table_count_mismatch": true,
+    "cir_later_candidate_source_ids": [
+      "SRC-000017",
+      "SRC-000018",
+      "SRC-000019"
+    ],
+    "cir_excluded_or_reserved_ids": [
+      "SRC-000001",
+      "SRC-000011"
+    ],
+    "eir_rows": 10,
+    "eir_counting_note": "EIR says 10 records counting EV-000002 split and EV-000005→EV-000009 supersession; distinguish row count, unique IDs, and active/superseded lineage.",
+    "missing_cir_detail_files": [
+      "SRC-CORPUS-001-ENTRIES.md",
+      "SRC-CORPUS-001-ENTRIES-2.md"
+    ],
+    "migration_status": "review_matrix_proposed_not_applied",
+    "c1_status": "unresolved"
+  }
+}

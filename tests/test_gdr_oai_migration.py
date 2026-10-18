@@ -80,6 +80,27 @@ class GdrOaiMigrationValidationTests(unittest.TestCase):
             plan["invariants"],
         )
 
+    def test_phase_30_instance_review_matrix_is_unique_and_not_applied(self):
+        matrix_path = ROOT / "02-Research/Registry/migration/phase-30-instance-review-matrix.json"
+        matrix = json.loads(matrix_path.read_text(encoding="utf-8"))
+        self.assertEqual("review_matrix_proposed_not_applied", matrix["status"])
+        source_ids = [item["source_id"] for item in matrix["source_instances"]]
+        evidence_ids = [item["evidence_id"] for item in matrix["evidence_instances"]]
+        self.assertEqual(len(source_ids), len(set(source_ids)))
+        self.assertEqual(len(evidence_ids), len(set(evidence_ids)))
+        self.assertEqual(14, matrix["registry_level_findings"]["cir_rows"])
+        self.assertTrue(matrix["registry_level_findings"]["cir_table_count_mismatch"])
+        self.assertEqual("unresolved", matrix["registry_level_findings"]["c1_status"])
+        for item in matrix["source_instances"]:
+            if item.get("registration_path"):
+                self.assertTrue((ROOT / item["registration_path"]).is_file(), item["registration_path"])
+            for path in item.get("supplementary_paths", []):
+                self.assertTrue((ROOT / path).is_file(), path)
+        for item in matrix["evidence_instances"]:
+            self.assertTrue((ROOT / item["record_or_container_path"]).is_file(), item["record_or_container_path"])
+            for path in item.get("supplementary_paths", []):
+                self.assertTrue((ROOT / path).is_file(), path)
+
     def test_c1_record_remains_unresolved(self):
         c1_path = STAGED_GDR / "GOV-DEC-C1.json"
         c1 = json.loads(c1_path.read_text(encoding="utf-8"))
