@@ -1,0 +1,37 @@
+{
+  "artifact_id": "CIR-001",
+  "title": "Corpus Instance Registry",
+  "classification": "Registry Specification",
+  "path": "02-Research/Corpus/CIR-001.md",
+  "version": "1.0.0",
+  "lifecycle_state": "draft",
+  "owner": null,
+  "domain": "02-Research",
+  "collection": "Corpus",
+  "depends_on": [
+    "MAI-001",
+    "DECISION-MAI001-OPTION-B"
+  ],
+  "source_decision_ids": [],
+  "provenance": [
+    {
+      "source_path": "02-Research/Corpus/CIR-001.md",
+      "source_commit": "5bc0ff427e7937139e85d3222e65cb0f4b1ab11b",
+      "source_version": "1.0.0",
+      "source_claim": "Describes itself as the index of source instances; header marks it Draft and pending Architecture Board ratification.",
+      "source_status": "current"
+    },
+    {
+      "source_path": "02-Research/Registry/DECISION-MAI001-OPTION-B.md",
+      "source_commit": "5bc0ff427e7937139e85d3222e65cb0f4b1ab11b",
+      "source_version": null,
+      "source_claim": "Records Option B to use sub-registries for instance records.",
+      "source_status": "conflicting"
+    }
+  ],
+  "reconciliation_status": "pending",
+  "notes": [
+    "CIR-001 is explicitly draft and pending ratification; do not treat its index as proof of governance approval.",
+    "The table lists SRC-000002 through SRC-000016 with gaps; reconcile the full source ID set and detail locations before claiming completeness."
+  ]
+}
