@@ -122,6 +122,20 @@ class GdrOaiMigrationValidationTests(unittest.TestCase):
     def test_phase_31_correction_package_paths_and_safety(self):
         self.assertEqual([], validate_phase31_correction_package())
 
+    def test_phase_33_owner_decision_gate_is_explicit_and_non_authorizing(self):
+        gate_path = ROOT / "02-Research/Registry/migration/phase-33-owner-decision-gate.json"
+        gate = json.loads(gate_path.read_text(encoding="utf-8"))
+        self.assertEqual("pending_owner_decisions_not_applied", gate["status"])
+        self.assertEqual(7, len(gate["decisions"]))
+        self.assertTrue(all(item["status"].startswith("pending_") for item in gate["decisions"]))
+        self.assertFalse(gate["invariants"]["canonical_files_changed"])
+        self.assertFalse(gate["invariants"]["staged_oai_or_gdr_changed"])
+        self.assertFalse(gate["invariants"]["merge_authorized"])
+        self.assertEqual("unresolved", gate["invariants"]["c1_status"])
+        decision_ids = [item["decision_id"] for item in gate["decisions"]]
+        self.assertEqual(len(decision_ids), len(set(decision_ids)))
+        self.assertEqual({"G1", "G2", "G3", "G4"}, {item["gate"] for item in gate["release_gates"]})
+
     def test_c1_record_remains_unresolved(self):
         c1_path = STAGED_GDR / "GOV-DEC-C1.json"
         c1 = json.loads(c1_path.read_text(encoding="utf-8"))
