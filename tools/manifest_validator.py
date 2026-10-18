@@ -98,7 +98,7 @@ def validate_manifest(data: Any, repo_root: Path | None = None) -> list[Finding]
                 findings.append(_finding("FIELD_TYPE", "error", f"{base}.{field}", "must be a string or null"))
 
         record_state = item.get("record_state")
-        if "record_state" in item and record_state not in RECORD_STATES:
+        if "record_state" in item and (not isinstance(record_state, str) or record_state not in RECORD_STATES):
             findings.append(_finding("RECORD_STATE_INVALID", "error", f"{base}.record_state", f"must be one of: {', '.join(sorted(RECORD_STATES))}"))
 
         notes = item.get("notes")
@@ -114,7 +114,7 @@ def validate_manifest(data: Any, repo_root: Path | None = None) -> list[Finding]
                 not path_value
                 or path.is_absolute()
                 or "\\" in path_value
-                or any(part in {".", ".."} for part in path.parts)
+                or any(part in {".", ".."} for part in path_value.split("/"))
                 or (path.parts and ":" in path.parts[0])
             ):
                 findings.append(_finding("PATH_UNSAFE", "error", f"{base}.path", "must be a safe repository-relative POSIX path without traversal"))
