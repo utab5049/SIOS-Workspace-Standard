@@ -12,6 +12,8 @@ ROOT = Path(__file__).resolve().parents[1]
 MIGRATION = ROOT / "02-Research/Registry/migration/phase-20-migration-map.json"
 GDR_SCHEMA = ROOT / "02-Research/Registry/schemas/gdr.schema.json"
 OAI_SCHEMA = ROOT / "02-Research/Registry/schemas/oai.schema.json"
+STAGED_GDR = ROOT / "02-Research/Registry/migration/staged/gdr"
+STAGED_OAI = ROOT / "02-Research/Registry/migration/staged/oai"
 
 
 def load_json(path: Path):
@@ -45,6 +47,32 @@ def validate_package():
             f"operational_inventory[{index}]: {error.message}"
             for error in sorted(oai_validator.iter_errors(record), key=lambda e: list(map(str, e.path)))
         )
+
+    # Each staged JSON record must match the corresponding migration-map entry.
+    expected_sets = [
+        (STAGED_GDR, decisions, "decision_id", gdr_validator, "GDR"),
+        (STAGED_OAI, artifacts, "artifact_id", oai_validator, "OAI"),
+    ]
+    for directory, records, id_key, validator, label in expected_sets:
+        expected = {record.get(id_key): record for record in records}
+        staged_paths = sorted(directory.glob("*.json")) if directory.is_dir() else []
+        actual_names = {path.stem for path in staged_paths}
+        expected_names = {str(record_id) for record_id in expected}
+        for missing in sorted(expected_names - actual_names):
+            errors.append(f"{label} staged record is missing: {missing}.json")
+        for extra in sorted(actual_names - expected_names):
+            errors.append(f"{label} staged record is not present in migration map: {extra}.json")
+        for staged_path in staged_paths:
+            record_id = staged_path.stem
+            try:
+                staged_record = load_json(staged_path)
+            except ValueError as exc:
+                errors.append(str(exc))
+                continue
+            for error in sorted(validator.iter_errors(staged_record), key=lambda e: list(map(str, e.path))):
+                errors.append(f"{label} staged {record_id}: {error.message}")
+            if record_id in expected and staged_record != expected[record_id]:
+                errors.append(f"{label} staged record differs from migration map: {record_id}.json")
 
     decision_ids = [record.get("decision_id") for record in decisions]
     artifact_ids = [record.get("artifact_id") for record in artifacts]
@@ -100,7 +128,7 @@ def main() -> int:
         for error in errors:
             print(f"- {error}")
         return 1
-    print("GDR/OAI schemas and staged migration map passed validation.")
+    print("GDR/OAI schemas, migration map, and individual staged records passed validation.")
     print("No source registry files were modified.")
     return 0
 
