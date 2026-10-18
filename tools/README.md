@@ -32,3 +32,25 @@ validator result yet, because the current workspace contains a known registry
 status contradiction that requires an explicit governance resolution. This
 keeps CI failures actionable and avoids silently treating a disputed source as
 authoritative.
+
+## Proposed manifest validator
+
+`manifest_validator.py` checks one JSON manifest against a limited
+implementation of the proposed contract in
+`schemas/registry-manifest.schema.json`. It checks required/unknown fields,
+basic field types, artifact ID syntax and duplicates, record-state values, and
+unsafe repository-relative paths. When `--repo-root` is supplied, missing
+paths are warnings rather than errors because a path may be unverified or
+refer to content not present in the current checkout.
+
+Run it by passing a manifest explicitly:
+
+```sh
+python tools/manifest_validator.py path/to/manifest.json --repo-root .
+```
+
+This uses only the Python standard library. It is **not** a full JSON Schema
+validator, does not generate a manifest, does not resolve source conflicts,
+and does not grant authority to the proposed contract. A structurally valid
+manifest is not evidence that its records are factually correct. Errors return
+exit code `1`; warnings alone return `0`. The validator never edits files.
