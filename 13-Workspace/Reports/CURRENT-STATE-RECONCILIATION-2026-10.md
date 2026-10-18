@@ -58,3 +58,10 @@ This reconciliation intentionally does **not** edit MAI-001, mark governance dec
 - [ICRAA Part 2](../../02-Research/Audit/ICRAA-Part2.md)
 - [Pilot final report](FINAL-REPORT.md)
 - [Phase 5 kickoff](PHASE-5-KICKOFF.md)
+
+## Review-stage artifacts added on 2026-10-18
+
+- `02-Research/Audit/REVIEW-LEDGER.md` provides a ledger template for reconciling review-event claims. Its TBD rows are tasks, not accepted evidence.
+- `02-Research/Audit/INDEPENDENT-REVIEW-PROTOCOL.md` proposes a version-pinned external review method. It remains proposed until the maintainer approves it.
+
+These artifacts prepare the next stage; they do not constitute an independent review, verify the historical count of reviews, or resolve C1/C3 authority. The independent-review stage remains open until actual review evidence is recorded and a governance owner accepts or rejects it.
