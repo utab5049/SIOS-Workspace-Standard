@@ -4,7 +4,7 @@
 
 ## Scope and interpretation
 
-This matrix describes the current implementation on the Phase 9 branch. “Covered” means an explicit check exists in the named layer; it does not mean every possible malformed input is handled perfectly. Test references identify the closest existing tests, not exhaustive proof.
+This matrix describes the implementation and tests through Phase 11. “Covered” means an explicit check exists in the named layer; it does not mean every possible malformed input is handled perfectly.
 
 Legend:
 - **Yes** — explicit check exists.
@@ -16,25 +16,27 @@ Legend:
 
 | Rule / concern | JSON Schema (Draft 2020-12) | SIOS application validator | Automated test coverage | Notes / gap |
 |---|---|---|---|---|
-| Root must be an object | Yes | Yes | Partial | Schema and application behavior are tested indirectly; add a dedicated root-type fixture if this becomes a release gate. |
+| Root must be an object | Yes | Yes | Yes | Direct application-validator test; schema meta-validation and representative conformance tests are separate. |
 | Required top-level fields | Yes | Yes | Yes | Required keys are also compared in schema compatibility tests. |
 | Unknown top-level fields rejected | Yes | Yes | Yes | Both layers use a closed field set. |
 | Schema version fixed to 1.0.0 | Yes | Yes | Yes | Version is a proposal constant, not a release approval. |
 | Authority state remains proposed | Yes | Yes | Yes | Validators intentionally cannot ratify authority. |
-| source_document is string or null | Yes | Yes | Partial | Schema types are compared; the conformance suite does not yet enumerate all wrong-type cases. |
-| artifacts must be an array | Yes | Yes | Partial | Application code checks this; dedicated shared fixture not yet present. |
-| Artifact record must be an object | Yes | Yes | Partial | Schema enforces item type; application validator has RECORD_TYPE. |
-| Required artifact fields | Yes | Yes | Yes | A missing path is included in the conformance test. |
+| source_document is string or null | Yes | Yes | Yes | Wrong nullable-field types are directly tested for the application validator. |
+| artifacts must be an array | Yes | Yes | Yes | Dedicated application-validator test. |
+| Artifact record must be an object | Yes | Yes | Yes | Dedicated application-validator test. |
+| Required artifact fields | Yes | Yes | Yes | Missing artifact field is tested. |
 | Unknown artifact fields rejected | Yes | Yes | Yes | Covered by the conformance suite. |
-| Artifact ID syntax | Yes | Yes | Yes | Pattern parity is checked; invalid ID is tested against JSON Schema. |
+| Artifact ID syntax | Yes | Yes | Yes | Pattern parity is checked; invalid ID is tested. |
 | Duplicate artifact IDs across records | No | Yes | Yes | Intentional difference. Duplicate detection is an application-level rule. |
-| status string/null and non-empty when string | Yes | Yes | Partial | Empty status is tested against JSON Schema; application has a corresponding check. |
-| version, path, source_location string/null | Yes | Yes | Partial | Schema types are compared; exhaustive wrong-type fixture coverage is not present. |
+| status string/null and non-empty when string | Yes | Yes | Partial | Empty status is tested; broader boundary cases are not exhaustive. |
+| version, path, source_location string/null | Yes | Yes | Yes | Wrong nullable-field types are directly tested for the application validator. |
 | record_state allowed values | Yes | Yes | Yes | Invalid enum value is tested in both layers. |
 | notes is an array of strings | Yes | Yes | Yes | Non-string note item is covered in the JSON Schema conformance suite. |
 | Repository path traversal / unsafe path | No | Yes | Yes | Intentional difference. Schema validates a string/null shape, not filesystem safety. |
-| Path exists in current checkout | No | Partial | No dedicated test | Application emits a warning only when --repo-root is supplied; path existence does not prove semantic correctness. |
-| JSON file can be read and parsed | No | Yes, CLI layer | No dedicated test | CLI reports read and JSON parse errors; this is outside the in-memory validation function. |
+| Path exists in current checkout | No | Partial | Yes | Temporary-directory tests cover both missing-path warning and existing-path success when --repo-root is supplied. |
+| JSON file can be read and parsed | No | Yes, CLI layer | Yes | Malformed JSON and missing/unreadable file findings are tested. |
+| CLI exit code on malformed JSON | No | Yes | Yes | Test confirms malformed input returns exit code 1. |
+| Validator leaves manifest file unchanged | Not applicable | Read-only behavior | Yes | Test compares file bytes before and after validation. |
 | Schema document itself is valid Draft 2020-12 | Yes, through meta-schema check | No | Yes | Checked with Draft202012Validator.check_schema. |
 | Status/version/path agree with source documents | No | No | No | Requires source review and provenance; never infer missing values. |
 | Referenced path is the correct artifact | No | No | No | Existence is not identity or provenance. |
@@ -43,13 +45,12 @@ Legend:
 | Manifest authority / relation to MAI-001 | No | No | No | Explicit governance decision required. |
 | Repository-wide registry contradictions resolved | No | No | No | The known contradiction remains unresolved; current CI does not treat it as automatically resolved. |
 
-## Recommended next engineering tests
+## Remaining engineering work
 
-1. Add shared fixtures for root type, non-array artifacts, non-object artifact items, and wrong types for nullable fields.
-2. Test CLI file-read and malformed-JSON findings.
-3. Test --repo-root path-exists warning behavior using a temporary directory.
-4. Keep application-only rules (duplicate IDs and path safety) explicitly listed rather than claiming full equivalence with JSON Schema.
-5. Once governance agrees on source conventions, add reviewed source-derived fixtures with explicit provenance. Until then, retain synthetic fixtures only.
+1. Consider shared schema/application fixtures for every nullable field and additional boundary values for non-empty strings.
+2. Keep application-only rules (duplicate IDs and path safety) explicitly listed rather than claiming full equivalence with JSON Schema.
+3. Add source-derived fixtures only after provenance and source conventions are explicitly reviewed.
+4. Treat these tests as regression protection, not proof of factual accuracy or governance approval.
 
 ## Governance boundary
 
