@@ -1,0 +1,45 @@
+{
+  "decision_id": "GOV-DEC-001",
+  "title": "Separate governance decision authority from operational artifact inventory",
+  "status": "approved",
+  "scope": "Target architecture for GDR and OAI responsibilities",
+  "authority": {
+    "owner_or_body": "Project owner",
+    "basis": "Explicit instruction in the project conversation dated 2026-10-18",
+    "approval_record": "This phase-20 migration package; repository adoption remains pending PR review and merge"
+  },
+  "selected_option": "Separate governance authority from operational asset inventory",
+  "rationale": "Avoid competing sources of truth by defining non-overlapping responsibilities and explicit precedence rules.",
+  "effective_date": "2026-10-18",
+  "evidence": [
+    {
+      "reference": "02-Research/Audit/PHASE-20-GDR-OAI-ADOPTION-AND-MIGRATION.md",
+      "claim": "Proposed separation of GDR and OAI",
+      "verification_status": "verified"
+    }
+  ],
+  "affected_artifact_ids": [
+    "MAI-001",
+    "REGISTRY-README",
+    "REGISTRY-INDEX"
+  ],
+  "supersedes": null,
+  "superseded_by": null,
+  "implementation_requirements": [
+    "Adopt GDR and OAI schemas",
+    "Migrate records with source provenance",
+    "Preserve conflict records"
+  ],
+  "implementation_evidence": [
+    "02-Research/Registry/schemas/gdr.schema.json",
+    "02-Research/Registry/schemas/oai.schema.json",
+    "02-Research/Registry/migration/phase-20-migration-map.json"
+  ],
+  "history": [
+    {
+      "date": "2026-10-18",
+      "event": "Architecture direction approved by explicit project-owner instruction; repository adoption awaits review and merge",
+      "source": "Project conversation and Phase 20 PR"
+    }
+  ]
+}
