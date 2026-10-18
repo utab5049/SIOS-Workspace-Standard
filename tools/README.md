@@ -25,13 +25,13 @@ pipeline.
 
 ## Continuous integration
 
-The GitHub Actions workflow at `.github/workflows/registry-validator.yml` compiles
-the Python sources and runs the unit-test suite on pushes and pull requests that
-change tool or test files. It does not gate merges on the repository-wide
-validator result yet, because the current workspace contains a known registry
-status contradiction that requires an explicit governance resolution. This
-keeps CI failures actionable and avoids silently treating a disputed source as
-authoritative.
+The GitHub Actions workflow at `.github/workflows/registry-validator.yml` installs
+the development test dependencies, compiles the Python sources, and runs the
+unit-test suite on relevant pushes and pull requests. It does not gate merges on
+the repository-wide validator result yet, because the current workspace contains
+a known registry status contradiction that requires an explicit governance
+resolution. This keeps CI failures actionable and avoids silently treating a
+disputed source as authoritative.
 
 ## Proposed manifest validator
 
@@ -49,21 +49,27 @@ Run it by passing a manifest explicitly:
 python tools/manifest_validator.py path/to/manifest.json --repo-root .
 ```
 
-This uses only the Python standard library. It is **not** a full JSON Schema
-validator, does not generate a manifest, does not resolve source conflicts,
-and does not grant authority to the proposed contract. A structurally valid
-manifest is not evidence that its records are factually correct. Errors return
-exit code `1`; warnings alone return `0`. The validator never edits files.
+This command uses only the Python standard library and remains dependency-free.
+It is **not** a full JSON Schema validator, does not generate a manifest, does
+not resolve source conflicts, and does not grant authority to the proposed
+contract. A structurally valid manifest is not evidence that its records are
+factually correct. Errors return exit code `1`; warnings alone return `0`.
+The validator never edits files.
 
 ## Schema compatibility tests
 
 `tests/test_schema_compatibility.py` compares the schema's field sets,
 required fields, version and proposed-authority constants, artifact ID pattern,
 record-state enum, and selected field types against the Python validator.
-These tests are designed to catch accidental drift between the two definitions
-during edits.
+These tests are designed to catch accidental drift between the two definitions.
 
-They cover only the validator's supported subset. They do **not** replace a
-standards-compliant JSON Schema validator and do not prove full Draft 2020-12
-conformance. The CI workflow runs them on pull requests that change the schema,
-contract document, tools, tests, or workflow itself.
+`tests/test_jsonschema_conformance.py` also runs the official Draft 2020-12
+validator implementation from the `jsonschema` package against representative
+valid and invalid manifest examples and checks that the schema itself is valid.
+The dependency is installed only for CI/development tests; it is not required to
+run `tools/manifest_validator.py`.
+
+The tests cover representative cases, not every possible input or every
+semantic/governance rule. JSON Schema cannot by itself prove that records match
+source documents, that paths identify the correct artifacts, or that the
+proposed contract has been ratified. The manifest schema remains a proposal.
