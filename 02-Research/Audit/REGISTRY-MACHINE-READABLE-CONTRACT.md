@@ -30,10 +30,13 @@ This proposal defines a separate JSON manifest shape that future tooling can val
 - `source_location`: optional section/row locator.
 - `notes`: optional explanation of ambiguity or follow-up required.
 
-## Validation layers
+## Validation layers and known differences
 
 - The standard-library CLI checker provides narrow application-level checks, including duplicate IDs and repository path safety.
-- CI also uses the `jsonschema` package's Draft 2020-12 implementation to validate the schema and representative manifest fixtures against the schema itself.
+- CI uses the `jsonschema` package's Draft 2020-12 implementation to validate the schema and representative manifest fixtures against it.
+- Shared synthetic fixtures are checked by both validators. These fixtures are test-only and are not claimed to have been extracted from project registry sources.
+- Expected difference: the current JSON Schema does not enforce cross-record uniqueness of `artifact_id`; the application validator does.
+- Expected difference: the current JSON Schema does not encode repository path traversal safety; the application validator does.
 - Passing either layer does not establish source accuracy, path correctness, or governance authority. These are separate review questions.
 
 ## Activation gates
@@ -45,6 +48,6 @@ Before implementing a manifest importer or making these checks merge-blocking:
 - Agree on status vocabulary and whether versions may be absent.
 - Decide how grouped/ranged IDs are resolved and recorded.
 - Verify path semantics and duplicate-ID policy.
-- Add fixtures derived from reviewed source records and tests for invalid paths, duplicate IDs, missing fields, and unresolved entries.
+- Replace or supplement synthetic fixtures with fixtures derived from reviewed source records, without guessing unresolved fields.
 
 Until those gates are closed, the existing validator remains narrow and the current MAI-001 remains unchanged. This proposal does not resolve the known disagreement between registry documents.

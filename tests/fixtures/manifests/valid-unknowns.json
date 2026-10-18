@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0.0",
+  "authority_state": "proposed",
+  "source_document": null,
+  "artifacts": [
+    {
+      "artifact_id": "EXAMPLE-001",
+      "status": null,
+      "version": null,
+      "path": null,
+      "record_state": "unverified",
+      "source_location": null,
+      "notes": [
+        "Synthetic test fixture; not a real registry record."
+      ]
+    }
+  ]
+}
