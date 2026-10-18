@@ -1,0 +1,29 @@
+{
+  "artifact_id": "SRC-000017",
+  "title": "Knowledge Engineering: Principles and Methods (Studer et al. 1998)",
+  "classification": "Source Instance",
+  "path": "02-Research/Corpus/Sources/SRC-000017-Studer.md",
+  "version": null,
+  "lifecycle_state": "candidate",
+  "owner": null,
+  "domain": "02-Research",
+  "collection": "Source Instance",
+  "depends_on": [
+    "CIR-001",
+    "EIR-001"
+  ],
+  "source_decision_ids": [],
+  "provenance": [
+    {
+      "source_path": "02-Research/Corpus/Sources/SRC-000017-Studer.md",
+      "source_commit": "5bc0ff427e7937139e85d3222e65cb0f4b1ab11b",
+      "source_version": null,
+      "source_claim": "Contains the SRC-000017 registration and linked observation OBSU-000026; the source is full-text and marked Accepted.",
+      "source_status": "current"
+    }
+  ],
+  "reconciliation_status": "pending",
+  "notes": [
+    "SRC-000017 is a later addition absent from CIR-001's 16-source claim; reconcile CIR-001 counts and Studer definition evidence."
+  ]
+}
