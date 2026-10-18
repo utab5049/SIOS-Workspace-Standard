@@ -14,7 +14,10 @@ from pathlib import Path, PurePosixPath
 from typing import Any
 
 
-ARTIFACT_ID_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]*$")
+SCHEMA_VERSION = "1.0.0"
+AUTHORITY_STATE = "proposed"
+ARTIFACT_ID_PATTERN = r"^[A-Za-z0-9][A-Za-z0-9._-]*$"
+ARTIFACT_ID_RE = re.compile(ARTIFACT_ID_PATTERN)
 RECORD_STATES = {"explicit", "grouped", "ambiguous", "unverified"}
 TOP_LEVEL_FIELDS = {"schema_version", "authority_state", "source_document", "artifacts"}
 ARTIFACT_FIELDS = {
@@ -52,10 +55,10 @@ def validate_manifest(data: Any, repo_root: Path | None = None) -> list[Finding]
     for key in sorted(data.keys() - TOP_LEVEL_FIELDS):
         findings.append(_finding("FIELD_UNKNOWN", "error", f"$.{key}", "field is not defined by the proposed contract"))
 
-    if "schema_version" in data and data["schema_version"] != "1.0.0":
-        findings.append(_finding("SCHEMA_VERSION", "error", "$.schema_version", "expected the proposed contract version '1.0.0'"))
-    if "authority_state" in data and data["authority_state"] != "proposed":
-        findings.append(_finding("AUTHORITY_STATE", "error", "$.authority_state", "must remain 'proposed'; this validator cannot ratify authority"))
+    if "schema_version" in data and data["schema_version"] != SCHEMA_VERSION:
+        findings.append(_finding("SCHEMA_VERSION", "error", "$.schema_version", "expected the proposed contract version {SCHEMA_VERSION!r}"))
+    if "authority_state" in data and data["authority_state"] != AUTHORITY_STATE:
+        findings.append(_finding("AUTHORITY_STATE", "error", "$.authority_state", "must remain {AUTHORITY_STATE!r}; this validator cannot ratify authority"))
 
     if "source_document" in data and data["source_document"] is not None and not isinstance(data["source_document"], str):
         findings.append(_finding("FIELD_TYPE", "error", "$.source_document", "must be a string or null"))
@@ -82,7 +85,7 @@ def validate_manifest(data: Any, repo_root: Path | None = None) -> list[Finding]
         artifact_id = item.get("artifact_id")
         if "artifact_id" in item:
             if not isinstance(artifact_id, str) or not ARTIFACT_ID_RE.fullmatch(artifact_id):
-                findings.append(_finding("ARTIFACT_ID_INVALID", "error", f"{base}.artifact_id", "must match ^[A-Za-z0-9][A-Za-z0-9._-]*$"))
+                findings.append(_finding("ARTIFACT_ID_INVALID", "error", f"{base}.artifact_id", "must match {ARTIFACT_ID_PATTERN}"))
             elif artifact_id in seen_ids:
                 findings.append(_finding("ARTIFACT_ID_DUPLICATE", "error", f"{base}.artifact_id", f"duplicate ID; first seen at artifacts[{seen_ids[artifact_id]}]"))
             else:
