@@ -1,0 +1,28 @@
+{
+  "artifact_id": "SRC-BATCH2",
+  "title": "Second Live Source Registrations",
+  "classification": "Source Registration Batch",
+  "path": "02-Research/Corpus/Sources/SRC-Batch2.md",
+  "version": null,
+  "lifecycle_state": "candidate",
+  "owner": null,
+  "domain": "02-Research",
+  "collection": "Source Registration Batch",
+  "depends_on": [
+    "CIR-001"
+  ],
+  "source_decision_ids": [],
+  "provenance": [
+    {
+      "source_path": "02-Research/Corpus/Sources/SRC-Batch2.md",
+      "source_commit": "5bc0ff427e7937139e85d3222e65cb0f4b1ab11b",
+      "source_version": null,
+      "source_claim": "Source registration batch containing SRC-000007 through SRC-000010.",
+      "source_status": "current"
+    }
+  ],
+  "reconciliation_status": "pending",
+  "notes": [
+    "Batch container only; four source instances are represented inside."
+  ]
+}
