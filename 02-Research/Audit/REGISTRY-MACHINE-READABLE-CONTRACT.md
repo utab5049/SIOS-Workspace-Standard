@@ -30,6 +30,12 @@ This proposal defines a separate JSON manifest shape that future tooling can val
 - `source_location`: optional section/row locator.
 - `notes`: optional explanation of ambiguity or follow-up required.
 
+## Validation layers
+
+- The standard-library CLI checker provides narrow application-level checks, including duplicate IDs and repository path safety.
+- CI also uses the `jsonschema` package's Draft 2020-12 implementation to validate the schema and representative manifest fixtures against the schema itself.
+- Passing either layer does not establish source accuracy, path correctness, or governance authority. These are separate review questions.
+
 ## Activation gates
 
 Before implementing a manifest importer or making these checks merge-blocking:
