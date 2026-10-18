@@ -64,6 +64,22 @@ class GdrOaiMigrationValidationTests(unittest.TestCase):
             )["status"],
         )
 
+    def test_phase_29_migration_plan_is_gated_and_non_destructive(self):
+        plan_path = ROOT / "02-Research/Registry/migration/phase-29-controlled-migration-plan.json"
+        plan = json.loads(plan_path.read_text(encoding="utf-8"))
+        self.assertEqual("plan_only_not_applied", plan["status"])
+        self.assertFalse(plan["target_architecture"]["canonical_registry_changes_allowed"])
+        self.assertEqual(
+            {"G1", "G2", "G3", "G4"},
+            {gate["gate"] for gate in plan["required_gates"]},
+        )
+        c1 = next(op for op in plan["operations"] if op["operation_id"] == "MIG029-04")
+        self.assertEqual("no_change_authorized", c1["status"])
+        self.assertIn(
+            "Keep GOV-DEC-C1 unresolved until an authorized governance decision is recorded.",
+            plan["invariants"],
+        )
+
     def test_c1_record_remains_unresolved(self):
         c1_path = STAGED_GDR / "GOV-DEC-C1.json"
         c1 = json.loads(c1_path.read_text(encoding="utf-8"))

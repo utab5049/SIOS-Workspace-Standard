@@ -1,0 +1,135 @@
+{
+  "migration_id": "MIG-029",
+  "title": "Controlled CIR/EIR normalization and GDR/OAI inventory migration",
+  "status": "plan_only_not_applied",
+  "source_snapshot_commit": "5bc0ff427e7937139e85d3222e65cb0f4b1ab11b",
+  "parent_reconciliation": "02-Research/Registry/migration/phase-28-instance-evidence-reconciliation.json",
+  "target_architecture": {
+    "governance_authority": "GDR",
+    "inventory_metadata": "OAI",
+    "canonical_registry_changes_allowed": false
+  },
+  "invariants": [
+    "Preserve original files and Git history; no destructive rewrite or history alteration.",
+    "Never treat OAI metadata as governance approval.",
+    "Do not select a winner for conflicting source claims without an authorized decision.",
+    "Do not infer that missing evidence proves an event did not occur.",
+    "Preserve source version, correction, split, supersession, and review lineage.",
+    "Keep GOV-DEC-C1 unresolved until an authorized governance decision is recorded.",
+    "Do not count batch containers as individual source/evidence instances."
+  ],
+  "operations": [
+    {
+      "operation_id": "MIG029-01",
+      "target": "02-Research/Corpus/CIR-001.md",
+      "action": "propose_repository_relative_detail_path_normalization",
+      "status": "blocked_pending_owner_review",
+      "changes_proposed": [
+        "Replace references to SRC-CORPUS-001-ENTRIES.md and SRC-CORPUS-001-ENTRIES-2.md with references to the existing source-batch registration files only after each referenced source ID is confirmed against the batch contents.",
+        "Separate source registration locations from supporting full-text/search reports.",
+        "Reconcile claimed total of 16 against the 14 table rows and later SRC-000017/018/019 records."
+      ],
+      "acceptance": [
+        "Every source ID has a reviewed record location or an explicit unresolved/missing-evidence status.",
+        "Counts are computed from unique source IDs, not batch file count.",
+        "No source is marked registered solely because a heading exists in a mixed-purpose report."
+      ]
+    },
+    {
+      "operation_id": "MIG029-02",
+      "target": "02-Research/Evidence/EIR-001.md",
+      "action": "propose_evidence_path_and_lineage_normalization",
+      "status": "blocked_pending_content_review",
+      "changes_proposed": [
+        "Use repository-relative paths for source/evidence detail locations.",
+        "Represent EV-000003 version 1.1 and its temporal-scope split as explicit lineage without erasing the prior version.",
+        "Represent EV-000005 supersession by EV-000009 alongside any correction revision.",
+        "Determine whether EV-000012 meets the evidence record contract before adding it."
+      ],
+      "acceptance": [
+        "Every listed evidence ID has a validated record location or documented exception.",
+        "Correction and supersession links are consistent and acyclic.",
+        "Status conflicts remain visible until adjudicated."
+      ]
+    },
+    {
+      "operation_id": "MIG029-03",
+      "target": "02-Research/Registry/migration/staged/oai/",
+      "action": "reconcile_staged_records_against_approved_inventory",
+      "status": "blocked_until_operations_01_and_02_reviewed",
+      "changes_proposed": [
+        "Retain existing staged OAI records as historical claims with provenance.",
+        "Add only reviewed individual artifacts to the migration map and staged package in a later PR.",
+        "Keep batch containers distinct from instance records."
+      ],
+      "acceptance": [
+        "Migration map and staged files have one-to-one ID parity.",
+        "All source paths exist and each record passes OAI schema validation.",
+        "No proposal is silently promoted to canonical/staged."
+      ]
+    },
+    {
+      "operation_id": "MIG029-04",
+      "target": "02-Research/Registry/migration/staged/gdr/GOV-DEC-C1.json",
+      "action": "preserve_unresolved_governance_state",
+      "status": "no_change_authorized",
+      "changes_proposed": [
+        "No status change; recover qualifying review evidence or obtain explicit authorized decision."
+      ],
+      "acceptance": [
+        "C1 remains unresolved unless a separately recorded authorized decision supersedes this status."
+      ]
+    },
+    {
+      "operation_id": "MIG029-05",
+      "target": "12-Registry/README.md and 12-Registry/INDEX.md",
+      "action": "prepare_registry_entrypoint_update",
+      "status": "blocked_until_gdr_oai_migration_review",
+      "changes_proposed": [
+        "Propose language explaining GDR governance authority, OAI inventory role, and the fact that current migration package is staged rather than applied.",
+        "Preserve historical claims in provenance rather than deleting them."
+      ],
+      "acceptance": [
+        "No entrypoint claims migration is complete before the canonical migration PR is merged."
+      ]
+    }
+  ],
+  "required_gates": [
+    {
+      "gate": "G1",
+      "name": "Content review",
+      "required_evidence": "Per-ID CIR/EIR review with exact path, current state, and source provenance.",
+      "blocks": [
+        "MIG029-01",
+        "MIG029-02"
+      ]
+    },
+    {
+      "gate": "G2",
+      "name": "Governance review",
+      "required_evidence": "Authorized approval of registry authority and handling of conflicting status claims.",
+      "blocks": [
+        "MIG029-03",
+        "MIG029-05"
+      ]
+    },
+    {
+      "gate": "G3",
+      "name": "Automated validation",
+      "required_evidence": "Schema, path existence, unique IDs, map/staged parity, lineage consistency, and unit tests passing.",
+      "blocks": [
+        "MIG029-03"
+      ]
+    },
+    {
+      "gate": "G4",
+      "name": "Separate migration PR",
+      "required_evidence": "Reviewable diff that changes canonical files only after G1-G3, with rollback and provenance notes.",
+      "blocks": [
+        "all canonical changes"
+      ]
+    }
+  ],
+  "rollback": "Because this phase applies no canonical edits, rollback is simply to close/revise the plan PR. Any later canonical migration must be a separate reviewable commit and preserve pre-migration content in Git history.",
+  "next_action": "Phase 30 should build a per-ID review matrix for CIR/EIR and only then prepare a separately gated canonical migration PR."
+}
