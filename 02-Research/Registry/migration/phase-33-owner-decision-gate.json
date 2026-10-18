@@ -1,0 +1,130 @@
+{
+  "gate_id": "OWNER-DECISION-GATE-033",
+  "source_snapshot_commit": "5bc0ff427e7937139e85d3222e65cb0f4b1ab11b",
+  "parent_package": "02-Research/Registry/migration/phase-31-correction-package.json",
+  "status": "pending_owner_decisions_not_applied",
+  "purpose": "Explicitly record decisions required before any canonical CIR/EIR correction or staged OAI expansion. This is a decision-request ledger, not a record of approvals.",
+  "rules": [
+    "All decisions start pending; no approval is inferred from this file or its presence in a pull request.",
+    "A decision may be marked approved only by an authorized owner with a recorded identity, date, rationale, and evidence reference.",
+    "Conflicting evidence lifecycle claims remain disputed until an authorized adjudication is recorded.",
+    "No canonical CIR/EIR, staged GDR/OAI, or migration-map change is authorized by this gate.",
+    "GOV-DEC-C1 remains unresolved."
+  ],
+  "decisions": [
+    {
+      "decision_id": "D33-CIR-001",
+      "area": "CIR-001",
+      "question": "Should SRC-000017 be added to the current corpus registry?",
+      "status": "pending_owner_decision",
+      "required_evidence": [
+        "Review SRC-000017-Studer.md against the source-record contract",
+        "Confirm corpus scope and full-text classification"
+      ],
+      "proposed_default": "Do not add until approved",
+      "canonical_effect": "CIR-001 row/count change only after separate migration PR"
+    },
+    {
+      "decision_id": "D33-CIR-002",
+      "area": "CIR-001",
+      "question": "Do SRC-000018 and SRC-000019 each satisfy the source-record contract and corpus scope?",
+      "status": "pending_owner_decision",
+      "required_evidence": [
+        "Review each source independently in SRC-000018-19.md",
+        "Separate individual source records from the mixed-purpose completion report"
+      ],
+      "proposed_default": "Do not add either source until each is validated",
+      "canonical_effect": "Add only individually approved source instances"
+    },
+    {
+      "decision_id": "D33-CIR-003",
+      "area": "CIR-001",
+      "question": "Are SRC-000001 grandfathering and SRC-000011 reserved/unused claims supported by the controlling ID ledger?",
+      "status": "pending_owner_decision",
+      "required_evidence": [
+        "Verify SIOS-ID-001 and MAI-001 controlling clauses",
+        "Record exact source path and clause"
+      ],
+      "proposed_default": "Preserve exclusions with verification pending",
+      "canonical_effect": "No source row created unless an authorized decision requires it"
+    },
+    {
+      "decision_id": "D33-EIR-001",
+      "area": "EIR-001",
+      "question": "How should EV-000001's conflicting lifecycle claims be represented?",
+      "status": "pending_evidence_owner_adjudication",
+      "required_evidence": [
+        "Compare EIR-001, EV-CORRECTIONS-BATCH-001.md, and REVIEW-BATCH-002.md",
+        "Record evidence owner rationale and scoped status if any"
+      ],
+      "proposed_default": "Keep status disputed; do not select a winner",
+      "canonical_effect": "Status/lineage correction only after adjudication"
+    },
+    {
+      "decision_id": "D33-EIR-002",
+      "area": "EIR-001",
+      "question": "What is the approved lifecycle and review status for EV-000003 version 1.1 and its temporal-scope split?",
+      "status": "pending_evidence_owner_adjudication",
+      "required_evidence": [
+        "Review APPLIED-CORRECTIONS-EV003-KSM001.md",
+        "Preserve previous version and retarget recommendation",
+        "Record whether qualifying independent review exists"
+      ],
+      "proposed_default": "Preserve correction lineage and Needs Revision pending review",
+      "canonical_effect": "Lifecycle and lineage update only after adjudication"
+    },
+    {
+      "decision_id": "D33-EIR-003",
+      "area": "EIR-001",
+      "question": "Do EV-000006 through EV-000009 satisfy the evidence record contract at their current embedded locations?",
+      "status": "pending_contract_review",
+      "required_evidence": [
+        "Confirm each record boundary and required fields",
+        "Verify correction/supersession links are consistent and acyclic"
+      ],
+      "proposed_default": "Do not promote embedded entries to standalone records without validation",
+      "canonical_effect": "Normalize only in a separate migration PR"
+    },
+    {
+      "decision_id": "D33-EIR-004",
+      "area": "EIR-001",
+      "question": "Does EV-000012 satisfy the evidence record contract and belong in EIR-001?",
+      "status": "pending_contract_review",
+      "required_evidence": [
+        "Verify evidence identity, required fields, source link, and lifecycle in SRC-000018-19.md",
+        "Confirm evidence owner approval"
+      ],
+      "proposed_default": "Keep excluded from EIR-001",
+      "canonical_effect": "Add only after approval and separate migration PR"
+    }
+  ],
+  "release_gates": [
+    {
+      "gate": "G1",
+      "name": "Owner decisions recorded",
+      "required": "Every applicable decision has an explicit disposition, authorized owner, date, rationale, and evidence reference."
+    },
+    {
+      "gate": "G2",
+      "name": "Proposed drafts reconciled",
+      "required": "CIR/EIR drafts reflect only approved dispositions and retain disputed history."
+    },
+    {
+      "gate": "G3",
+      "name": "Automated checks pass",
+      "required": "Path, schema, unique-ID, contract, and lineage validation pass."
+    },
+    {
+      "gate": "G4",
+      "name": "Separate migration PR",
+      "required": "Canonical edits are isolated in a reviewable PR after G1-G3; no automatic merge."
+    }
+  ],
+  "invariants": {
+    "canonical_files_changed": false,
+    "staged_oai_or_gdr_changed": false,
+    "merge_authorized": false,
+    "c1_status": "unresolved"
+  },
+  "next_action": "Obtain owner decisions or explicitly record that each item remains pending; then update proposal drafts in a separate phase."
+}
