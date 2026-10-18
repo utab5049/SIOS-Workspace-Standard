@@ -1,0 +1,32 @@
+{
+  "artifact_id": "REVIEW-BATCH-002",
+  "title": "Adversarial Fresh Review",
+  "classification": "Review Evidence Batch",
+  "path": "02-Research/Reviews/REVIEW-BATCH-002.md",
+  "version": null,
+  "lifecycle_state": "disputed",
+  "owner": null,
+  "domain": "02-Research",
+  "collection": "Reviews",
+  "depends_on": [
+    "EV-CORRECTIONS-BATCH-001",
+    "OPS-001"
+  ],
+  "source_decision_ids": [
+    "GOV-DEC-C1"
+  ],
+  "provenance": [
+    {
+      "source_path": "02-Research/Reviews/REVIEW-BATCH-002.md",
+      "source_commit": "5bc0ff427e7937139e85d3222e65cb0f4b1ab11b",
+      "source_version": null,
+      "source_claim": "Describes an adversarial review against full-text material while explicitly saying it is not genuine reviewer independence because it occurred in the same session.",
+      "source_status": "conflicting"
+    }
+  ],
+  "reconciliation_status": "disputed",
+  "notes": [
+    "Record methodological value separately from reviewer independence; this pass is not a substitute for a qualifying independent review.",
+    "C1 remains unresolved."
+  ]
+}
