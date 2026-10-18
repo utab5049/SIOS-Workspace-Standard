@@ -1,0 +1,38 @@
+{
+  "artifact_id": "EIR-001",
+  "title": "Evidence Instance Registry",
+  "classification": "Registry Specification",
+  "path": "02-Research/Evidence/EIR-001.md",
+  "version": "1.0.0",
+  "lifecycle_state": "draft",
+  "owner": null,
+  "domain": "02-Research",
+  "collection": "Evidence",
+  "depends_on": [
+    "MAI-001",
+    "DECISION-MAI001-OPTION-B",
+    "ERS-001"
+  ],
+  "source_decision_ids": [],
+  "provenance": [
+    {
+      "source_path": "02-Research/Evidence/EIR-001.md",
+      "source_commit": "5bc0ff427e7937139e85d3222e65cb0f4b1ab11b",
+      "source_version": "1.0.0",
+      "source_claim": "Describes an index of EV evidence records; header marks it Draft and proposed under Option B.",
+      "source_status": "current"
+    },
+    {
+      "source_path": "02-Research/Registry/DECISION-MAI001-OPTION-B.md",
+      "source_commit": "5bc0ff427e7937139e85d3222e65cb0f4b1ab11b",
+      "source_version": null,
+      "source_claim": "Records the proposed sub-registry approach.",
+      "source_status": "conflicting"
+    }
+  ],
+  "reconciliation_status": "pending",
+  "notes": [
+    "EIR-001 reports ten records when counting a split and supersession; distinguish unique IDs, superseded IDs, and active records.",
+    "EV-000001 and EV-000005 have correction/review caveats that must remain visible."
+  ]
+}
