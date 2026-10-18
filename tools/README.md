@@ -75,6 +75,10 @@ intentional differences: JSON Schema alone does not enforce unique
 `artifact_id` values across records, and the current schema does not encode
 repository path traversal safety. The application validator rejects both cases.
 
+`tests/test_manifest_validator.py` also covers malformed JSON, missing files,
+invalid root and artifact shapes, wrong nullable-field types, repository path
+warnings, CLI error codes, and the read-only guarantee.
+
 See `02-Research/Audit/VALIDATION-COVERAGE-MATRIX.md` for the rule-by-rule
 coverage audit, test gaps, and issues that require governance or source review.
 The matrix is an engineering assessment, not an approval of the proposed
