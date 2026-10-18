@@ -2,7 +2,7 @@ import json
 import unittest
 from pathlib import Path
 
-from scripts.validate_gdr_oai import ROOT, STAGED_GDR, STAGED_OAI, validate_package
+from scripts.validate_gdr_oai import ROOT, STAGED_GDR, STAGED_OAI, validate_package, validate_phase31_correction_package
 
 
 class GdrOaiMigrationValidationTests(unittest.TestCase):
@@ -118,6 +118,9 @@ class GdrOaiMigrationValidationTests(unittest.TestCase):
         self.assertIn("SRC-000017", cir)
         self.assertIn("EV-000012", eir)
         self.assertIn("Disputed", eir)
+
+    def test_phase_31_correction_package_paths_and_safety(self):
+        self.assertEqual([], validate_phase31_correction_package())
 
     def test_c1_record_remains_unresolved(self):
         c1_path = STAGED_GDR / "GOV-DEC-C1.json"
