@@ -54,3 +54,16 @@ validator, does not generate a manifest, does not resolve source conflicts,
 and does not grant authority to the proposed contract. A structurally valid
 manifest is not evidence that its records are factually correct. Errors return
 exit code `1`; warnings alone return `0`. The validator never edits files.
+
+## Schema compatibility tests
+
+`tests/test_schema_compatibility.py` compares the schema's field sets,
+required fields, version and proposed-authority constants, artifact ID pattern,
+record-state enum, and selected field types against the Python validator.
+These tests are designed to catch accidental drift between the two definitions
+during edits.
+
+They cover only the validator's supported subset. They do **not** replace a
+standards-compliant JSON Schema validator and do not prove full Draft 2020-12
+conformance. The CI workflow runs them on pull requests that change the schema,
+contract document, tools, tests, or workflow itself.
