@@ -56,20 +56,25 @@ contract. A structurally valid manifest is not evidence that its records are
 factually correct. Errors return exit code `1`; warnings alone return `0`.
 The validator never edits files.
 
-## Schema compatibility tests
+## Schema compatibility and fixture comparisons
 
 `tests/test_schema_compatibility.py` compares the schema's field sets,
 required fields, version and proposed-authority constants, artifact ID pattern,
 record-state enum, and selected field types against the Python validator.
-These tests are designed to catch accidental drift between the two definitions.
 
-`tests/test_jsonschema_conformance.py` also runs the official Draft 2020-12
-validator implementation from the `jsonschema` package against representative
-valid and invalid manifest examples and checks that the schema itself is valid.
-The dependency is installed only for CI/development tests; it is not required to
-run `tools/manifest_validator.py`.
+`tests/test_jsonschema_conformance.py` uses the `jsonschema` package's
+Draft 2020-12 implementation to validate the schema itself and representative
+valid/invalid data. The dependency is installed only for CI/development tests;
+it is not required to run `tools/manifest_validator.py`.
 
-The tests cover representative cases, not every possible input or every
-semantic/governance rule. JSON Schema cannot by itself prove that records match
-source documents, that paths identify the correct artifacts, or that the
-proposed contract has been ratified. The manifest schema remains a proposal.
+`tests/test_validator_fixture_comparison.py` runs the same synthetic fixtures
+through both validators and asserts the expected outcome for each. Fixtures in
+`tests/fixtures/manifests/` are explicitly illustrative and are **not** records
+extracted from MAI-001 or any other project source. The tests document two
+intentional differences: JSON Schema alone does not enforce unique
+`artifact_id` values across records, and the current schema does not encode
+repository path traversal safety. The application validator rejects both cases.
+
+These tests cover representative cases, not every possible input or every
+semantic/governance rule. Neither validator proves source accuracy, path
+correctness, or governance authority. The manifest schema remains a proposal.
