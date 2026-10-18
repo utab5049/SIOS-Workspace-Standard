@@ -1,0 +1,28 @@
+{
+  "artifact_id": "REGISTRY-INDEX",
+  "title": "12-Registry Index",
+  "classification": "Registry index",
+  "path": "12-Registry/INDEX.md",
+  "version": null,
+  "lifecycle_state": "disputed",
+  "owner": null,
+  "domain": "12-Registry",
+  "collection": "Registry",
+  "depends_on": [],
+  "source_decision_ids": [
+    "GOV-DEC-001"
+  ],
+  "provenance": [
+    {
+      "source_path": "12-Registry/INDEX.md",
+      "source_commit": "5bc0ff427e7937139e85d3222e65cb0f4b1ab11b",
+      "source_version": null,
+      "source_claim": "States that no artifacts are currently registered",
+      "source_status": "conflicting"
+    }
+  ],
+  "reconciliation_status": "disputed",
+  "notes": [
+    "Conflicts with MAI-001; preserved without choosing a canonical source in this migration map."
+  ]
+}
