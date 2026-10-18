@@ -1,0 +1,28 @@
+{
+  "artifact_id": "APPLIED-CORRECTIONS-EV003-KSM001",
+  "title": "Applied Corrections for EV-000003 and KSM-001",
+  "classification": "Evidence Correction Record",
+  "path": "02-Research/Evidence/Records/APPLIED-CORRECTIONS-EV003-KSM001.md",
+  "version": null,
+  "lifecycle_state": "candidate",
+  "owner": null,
+  "domain": "02-Research",
+  "collection": "Evidence Correction Record",
+  "depends_on": [
+    "EIR-001"
+  ],
+  "source_decision_ids": [],
+  "provenance": [
+    {
+      "source_path": "02-Research/Evidence/Records/APPLIED-CORRECTIONS-EV003-KSM001.md",
+      "source_commit": "5bc0ff427e7937139e85d3222e65cb0f4b1ab11b",
+      "source_version": null,
+      "source_claim": "Records a correction splitting EV-000003 by temporal scope and a linked KSM-001 correction.",
+      "source_status": "current"
+    }
+  ],
+  "reconciliation_status": "pending",
+  "notes": [
+    "Correction artifact must preserve lineage and not silently replace EV-000003 prior versions."
+  ]
+}
