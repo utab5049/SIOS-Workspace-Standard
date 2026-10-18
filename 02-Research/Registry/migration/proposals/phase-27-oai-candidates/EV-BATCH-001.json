@@ -1,0 +1,30 @@
+{
+  "artifact_id": "EV-BATCH-001",
+  "title": "Evidence Records Batch 1",
+  "classification": "Evidence Batch",
+  "path": "02-Research/Evidence/Records/EV-BATCH-001.md",
+  "version": null,
+  "lifecycle_state": "candidate",
+  "owner": null,
+  "domain": "02-Research",
+  "collection": "Evidence Records",
+  "depends_on": [
+    "OBSU-BATCH-001",
+    "ERS-001"
+  ],
+  "source_decision_ids": [],
+  "provenance": [
+    {
+      "source_path": "02-Research/Evidence/Records/EV-BATCH-001.md",
+      "source_commit": "5bc0ff427e7937139e85d3222e65cb0f4b1ab11b",
+      "source_version": null,
+      "source_claim": "Contains a batch of evidence records and states it was transformed from OBSU-BATCH-001.",
+      "source_status": "current"
+    }
+  ],
+  "reconciliation_status": "pending",
+  "notes": [
+    "Batch contains multiple EV records; decide whether the batch container and each contained record need separate OAI entries.",
+    "Contains self-audit/reviewer-independence caveats; do not interpret as independent-review proof."
+  ]
+}
