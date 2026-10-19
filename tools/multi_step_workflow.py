@@ -45,6 +45,15 @@ def _resolve_file(base: Path, value: Any, label: str) -> Path:
     return resolved
 
 
+def _is_reference(value: Any) -> bool:
+    return (
+        isinstance(value, dict) and set(value) == {"$ref"}
+        and isinstance(value["$ref"], dict)
+        and set(value["$ref"]) == {"step_id", "path"}
+        and isinstance(value["$ref"]["step_id"], str) and bool(value["$ref"]["step_id"].strip())
+        and isinstance(value["$ref"]["path"], str) and bool(value["$ref"]["path"].strip())
+    )
+
 def _validate_operation(operation: Any, step_id: str) -> dict[str, Any]:
     if not isinstance(operation, dict):
         raise MultiStepWorkflowError(f"step {step_id}: operation must be an object")
@@ -53,20 +62,46 @@ def _validate_operation(operation: Any, step_id: str) -> dict[str, Any]:
         raise MultiStepWorkflowError(f"step {step_id}: unsupported operation type: {kind}")
     if set(operation) - {"type", "artifact_id", "query"}:
         raise MultiStepWorkflowError(f"step {step_id}: operation contains unsupported arguments")
+    def valid(value: Any) -> bool:
+        return (isinstance(value, str) and bool(value.strip())) or _is_reference(value)
     if kind == "registry.get":
-        if not isinstance(operation.get("artifact_id"), str) or not operation["artifact_id"].strip():
-            raise MultiStepWorkflowError(f"step {step_id}: registry.get requires artifact_id")
-        if "query" in operation:
-            raise MultiStepWorkflowError(f"step {step_id}: registry.get does not accept query")
+        if not valid(operation.get("artifact_id")) or "query" in operation:
+            raise MultiStepWorkflowError(f"step {step_id}: registry.get requires artifact_id only")
     elif kind == "registry.search":
-        if not isinstance(operation.get("query"), str):
-            raise MultiStepWorkflowError(f"step {step_id}: registry.search requires string query")
-        if "artifact_id" in operation:
-            raise MultiStepWorkflowError(f"step {step_id}: registry.search does not accept artifact_id")
+        if not valid(operation.get("query")) or "artifact_id" in operation:
+            raise MultiStepWorkflowError(f"step {step_id}: registry.search requires query only")
     elif set(operation) != {"type"}:
         raise MultiStepWorkflowError(f"step {step_id}: registry.list accepts only type")
     return operation
 
+def _resolve_operation(step: dict[str, Any], prior_results: dict[str, dict[str, Any]]) -> dict[str, Any]:
+    operation = dict(step["operation"])
+    dependencies = set(step["depends_on"])
+    for key, value in list(operation.items()):
+        if key == "type" or not _is_reference(value):
+            continue
+        ref = value["$ref"]
+        source_id, path = ref["step_id"], ref["path"]
+        if source_id not in dependencies:
+            raise MultiStepWorkflowError(f"step {step['step_id']}: reference source {source_id} must be a direct dependency")
+        source = prior_results.get(source_id)
+        if not isinstance(source, dict) or source.get("status") != "completed" or "result" not in source:
+            raise MultiStepWorkflowError(f"step {step['step_id']}: reference source {source_id} has no completed result")
+        current: Any = source["result"]
+        segments = path.split(".")
+        if segments and segments[0] == "result":
+            segments = segments[1:]
+        for segment in segments:
+            if isinstance(current, dict) and segment in current:
+                current = current[segment]
+            elif isinstance(current, list) and segment.isdigit() and int(segment) < len(current):
+                current = current[int(segment)]
+            else:
+                raise MultiStepWorkflowError(f"step {step['step_id']}: reference path {path!r} does not exist in {source_id}")
+        if not isinstance(current, str) or not current.strip():
+            raise MultiStepWorkflowError(f"step {step['step_id']}: reference {source_id}.{path} must resolve to a non-empty string")
+        operation[key] = current
+    return operation
 
 def _validate_workflow(document: Any) -> dict[str, Any]:
     if not isinstance(document, dict):
@@ -106,6 +141,11 @@ def _validate_workflow(document: Any) -> dict[str, Any]:
                 raise MultiStepWorkflowError(f"step {step_id}: unknown dependency {dep}")
             if dep == step_id:
                 raise MultiStepWorkflowError(f"step {step_id}: cannot depend on itself")
+        for key, value in step["operation"].items():
+            if key != "type" and _is_reference(value):
+                source_id = value["$ref"]["step_id"]
+                if source_id not in step["depends_on"]:
+                    raise MultiStepWorkflowError(f"step {step_id}: reference source {source_id} must be a direct dependency")
     # Stable topological sort: among ready steps, preserve declaration order.
     ordered: list[dict[str, Any]] = []
     done: set[str] = set()
@@ -238,7 +278,8 @@ def run_multi_step(workflow_path: Path, *, state_path: Path | None = None, resum
             ordered_results.append(item)
             continue
         try:
-            op_status, value = _dispatch(runtime, step["operation"])
+            resolved_operation = _resolve_operation(step, step_results)
+            op_status, value = _dispatch(runtime, resolved_operation)
             item = {"step_id": step_id, "operation_type": step["operation"]["type"], "status": op_status}
             if op_status == "completed":
                 item["result"] = value
