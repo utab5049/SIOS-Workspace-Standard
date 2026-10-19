@@ -174,3 +174,12 @@ To persist a JSON report:
     python tools/workflow_runner.py examples/workflows/registry-lookup/workflow.json --report run-report.json
 
 The report path is relative to the workflow directory. Its parent directory must exist; absolute paths, path traversal, and overwriting the workflow, manifest, rules, or context inputs are rejected. Reports include a UTC timestamp and the structured result. The example manifest contains synthetic DEMO records only, not authoritative SIOS data. CI exercises this example as part of the unit-test suite. See `02-Research/Audit/PHASE-41-REPRODUCIBLE-WORKFLOW.md`.
+
+
+## Workflow execution history
+
+The workflow runner supports optional append-only local run history in JSON Lines format. Use `--history` to record a compact execution trace:
+
+    python tools/workflow_runner.py examples/workflows/registry-lookup/workflow.json --history history.jsonl
+
+Each invocation appends a unique run ID, UTC timestamp, status, duration, gate decision, operation summary, and error when present. The history path must remain inside the workflow directory and cannot overwrite workflow inputs. Full context and operation results are deliberately excluded. This local file is not tamper-proof and is not a governance approval record. See `02-Research/Audit/PHASE-42-EXECUTION-HISTORY.md`.
