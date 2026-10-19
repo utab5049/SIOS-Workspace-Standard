@@ -4,12 +4,15 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+import time
+import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
 from tools.registry_runtime import ManifestValidationError, RegistryRuntime
 from tools.rules_engine import RulesConfigurationError, RulesEngine
+from tools.execution_history import HistoryWriteError, append_history
 
 
 class WorkflowConfigurationError(ValueError):
@@ -157,14 +160,45 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Run a gated, read-only SIOS registry workflow.")
     parser.add_argument("workflow", type=Path, help="path to workflow definition JSON")
     parser.add_argument("--report", help="optional report path relative to the workflow directory")
+    parser.add_argument("--history", help="optional append-only JSONL history path relative to the workflow directory")
     args = parser.parse_args(argv)
+
+    started = time.perf_counter()
+    run_id = str(uuid.uuid4())
+    result: dict[str, Any] | None = None
+    error_message: str | None = None
     try:
         result = run_workflow(args.workflow)
         if args.report:
             report_path = _write_report(args.workflow, args.report, result)
             result["report_path"] = str(report_path.relative_to(args.workflow.resolve().parent))
     except (WorkflowConfigurationError, RulesConfigurationError, ManifestValidationError, OSError, TypeError) as exc:
-        print(json.dumps({"status": "error", "error": str(exc)}, ensure_ascii=False, indent=2), file=sys.stderr)
+        error_message = str(exc)
+        print(json.dumps({"status": "error", "error": error_message}, ensure_ascii=False, indent=2), file=sys.stderr)
+
+    if args.history:
+        operation = result.get("operation", {}) if result else {}
+        gate = result.get("gate", {}) if result else {}
+        entry = {
+            "history_schema_version": "1.0",
+            "run_id": run_id,
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "workflow_id": result.get("workflow_id") if result else None,
+            "status": result.get("status", "error") if result else "error",
+            "duration_ms": round((time.perf_counter() - started) * 1000, 3),
+            "gate_decision": gate.get("decision"),
+            "operation_type": operation.get("type"),
+            "operation_status": operation.get("status"),
+            "error": error_message,
+        }
+        try:
+            history_path = append_history(args.workflow, args.history, entry)
+            entry["history_file"] = str(history_path.relative_to(args.workflow.resolve().parent))
+        except (HistoryWriteError, OSError, TypeError) as exc:
+            print(json.dumps({"status": "history_error", "error": str(exc)}, ensure_ascii=False, indent=2), file=sys.stderr)
+            return 1
+
+    if result is None:
         return 1
     print(json.dumps(result, ensure_ascii=False, indent=2))
     if result["status"] == "blocked":
