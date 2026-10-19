@@ -1,0 +1,216 @@
+{
+  "audit_id": "CONFORMANCE-MATRIX-035",
+  "source_snapshot_commit": "5bc0ff427e7937139e85d3222e65cb0f4b1ab11b",
+  "parent_phase": "PHASE-34",
+  "status": "contract_conformance_matrix_proposed_not_applied",
+  "contract_sources": {
+    "source_registry_contract": {
+      "path": "02-Research/Corpus/CIR-001.md",
+      "authority": "CIR-001 §2 Schema",
+      "fields": [
+        "Source ID",
+        "Title",
+        "Corpus",
+        "Domain",
+        "Status",
+        "Full-Text Status",
+        "Detail Location"
+      ],
+      "note": "This is the registry row schema, not proof that every source file must be a standalone file."
+    },
+    "evidence_record_contract": {
+      "path": "02-Research/Evidence/Records/EV-BATCH-001.md",
+      "authority": "Header: Schema Authority ERS-001; stated full 9-section structure",
+      "sections": [
+        "Identity",
+        "Source",
+        "Research Context",
+        "Evidence Content",
+        "Classification",
+        "Quality Profile",
+        "Relationships",
+        "Lifecycle",
+        "Governance"
+      ],
+      "note": "The referenced ERS-001 canonical definition was not located at the assumed Foundation/Registry path in this audit; section list is taken from the evidence batch's explicit statement and observed record structure. Do not treat this as complete authoritative schema validation."
+    }
+  },
+  "source_instances": [
+    {
+      "id": "SRC-000017",
+      "path": "02-Research/Corpus/Sources/SRC-000017-Studer.md",
+      "checks": {
+        "source_id": true,
+        "title": true,
+        "corpus": false,
+        "domain": true,
+        "status": true,
+        "full_text_status": true,
+        "detail_location": true
+      },
+      "result": "partial_registry_schema_coverage",
+      "findings": [
+        "Source ID, title, domain, Accepted status, and Full-Text assertion are observable.",
+        "A Corpus field is not explicitly evidenced in the previously inspected record summary.",
+        "The file also embeds OBSU-000026 and registry-update assertions; inclusion remains an owner decision."
+      ],
+      "promotion": "not_authorized"
+    },
+    {
+      "id": "SRC-000018",
+      "path": "02-Research/Corpus/Sources/SRC-000018-19.md",
+      "checks": {
+        "source_id": true,
+        "title": true,
+        "corpus": false,
+        "domain": true,
+        "status": true,
+        "full_text_status": true,
+        "detail_location": true
+      },
+      "result": "partial_embedded_record",
+      "findings": [
+        "Identifiable bibliographic details are present in a mixed-purpose report.",
+        "A distinct source-record boundary and explicit Corpus field are not established.",
+        "The report also contains observations, EV-000012 and completion claims."
+      ],
+      "promotion": "not_authorized"
+    },
+    {
+      "id": "SRC-000019",
+      "path": "02-Research/Corpus/Sources/SRC-000018-19.md",
+      "checks": {
+        "source_id": true,
+        "title": true,
+        "corpus": false,
+        "domain": true,
+        "status": true,
+        "full_text_status": true,
+        "detail_location": true
+      },
+      "result": "partial_embedded_record",
+      "findings": [
+        "Identifiable source details are present in the shared completion report.",
+        "A distinct source-record boundary and explicit Corpus field are not established.",
+        "The source must be reviewed separately from SRC-000018."
+      ],
+      "promotion": "not_authorized"
+    }
+  ],
+  "evidence_instances": [
+    {
+      "id": "EV-000006",
+      "path": "02-Research/Corpus/Sources/SRC-000016-RESOLUTION.md",
+      "observed_sections": [
+        "Identity",
+        "Source",
+        "Research Context",
+        "Evidence Content",
+        "Quality Profile",
+        "Relationships",
+        "Governance"
+      ],
+      "unverified_sections": [
+        "Classification",
+        "Lifecycle"
+      ],
+      "result": "partial_section_coverage",
+      "promotion": "not_authorized"
+    },
+    {
+      "id": "EV-000007",
+      "path": "02-Research/Corpus/Sources/SRC-000015-EXTRACTION.md",
+      "observed_sections": [
+        "Identity",
+        "Source",
+        "Research Context",
+        "Evidence Content",
+        "Quality Profile",
+        "Relationships",
+        "Governance"
+      ],
+      "unverified_sections": [
+        "Classification",
+        "Lifecycle"
+      ],
+      "result": "partial_section_coverage",
+      "promotion": "not_authorized"
+    },
+    {
+      "id": "EV-000008",
+      "path": "02-Research/Observation/Records/FULLTEXT-UPGRADE-005-012.md",
+      "observed_sections": [
+        "Evidence Content-like block: Primary Type, Linked RQ, Claim, Context Summary, Support Level, Confidence, Traceability"
+      ],
+      "unverified_sections": [
+        "Identity",
+        "Source",
+        "Research Context",
+        "Classification",
+        "Quality Profile",
+        "Relationships",
+        "Lifecycle",
+        "Governance"
+      ],
+      "result": "embedded_evidence_summary_not_full_record",
+      "promotion": "not_authorized"
+    },
+    {
+      "id": "EV-000009",
+      "path": "02-Research/Observation/Records/FULLTEXT-UPGRADE-005-012.md",
+      "observed_sections": [
+        "Evidence Content-like block: Primary Type, Linked RQ, Claim, Context Summary, Support Level, Confidence, Traceability"
+      ],
+      "unverified_sections": [
+        "Identity",
+        "Source",
+        "Research Context",
+        "Classification",
+        "Quality Profile",
+        "Relationships",
+        "Lifecycle",
+        "Governance"
+      ],
+      "result": "embedded_evidence_summary_not_full_record",
+      "promotion": "not_authorized"
+    },
+    {
+      "id": "EV-000012",
+      "path": "02-Research/Corpus/Sources/SRC-000018-19.md",
+      "observed_sections": [
+        "Evidence summary fields are described in Phase 34 audit"
+      ],
+      "unverified_sections": [
+        "Identity",
+        "Source",
+        "Research Context",
+        "Classification",
+        "Quality Profile",
+        "Relationships",
+        "Lifecycle",
+        "Governance"
+      ],
+      "result": "embedded_summary_not_full_record",
+      "promotion": "not_authorized"
+    }
+  ],
+  "interpretation_rules": [
+    "A checked field means observable in the inspected material, not owner-approved or externally verified.",
+    "A missing/unverified section is not proof the information never existed elsewhere.",
+    "The CIR §2 row schema and an underlying source-record contract are distinct; this matrix checks only the explicit registry fields where stated.",
+    "The ERS-001 full canonical definition must be located before final schema conformance can be certified."
+  ],
+  "next_actions": [
+    "Locate the canonical ERS-001 definition and any source-record template/contract; record exact repository paths and controlling clauses.",
+    "If no controlling source-record contract exists, request an authorized governance decision rather than inventing one.",
+    "Obtain Phase 33 owner decisions, then revise proposal drafts in a separate migration PR."
+  ],
+  "invariants": {
+    "canonical_cir_eir_changed": false,
+    "staged_oai_or_gdr_changed": false,
+    "migration_map_changed": false,
+    "candidates_promoted": false,
+    "merge_authorized": false,
+    "c1_status": "unresolved"
+  }
+}
