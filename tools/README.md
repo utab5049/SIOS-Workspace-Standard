@@ -56,6 +56,21 @@ contract. A structurally valid manifest is not evidence that its records are
 factually correct. Errors return exit code `1`; warnings alone return `0`.
 The validator never edits files.
 
+## Registry runtime
+
+`registry_runtime.py` loads a manifest only after it passes the canonical schema and application-level validation. It builds an in-memory, read-only index and exposes exact-ID lookup, case-insensitive substring search, and exact status/record-state filters. Returned records are detached copies so callers cannot mutate the runtime index.
+
+Examples from the repository root:
+
+```sh
+python tools/registry_runtime.py path/to/manifest.json list
+python tools/registry_runtime.py path/to/manifest.json get SIOS-001
+python tools/registry_runtime.py path/to/manifest.json search baseline
+python tools/registry_runtime.py path/to/manifest.json filter --status Frozen --record-state explicit
+```
+
+The runtime does not create or infer artifact records, write back to the manifest, resolve source conflicts, or grant governance approval. It operates on a manifest supplied by the caller; this repository does not yet claim to have a reconciled production manifest. A missing ID returns exit code `2`; invalid manifest input returns `1`.
+
 ## Schema compatibility, fixture comparison, and coverage
 
 `tests/test_schema_compatibility.py` compares the schema's field sets,
