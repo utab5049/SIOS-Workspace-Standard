@@ -52,7 +52,7 @@ class ControlledRetryTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temp:
             workflow = fixture(Path(temp), retry={"max_attempts": 3})
             with patch("tools.multi_step_workflow._dispatch", side_effect=[
-                OSError("temporary read issue"), [{"artifact_id": "DEMO-001"}]
+                OSError("temporary read issue"), ("completed", [{"artifact_id": "DEMO-001"}])
             ]) as dispatch:
                 result = run_multi_step(workflow)
         step = result["steps"][0]
