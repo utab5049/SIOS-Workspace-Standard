@@ -183,3 +183,17 @@ The workflow runner supports optional append-only local run history in JSON Line
     python tools/workflow_runner.py examples/workflows/registry-lookup/workflow.json --history history.jsonl
 
 Each invocation appends a unique run ID, UTC timestamp, status, duration, gate decision, operation summary, and error when present. The history path must remain inside the workflow directory and cannot overwrite workflow inputs. Full context and operation results are deliberately excluded. This local file is not tamper-proof and is not a governance approval record. See `02-Research/Audit/PHASE-42-EXECUTION-HISTORY.md`.
+
+
+## Workflow history inspector
+
+`workflow_inspector.py` reads the local JSONL history written by the runner and provides newest-first summaries with exact run-ID/status filters, ISO-8601 time bounds, and a result limit.
+
+Examples from the repository root:
+
+    python tools/workflow_inspector.py examples/workflows/registry-lookup/history.jsonl
+    python tools/workflow_inspector.py path/to/history.jsonl --status blocked
+    python tools/workflow_inspector.py path/to/history.jsonl --run-id RUN-ID --json
+    python tools/workflow_inspector.py path/to/history.jsonl --since 2026-10-01T00:00:00Z --until 2026-10-19T23:59:59Z --limit 20
+
+Time bounds must include a timezone. Malformed JSONL records and invalid timestamps return exit code 1 with a concise error. The inspector is read-only: it does not modify history, rerun workflows, or treat local logs as tamper-proof evidence or governance approval. See `02-Research/Audit/PHASE-43-WORKFLOW-INSPECTOR.md`.
