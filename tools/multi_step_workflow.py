@@ -159,6 +159,16 @@ def _condition_matches(condition: dict[str, Any], prior_results: dict[str, dict[
     return False
 
 
+def _validate_retry(retry: Any, step_id: str) -> dict[str, int]:
+    """Validate a bounded retry policy; max_attempts includes the first attempt."""
+    if not isinstance(retry, dict) or set(retry) != {"max_attempts"}:
+        raise MultiStepWorkflowError(f"step {step_id}: retry must contain only max_attempts")
+    attempts = retry["max_attempts"]
+    if isinstance(attempts, bool) or not isinstance(attempts, int) or not 1 <= attempts <= 3:
+        raise MultiStepWorkflowError(f"step {step_id}: retry.max_attempts must be an integer from 1 to 3")
+    return {"max_attempts": attempts}
+
+
 def _validate_workflow(document: Any) -> dict[str, Any]:
     if not isinstance(document, dict):
         raise MultiStepWorkflowError("workflow must be a JSON object")
@@ -177,7 +187,7 @@ def _validate_workflow(document: Any) -> dict[str, Any]:
         raise MultiStepWorkflowError("steps must be a non-empty array")
     by_id: dict[str, dict[str, Any]] = {}
     for step in steps:
-        if not isinstance(step, dict) or set(step) - {"step_id", "depends_on", "operation", "when"} or not {"step_id", "depends_on", "operation"} <= set(step):
+        if not isinstance(step, dict) or set(step) - {"step_id", "depends_on", "operation", "when", "retry"} or not {"step_id", "depends_on", "operation"} <= set(step):
             raise MultiStepWorkflowError("each step must contain only step_id, depends_on, and operation")
         step_id = step["step_id"]
         if not isinstance(step_id, str) or not step_id.strip():
@@ -192,6 +202,8 @@ def _validate_workflow(document: Any) -> dict[str, Any]:
         _validate_operation(step["operation"], step_id)
         if "when" in step:
             _validate_condition(step["when"], step_id)
+        if "retry" in step:
+            _validate_retry(step["retry"], step_id)
         by_id[step_id] = step
     for step_id, step in by_id.items():
         for dep in step["depends_on"]:
@@ -347,8 +359,39 @@ def run_multi_step(workflow_path: Path, *, state_path: Path | None = None, resum
             continue
         try:
             resolved_operation = _resolve_operation(step, step_results)
-            op_status, value = _dispatch(runtime, resolved_operation)
-            item = {"step_id": step_id, "operation_type": step["operation"]["type"], "status": op_status}
+            max_attempts = step.get("retry", {}).get("max_attempts", 1)
+            retry_history: list[dict[str, Any]] = []
+            for attempt in range(1, max_attempts + 1):
+                try:
+                    op_status, value = _dispatch(runtime, resolved_operation)
+                    break
+                except OSError as exc:
+                    retry_history.append({
+                        "attempt": attempt, "code": "TRANSIENT_IO_ERROR",
+                        "message": str(exc), "retryable": True,
+                    })
+                    if attempt >= max_attempts:
+                        message = str(exc)
+                        item = {
+                            "step_id": step_id, "operation_type": step["operation"]["type"],
+                            "status": "failed", "outcome": "failed", "attempts": attempt,
+                            "error": message,
+                            "error_detail": {"code": "TRANSIENT_IO_ERROR", "message": message, "retryable": True},
+                        }
+                        item["retry_history"] = retry_history
+                        step_results[step_id] = item
+                        ordered_results.append(item)
+                        final_status = "operation_failed"
+                        checkpoint(final_status)
+                        break
+            if final_status != "completed":
+                break
+            item = {
+                "step_id": step_id, "operation_type": step["operation"]["type"],
+                "status": op_status, "attempts": attempt,
+            }
+            if retry_history:
+                item["retry_history"] = retry_history
             if op_status == "completed":
                 item["result"] = value
                 item["outcome"] = "empty" if isinstance(value, (list, dict, str)) and len(value) == 0 else "success"
