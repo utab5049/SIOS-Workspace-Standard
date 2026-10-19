@@ -161,3 +161,16 @@ Run it from the repository root:
 Allowed operations are registry.list, registry.get, and registry.search. The rules gate runs before the manifest is loaded or an operation is dispatched. A denied gate returns status blocked and exit code 2; invalid configuration returns exit code 1; an unknown requested artifact returns exit code 3. A successful read-only operation returns exit code 0.
 
 This is a minimal local workflow runner, not a general-purpose job executor. It does not execute shell commands, arbitrary Python, network calls, writes, or manifest changes. Rule approval and governance authority remain external to the engine.
+
+
+## Reproducible workflow example and run reports
+
+A complete synthetic workflow is available at `examples/workflows/registry-lookup/`. Run it from the repository root:
+
+    python tools/workflow_runner.py examples/workflows/registry-lookup/workflow.json
+
+To persist a JSON report:
+
+    python tools/workflow_runner.py examples/workflows/registry-lookup/workflow.json --report run-report.json
+
+The report path is relative to the workflow directory. Its parent directory must exist; absolute paths, path traversal, and overwriting the workflow, manifest, rules, or context inputs are rejected. Reports include a UTC timestamp and the structured result. The example manifest contains synthetic DEMO records only, not authoritative SIOS data. CI exercises this example as part of the unit-test suite. See `02-Research/Audit/PHASE-41-REPRODUCIBLE-WORKFLOW.md`.
