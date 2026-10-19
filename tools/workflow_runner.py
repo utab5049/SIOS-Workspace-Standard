@@ -133,8 +133,14 @@ def _write_report(workflow_path: Path, report_value: str, result: dict[str, Any]
     resolved = (base / report).resolve()
     if resolved == base or base not in resolved.parents:
         raise WorkflowConfigurationError("report path must stay inside the workflow directory")
-    if resolved == workflow_path.resolve():
-        raise WorkflowConfigurationError("report path must not overwrite the workflow definition")
+    workflow_document = _load_json(workflow_path.resolve(), "workflow")
+    protected = {workflow_path.resolve()}
+    for key in ("manifest_path", "rules_path", "context_path"):
+        value = workflow_document.get(key)
+        if isinstance(value, str) and value.strip() and not Path(value).is_absolute():
+            protected.add((base / value).resolve())
+    if resolved in protected:
+        raise WorkflowConfigurationError("report path must not overwrite a workflow input file")
     if not resolved.parent.is_dir():
         raise WorkflowConfigurationError("report directory must already exist")
     payload = {
