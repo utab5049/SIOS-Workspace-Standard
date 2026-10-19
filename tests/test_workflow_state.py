@@ -44,7 +44,7 @@ class WorkflowStateTests(unittest.TestCase):
             with patch("sys.stdout"):
                 self.assertEqual(main([str(workflow), "--state", state]), 0)
             with patch("tools.workflow_runner.run_workflow", side_effect=AssertionError("must not rerun")), patch("sys.stdout"):
-                self.assertEqual(main([str(workflow), "--state", state, "--resume]), 0)
+                self.assertEqual(main([str(workflow), "--state", state, "--resume"]), 0)
 
     def test_changed_context_invalidates_resume(self):
         with tempfile.TemporaryDirectory() as directory:
