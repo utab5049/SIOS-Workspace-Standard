@@ -218,3 +218,17 @@ Example:
     python tools/multi_step_workflow.py examples/workflows/conditional-routing/workflow.json
 
 Condition references use `{"$ref":{"step_id":"search_records","path":"result.0.artifact_id"}}`. Paths traverse JSON object keys and numeric list indexes only. Conditions cannot run expressions or arbitrary code. The main rules gate still runs before manifest loading; registry operations remain allowlisted and read-only. The example uses synthetic DEMO records. See `02-Research/Audit/PHASE-47-CONDITIONAL-WORKFLOW.md`.
+
+
+## Standard workflow step outcomes
+
+The multi-step runner keeps its existing `status` field and adds a normalized `outcome` field for branch logic and reporting:
+
+- `success`: operation completed with a non-empty result
+- `empty`: operation completed successfully but returned an empty list, object, or string
+- `not_found`: an exact registry lookup did not find its artifact
+- `failed`: an operation input or execution error stopped the workflow
+- `skipped`: the step did not run because of a condition, dependency, or earlier failure
+- `not_run`: the top-level rules gate denied execution
+
+Failure outcomes include `error_detail` with a stable `code`, human-readable `message`, and boolean `retryable`. Existing `error` strings and operation status fields are retained for compatibility. Current read-only registry failures are marked non-retryable; this is classification, not an automatic retry policy. See `02-Research/Audit/PHASE-48-STEP-OUTCOMES.md`.
