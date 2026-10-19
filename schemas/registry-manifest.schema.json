@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://sios.invalid/schemas/registry-manifest.schema.json",
   "title": "SIOS Registry Manifest",
-  "description": "Canonical machine-readable contract for runtime validation. Artifact values remain source-backed and do not override governance decisions.",
+  "description": "Canonical machine-readable shape used by runtime validation. The proposed data authority state does not override governance decisions.",
   "type": "object",
   "additionalProperties": false,
   "required": ["schema_version", "authority_state", "artifacts"],
@@ -11,7 +11,7 @@
       "const": "1.0.0"
     },
     "authority_state": {
-      "const": "authoritative"
+      "const": "proposed"
     },
     "source_document": {
       "type": ["string", "null"],
