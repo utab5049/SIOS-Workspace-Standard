@@ -156,6 +156,24 @@ class GdrOaiMigrationValidationTests(unittest.TestCase):
         self.assertFalse(audit["invariants"]["merge_authorized"])
         self.assertEqual("unresolved", audit["invariants"]["c1_status"])
 
+    def test_phase_35_contract_conformance_matrix_is_cautious_and_non_promoting(self):
+        matrix_path = ROOT / "02-Research/Registry/migration/phase-35-contract-conformance-matrix.json"
+        matrix = json.loads(matrix_path.read_text(encoding="utf-8"))
+        self.assertEqual("contract_conformance_matrix_proposed_not_applied", matrix["status"])
+        self.assertEqual("5bc0ff427e7937139e85d3222e65cb0f4b1ab11b", matrix["source_snapshot_commit"])
+        self.assertEqual({"SRC-000017", "SRC-000018", "SRC-000019"}, {item["id"] for item in matrix["source_instances"]})
+        self.assertEqual({"EV-000006", "EV-000007", "EV-000008", "EV-000009", "EV-000012"}, {item["id"] for item in matrix["evidence_instances"]})
+        self.assertTrue(all(item["promotion"] == "not_authorized" for item in matrix["evidence_instances"]))
+        self.assertTrue(all(item["promotion"] == "not_authorized" for item in matrix["source_instances"]))
+        for item in matrix["source_instances"] + matrix["evidence_instances"]:
+            self.assertTrue((ROOT / item["path"]).is_file(), item["path"])
+        self.assertFalse(matrix["invariants"]["canonical_cir_eir_changed"])
+        self.assertFalse(matrix["invariants"]["staged_oai_or_gdr_changed"])
+        self.assertFalse(matrix["invariants"]["migration_map_changed"])
+        self.assertFalse(matrix["invariants"]["candidates_promoted"])
+        self.assertFalse(matrix["invariants"]["merge_authorized"])
+        self.assertEqual("unresolved", matrix["invariants"]["c1_status"])
+
     def test_c1_record_remains_unresolved(self):
         c1_path = STAGED_GDR / "GOV-DEC-C1.json"
         c1 = json.loads(c1_path.read_text(encoding="utf-8"))
