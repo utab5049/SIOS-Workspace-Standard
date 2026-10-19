@@ -14,3 +14,8 @@ This is the SIOS Enterprise Workspace, as originally frozen 2026-07-14, **plus t
 - `02-Research/Audit/REVIEW-LEDGER.md` — review claims and evidence ledger
 - `02-Research/Audit/INDEPENDENT-REVIEW-PROTOCOL.md` — proposed method for independent review
 - `CHANGELOG.md` — every change made to the original Frozen baseline, in one place
+
+
+## Controlled workflow retries
+
+Multi-step workflow steps may opt into a bounded retry policy with `"retry": {"max_attempts": 2}`. The value includes the initial attempt and must be an integer from 1 to 3. Omitting the policy means one attempt, with no retry. Only `OSError` raised during the read-only operation dispatch is retried; validation errors, invalid bindings, and exact-ID misses are not. Results expose the total `attempts` and, when retries occur, a concise `retry_history`. Retries are immediate and bounded; this does not add retries for side effects or make local history tamper-proof.
