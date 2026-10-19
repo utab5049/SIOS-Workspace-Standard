@@ -303,6 +303,43 @@ def _dispatch(runtime: RegistryRuntime, operation: dict[str, Any]) -> tuple[str,
     return "completed", runtime.search(operation["query"])
 
 
+def _workflow_summary(steps: list[dict[str, Any]], results: list[dict[str, Any]]) -> dict[str, Any]:
+    """Build a stable, compact summary without replacing detailed step results."""
+    by_result = {item.get("step_id"): item for item in results if isinstance(item, dict)}
+    counts = {
+        "total": len(steps), "success": 0, "empty": 0, "not_found": 0,
+        "failed": 0, "skipped": 0, "not_run": 0,
+    }
+    details: list[dict[str, Any]] = []
+    for step in steps:
+        step_id = step["step_id"]
+        result = by_result.get(step_id, {})
+        outcome = result.get("outcome", "not_run")
+        if outcome not in counts or outcome == "total":
+            outcome = "failed"
+        counts[outcome] += 1
+        item = {
+            "step_id": step_id,
+            "outcome": outcome,
+            "depends_on": list(step["depends_on"]),
+        }
+        if result.get("reason"):
+            item["reason"] = result["reason"]
+        if outcome == "skipped" and result.get("reason") == "dependency_not_completed":
+            item["blocked_dependencies"] = [
+                dep for dep in step["depends_on"]
+                if by_result.get(dep, {}).get("status") != "completed"
+            ]
+        if result.get("error"):
+            item["error"] = result["error"]
+        if result.get("error_detail"):
+            item["error_detail"] = result["error_detail"]
+        details.append(item)
+    counts["successful"] = counts["success"] + counts["empty"]
+    counts["unsuccessful"] = counts["failed"] + counts["not_found"]
+    return {"counts": counts, "steps": details}
+
+
 def run_multi_step(workflow_path: Path, *, state_path: Path | None = None, resume: bool = False) -> dict[str, Any]:
     workflow_path = workflow_path.resolve()
     document = _validate_workflow(_load_json(workflow_path, "workflow"))
@@ -314,9 +351,14 @@ def run_multi_step(workflow_path: Path, *, state_path: Path | None = None, resum
         raise MultiStepWorkflowError("context JSON root must be an object")
     gate = RulesEngine.from_file(rules_path).evaluate(context)
     if gate["decision"] == "deny":
+        blocked_steps = [
+            {"step_id": step["step_id"], "status": "not_run", "outcome": "not_run"}
+            for step in document["_ordered_steps"]
+        ]
         return {
             "workflow_id": document["workflow_id"], "status": "blocked", "gate": gate,
-            "steps": [{"step_id": step["step_id"], "status": "not_run", "outcome": "not_run"} for step in document["_ordered_steps"]],
+            "steps": blocked_steps,
+            "summary": _workflow_summary(document["_ordered_steps"], blocked_steps),
         }
 
     # Only compute a fingerprint/read the manifest after the gate allows execution.
@@ -437,7 +479,11 @@ def run_multi_step(workflow_path: Path, *, state_path: Path | None = None, resum
             ordered_results.append(item)
             step_results[step["step_id"]] = item
     checkpoint(final_status)
-    return {"workflow_id": document["workflow_id"], "status": final_status, "gate": gate, "steps": ordered_results}
+    return {
+        "workflow_id": document["workflow_id"], "status": final_status, "gate": gate,
+        "steps": ordered_results,
+        "summary": _workflow_summary(document["_ordered_steps"], ordered_results),
+    }
 
 
 def main(argv: list[str] | None = None) -> int:
