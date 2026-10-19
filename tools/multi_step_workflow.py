@@ -20,6 +20,7 @@ class MultiStepWorkflowError(ValueError):
 
 
 _ALLOWED_OPERATIONS = {"registry.list", "registry.get", "registry.search"}
+_CONDITION_OPERATORS = {"equals", "not_equals", "in", "contains", "exists", "truthy"}
 _WORKFLOW_KEYS = {"schema_version", "workflow_id", "manifest_path", "rules_path", "context_path", "steps"}
 
 
@@ -81,27 +82,82 @@ def _resolve_operation(step: dict[str, Any], prior_results: dict[str, dict[str, 
         if key == "type" or not _is_reference(value):
             continue
         ref = value["$ref"]
-        source_id, path = ref["step_id"], ref["path"]
+        source_id = ref["step_id"]
         if source_id not in dependencies:
-            raise MultiStepWorkflowError(f"step {step['step_id']}: reference source {source_id} must be a direct dependency")
-        source = prior_results.get(source_id)
-        if not isinstance(source, dict) or source.get("status") != "completed" or "result" not in source:
-            raise MultiStepWorkflowError(f"step {step['step_id']}: reference source {source_id} has no completed result")
-        current: Any = source["result"]
-        segments = path.split(".")
-        if segments and segments[0] == "result":
-            segments = segments[1:]
-        for segment in segments:
-            if isinstance(current, dict) and segment in current:
-                current = current[segment]
-            elif isinstance(current, list) and segment.isdigit() and int(segment) < len(current):
-                current = current[int(segment)]
-            else:
-                raise MultiStepWorkflowError(f"step {step['step_id']}: reference path {path!r} does not exist in {source_id}")
+            raise MultiStepWorkflowError(
+                f"step {step['step_id']}: reference source {source_id} must be a direct dependency"
+            )
+        current = _resolve_reference(ref, prior_results, step["step_id"])
         if not isinstance(current, str) or not current.strip():
-            raise MultiStepWorkflowError(f"step {step['step_id']}: reference {source_id}.{path} must resolve to a non-empty string")
+            raise MultiStepWorkflowError(
+                f"step {step['step_id']}: reference {source_id}.{ref['path']} must resolve to a non-empty string"
+            )
         operation[key] = current
     return operation
+
+def _validate_condition(condition: Any, step_id: str) -> dict[str, Any]:
+    if not isinstance(condition, dict) or set(condition) - {"$ref", "operator", "value"}:
+        raise MultiStepWorkflowError(f"step {step_id}: when must contain a reference, operator, and optional value")
+    ref = condition.get("$ref")
+    if not _is_reference({"$ref": ref}):
+        raise MultiStepWorkflowError(f"step {step_id}: when.$ref must contain step_id and path")
+    operator = condition.get("operator")
+    if operator not in _CONDITION_OPERATORS:
+        raise MultiStepWorkflowError(f"step {step_id}: unsupported condition operator: {operator}")
+    if operator not in {"exists", "truthy"} and "value" not in condition:
+        raise MultiStepWorkflowError(f"step {step_id}: when.value is required for {operator}")
+    if operator == "exists" and "value" in condition and not isinstance(condition["value"], bool):
+        raise MultiStepWorkflowError(f"step {step_id}: when.value must be boolean for exists")
+    return condition
+
+
+def _resolve_reference(ref: dict[str, Any], prior_results: dict[str, dict[str, Any]], step_id: str) -> Any:
+    source_id, path = ref["step_id"], ref["path"]
+    source = prior_results.get(source_id)
+    if not isinstance(source, dict) or source.get("status") != "completed" or "result" not in source:
+        raise MultiStepWorkflowError(f"step {step_id}: reference source {source_id} has no completed result")
+    current: Any = source["result"]
+    segments = path.split(".")
+    if segments and segments[0] == "result":
+        segments = segments[1:]
+    for segment in segments:
+        if isinstance(current, dict) and segment in current:
+            current = current[segment]
+        elif isinstance(current, list) and segment.isdigit() and int(segment) < len(current):
+            current = current[int(segment)]
+        else:
+            raise MultiStepWorkflowError(f"step {step_id}: reference path {path!r} does not exist in {source_id}")
+    return current
+
+
+def _condition_matches(condition: dict[str, Any], prior_results: dict[str, dict[str, Any]], step_id: str) -> bool:
+    try:
+        actual = _resolve_reference(condition["$ref"], prior_results, step_id)
+        exists = True
+    except MultiStepWorkflowError:
+        if condition["operator"] == "exists":
+            return condition.get("value", True) is False
+        return False
+    operator, expected = condition["operator"], condition.get("value")
+    if operator == "exists":
+        return exists is expected if "value" in condition else exists
+    if operator == "truthy":
+        return bool(actual)
+    if operator == "equals":
+        return actual == expected
+    if operator == "not_equals":
+        return actual != expected
+    if operator == "in":
+        return isinstance(expected, list) and actual in expected
+    if operator == "contains":
+        if isinstance(actual, (str, list, tuple, dict)):
+            try:
+                return expected in actual
+            except (TypeError, ValueError):
+                return False
+        return False
+    return False
+
 
 def _validate_workflow(document: Any) -> dict[str, Any]:
     if not isinstance(document, dict):
@@ -121,7 +177,7 @@ def _validate_workflow(document: Any) -> dict[str, Any]:
         raise MultiStepWorkflowError("steps must be a non-empty array")
     by_id: dict[str, dict[str, Any]] = {}
     for step in steps:
-        if not isinstance(step, dict) or set(step) != {"step_id", "depends_on", "operation"}:
+        if not isinstance(step, dict) or set(step) - {"step_id", "depends_on", "operation", "when"} or not {"step_id", "depends_on", "operation"} <= set(step):
             raise MultiStepWorkflowError("each step must contain only step_id, depends_on, and operation")
         step_id = step["step_id"]
         if not isinstance(step_id, str) or not step_id.strip():
@@ -134,6 +190,8 @@ def _validate_workflow(document: Any) -> dict[str, Any]:
         if len(set(deps)) != len(deps):
             raise MultiStepWorkflowError(f"step {step_id}: duplicate dependency")
         _validate_operation(step["operation"], step_id)
+        if "when" in step:
+            _validate_condition(step["when"], step_id)
         by_id[step_id] = step
     for step_id, step in by_id.items():
         for dep in step["depends_on"]:
@@ -146,6 +204,10 @@ def _validate_workflow(document: Any) -> dict[str, Any]:
                 source_id = value["$ref"]["step_id"]
                 if source_id not in step["depends_on"]:
                     raise MultiStepWorkflowError(f"step {step_id}: reference source {source_id} must be a direct dependency")
+        if "when" in step:
+            source_id = step["when"]["$ref"]["step_id"]
+            if source_id not in step["depends_on"]:
+                raise MultiStepWorkflowError(f"step {step_id}: condition source {source_id} must be a direct dependency")
     # Stable topological sort: among ready steps, preserve declaration order.
     ordered: list[dict[str, Any]] = []
     done: set[str] = set()
@@ -271,6 +333,12 @@ def run_multi_step(workflow_path: Path, *, state_path: Path | None = None, resum
             item = {"step_id": step_id, "status": "skipped", "reason": "dependency_not_completed"}
             step_results[step_id] = item
             ordered_results.append(item)
+            continue
+        if "when" in step and not _condition_matches(step["when"], step_results, step_id):
+            item = {"step_id": step_id, "status": "skipped", "reason": "condition_not_met"}
+            step_results[step_id] = item
+            ordered_results.append(item)
+            checkpoint("running")
             continue
         cached = step_results.get(step_id)
         if reusable and isinstance(cached, dict) and cached.get("status") == "completed":

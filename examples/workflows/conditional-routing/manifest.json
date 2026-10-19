@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0.0",
+  "authority_state": "proposed",
+  "source_document": "synthetic-example-only.md",
+  "artifacts": [
+    {"artifact_id": "DEMO-001", "status": "Frozen", "version": "1.0", "path": null, "record_state": "explicit", "source_location": "Example", "notes": ["conditional routing demo"]},
+    {"artifact_id": "DEMO-002", "status": "Draft", "version": "0.1", "path": null, "record_state": "explicit", "source_location": "Example", "notes": ["secondary synthetic record"]}
+  ]
+}
