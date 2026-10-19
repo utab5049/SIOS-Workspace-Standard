@@ -74,7 +74,7 @@ class WorkflowOutcomeTests(unittest.TestCase):
         self.assertEqual(result["steps"][1]["error_detail"]["code"], "INVALID_STEP_INPUT")
         self.assertFalse(result["steps"][1]["error_detail"]["retryable"])
         self.assertEqual(result["steps"][2]["outcome"], "skipped")
-        self.assertEqual(result["steps"][2]["reason"], "workflow_stopped_after_failure")
+        self.assertEqual(result["steps"][2]["reason"], "dependency_not_completed")
 
     def test_gate_block_has_not_run_outcome(self):
         with tempfile.TemporaryDirectory() as directory:
