@@ -13,7 +13,7 @@ from jsonschema import Draft202012Validator, SchemaError
 
 
 SCHEMA_VERSION = "1.0.0"
-AUTHORITY_STATE = "authoritative"
+AUTHORITY_STATE = "proposed"
 DEFAULT_SCHEMA_PATH = Path(__file__).resolve().parents[1] / "schemas" / "registry-manifest.schema.json"
 ARTIFACT_ID_PATTERN = r"^[A-Za-z0-9][A-Za-z0-9._-]*$"
 ARTIFACT_ID_RE = re.compile(ARTIFACT_ID_PATTERN)
@@ -73,7 +73,7 @@ def validate_manifest(data: Any, repo_root: Path | None = None, schema_path: Pat
     if "schema_version" in data and data["schema_version"] != SCHEMA_VERSION:
         findings.append(_finding("SCHEMA_VERSION", "error", "$.schema_version", f"expected manifest schema version {SCHEMA_VERSION!r}"))
     if "authority_state" in data and data["authority_state"] != AUTHORITY_STATE:
-        findings.append(_finding("AUTHORITY_STATE", "error", "$.authority_state", f"must be {AUTHORITY_STATE!r} per the selected manifest contract"))
+        findings.append(_finding("AUTHORITY_STATE", "error", "$.authority_state", f"must remain {AUTHORITY_STATE!r}; this validator cannot ratify authority"))
 
     if "source_document" in data and data["source_document"] is not None and not isinstance(data["source_document"], str):
         findings.append(_finding("FIELD_TYPE", "error", "$.source_document", "must be a string or null"))
