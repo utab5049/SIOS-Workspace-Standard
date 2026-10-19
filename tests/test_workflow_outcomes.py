@@ -5,7 +5,35 @@ import tempfile
 import unittest
 
 from tools.multi_step_workflow import run_multi_step
-from tests.test_multi_step_workflow import setup_workflow, write_json
+
+def write_json(path, value):
+    path.write_text(json.dumps(value), encoding="utf-8")
+
+
+def setup_workflow(root, *, approved=True, steps=None):
+    write_json(root / "manifest.json", {
+        "schema_version": "1.0.0", "authority_state": "proposed",
+        "source_document": "tests/synthetic-outcomes.md",
+        "artifacts": [
+            {"artifact_id": "DEMO-001", "status": "Frozen", "version": "1.0", "path": None,
+             "record_state": "explicit", "source_location": "Fixture", "notes": ["alpha record"]},
+            {"artifact_id": "DEMO-002", "status": "Draft", "version": "0.2", "path": None,
+             "record_state": "explicit", "source_location": "Fixture", "notes": ["beta record"]},
+        ],
+    })
+    write_json(root / "context.json", {"request": {"approved": approved}})
+    write_json(root / "rules.json", {"schema_version": "1.0", "rules": [{
+        "rule_id": "PRE-001", "field": "request.approved", "operator": "equals",
+        "value": True, "message": "Approval is required",
+    }]})
+    write_json(root / "workflow.json", {
+        "schema_version": "1.0", "workflow_id": "WF-OUTCOME-TEST",
+        "manifest_path": "manifest.json", "rules_path": "rules.json", "context_path": "context.json",
+        "steps": steps or [
+            {"step_id": "list", "depends_on": [], "operation": {"type": "registry.list"}},
+        ],
+    })
+    return root / "workflow.json"
 
 
 class WorkflowOutcomeTests(unittest.TestCase):
