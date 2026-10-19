@@ -102,3 +102,35 @@ contract.
 These tests cover representative cases, not every possible input or every
 semantic/governance rule. Neither validator proves source accuracy, path
 correctness, or governance authority. The manifest schema remains a proposal.
+
+
+## Deterministic rules engine
+
+rules_engine.py evaluates declarative preconditions against a caller-supplied JSON context. It uses a fixed operator allowlist and never evaluates Python expressions or executes the requested operation.
+
+Example rules file:
+
+    {
+      "schema_version": "1.0",
+      "rules": [
+        {
+          "rule_id": "PRE-001",
+          "field": "request.approved",
+          "operator": "equals",
+          "value": true,
+          "message": "Approval is required"
+        }
+      ]
+    }
+
+Context file:
+
+    {"request": {"approved": true}}
+
+Run from the repository root:
+
+    python tools/rules_engine.py rules.json context.json
+
+Supported operators are exists, equals, not_equals, in, contains, and truthy. Rules default to blocking severity; failed warning rules are reported but do not deny the decision. Disabled rules are marked skipped. Nested dictionary paths use dot notation. Exit code 0 means allow, 2 means deny, and 1 means invalid configuration or input.
+
+The engine returns a decision only. It does not execute operations, mutate the manifest, or grant governance authority. See 02-Research/Audit/PHASE-39-RULES-ENGINE.md.
