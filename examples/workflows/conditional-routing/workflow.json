@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "workflow_id": "WF-DEMO-CONDITIONAL-ROUTING",
+  "manifest_path": "manifest.json",
+  "rules_path": "rules.json",
+  "context_path": "context.json",
+  "steps": [
+    {"step_id": "search_records", "depends_on": [], "operation": {"type": "registry.search", "query": "conditional routing demo"}},
+    {
+      "step_id": "load_match",
+      "depends_on": ["search_records"],
+      "when": {
+        "$ref": {"step_id": "search_records", "path": "result.0.artifact_id"},
+        "operator": "equals",
+        "value": "DEMO-001"
+      },
+      "operation": {"type": "registry.get", "artifact_id": {"$ref": {"step_id": "search_records", "path": "result.0.artifact_id"}}}
+    },
+    {
+      "step_id": "fallback_list",
+      "depends_on": ["search_records"],
+      "when": {
+        "$ref": {"step_id": "search_records", "path": "result.0.artifact_id"},
+        "operator": "not_equals",
+        "value": "DEMO-001"
+      },
+      "operation": {"type": "registry.list"}
+    }
+  ]
+}
