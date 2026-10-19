@@ -1,8 +1,4 @@
-"""Read-only structural and safety checks for the proposed registry manifest.
-
-This is a standard-library checker for the current proposed contract, not a
-full JSON Schema implementation and not an authority/governance decision.
-"""
+"""Validate a SIOS registry manifest against the canonical schema and safety rules."""
 from __future__ import annotations
 
 import argparse
@@ -13,9 +9,12 @@ from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
 from typing import Any
 
+from jsonschema import Draft202012Validator, SchemaError
+
 
 SCHEMA_VERSION = "1.0.0"
 AUTHORITY_STATE = "proposed"
+DEFAULT_SCHEMA_PATH = Path(__file__).resolve().parents[1] / "schemas" / "registry-manifest.schema.json"
 ARTIFACT_ID_PATTERN = r"^[A-Za-z0-9][A-Za-z0-9._-]*$"
 ARTIFACT_ID_RE = re.compile(ARTIFACT_ID_PATTERN)
 RECORD_STATES = {"explicit", "grouped", "ambiguous", "unverified"}
@@ -43,20 +42,36 @@ def _finding(code: str, severity: str, location: str, message: str) -> Finding:
     return Finding(code, severity, location, message)
 
 
-def validate_manifest(data: Any, repo_root: Path | None = None) -> list[Finding]:
+def validate_manifest(data: Any, repo_root: Path | None = None, schema_path: Path | None = None) -> list[Finding]:
     """Return deterministic findings without modifying the manifest or repository."""
     findings: list[Finding] = []
 
     if not isinstance(data, dict):
         return [_finding("ROOT_TYPE", "error", "$", "manifest root must be an object")]
 
+    active_schema = schema_path or DEFAULT_SCHEMA_PATH
+    try:
+        schema = json.loads(active_schema.read_text(encoding="utf-8"))
+        Draft202012Validator.check_schema(schema)
+    except OSError as exc:
+        return [_finding("SCHEMA_READ_ERROR", "error", str(active_schema), str(exc))]
+    except (json.JSONDecodeError, SchemaError) as exc:
+        return [_finding("SCHEMA_INVALID", "error", str(active_schema), str(exc))]
+
+    for error in Draft202012Validator(schema).iter_errors(data):
+        location = "$" + "".join(
+            f"[{part}]" if isinstance(part, int) else f".{part}"
+            for part in error.absolute_path
+        )
+        findings.append(_finding("SCHEMA_VALIDATION", "error", location, error.message))
+
     for key in sorted(REQUIRED_TOP_LEVEL - data.keys()):
         findings.append(_finding("FIELD_REQUIRED", "error", f"$.{key}", "required field is missing"))
     for key in sorted(data.keys() - TOP_LEVEL_FIELDS):
-        findings.append(_finding("FIELD_UNKNOWN", "error", f"$.{key}", "field is not defined by the proposed contract"))
+        findings.append(_finding("FIELD_UNKNOWN", "error", f"$.{key}", "field is not defined by the manifest schema"))
 
     if "schema_version" in data and data["schema_version"] != SCHEMA_VERSION:
-        findings.append(_finding("SCHEMA_VERSION", "error", "$.schema_version", f"expected the proposed contract version {SCHEMA_VERSION!r}"))
+        findings.append(_finding("SCHEMA_VERSION", "error", "$.schema_version", f"expected manifest schema version {SCHEMA_VERSION!r}"))
     if "authority_state" in data and data["authority_state"] != AUTHORITY_STATE:
         findings.append(_finding("AUTHORITY_STATE", "error", "$.authority_state", f"must remain {AUTHORITY_STATE!r}; this validator cannot ratify authority"))
 
@@ -127,7 +142,7 @@ def validate_manifest(data: Any, repo_root: Path | None = None) -> list[Finding]
     return findings
 
 
-def validate_manifest_file(manifest_path: Path, repo_root: Path | None = None) -> list[Finding]:
+def validate_manifest_file(manifest_path: Path, repo_root: Path | None = None, schema_path: Path | None = None) -> list[Finding]:
     """Read and validate one JSON file; report parse/read failures as findings."""
     try:
         text = manifest_path.read_text(encoding="utf-8")
@@ -137,14 +152,18 @@ def validate_manifest_file(manifest_path: Path, repo_root: Path | None = None) -
         data = json.loads(text)
     except json.JSONDecodeError as exc:
         return [_finding("JSON_INVALID", "error", f"{manifest_path}:{exc.lineno}:{exc.colno}", exc.msg)]
-    return validate_manifest(data, repo_root=repo_root)
+    return validate_manifest(data, repo_root=repo_root, schema_path=schema_path)
 
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
-        description="Check a proposed SIOS registry manifest without modifying files."
+        description="Validate a SIOS registry manifest against the canonical schema without modifying files."
     )
     parser.add_argument("manifest", type=Path, help="path to the JSON manifest")
+    parser.add_argument(
+        "--schema", type=Path, default=DEFAULT_SCHEMA_PATH,
+        help="JSON Schema path (defaults to schemas/registry-manifest.schema.json)",
+    )
     parser.add_argument(
         "--repo-root",
         type=Path,
@@ -153,9 +172,9 @@ def main(argv: list[str] | None = None) -> int:
     )
     args = parser.parse_args(argv)
 
-    findings = validate_manifest_file(args.manifest, repo_root=args.repo_root)
+    findings = validate_manifest_file(args.manifest, repo_root=args.repo_root, schema_path=args.schema)
     if not findings:
-        print("Manifest checks passed (limited proposed-contract checks; no authority inferred).")
+        print("Manifest validation passed against the canonical JSON Schema and application safety checks.")
         return 0
 
     for finding in findings:

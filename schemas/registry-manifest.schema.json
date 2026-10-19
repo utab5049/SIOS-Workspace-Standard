@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://sios.invalid/schemas/registry-manifest.schema.json",
-  "title": "SIOS Registry Manifest (Proposed)",
-  "description": "Proposed machine-readable registry contract. Not authoritative until explicitly ratified.",
+  "title": "SIOS Registry Manifest",
+  "description": "Canonical machine-readable shape used by runtime validation. The proposed data authority state does not override governance decisions.",
   "type": "object",
   "additionalProperties": false,
   "required": ["schema_version", "authority_state", "artifacts"],
@@ -15,7 +15,7 @@
     },
     "source_document": {
       "type": ["string", "null"],
-      "description": "Source document used to prepare this manifest; null until selected by governance."
+      "description": "Source document used to prepare the manifest, or null when no single source is asserted."
     },
     "artifacts": {
       "type": "array",

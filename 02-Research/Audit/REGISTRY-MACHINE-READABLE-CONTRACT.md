@@ -1,16 +1,16 @@
-# Proposed Registry Machine-Readable Contract
+# SIOS Registry Machine-Readable Contract
 
-**State:** Proposal only — not ratified, not an authoritative registry, and not a replacement for MAI-001.
+**State:** Canonical machine-readable schema for software validation. This schema governs validation shape; it does not override MAI-001 source claims or independently ratify artifact statuses.
 
 ## Why this contract exists
 
 The current MAI-001 summary uses grouped cells and mixed status/version formatting. Examples include ID ranges, lists of IDs sharing one status, and entries with no visible version. A parser must not guess how those entries expand or invent paths and versions.
 
-This proposal defines a separate JSON manifest shape that future tooling can validate without rewriting the current governance records.
+This contract defines the JSON manifest shape used by runtime tooling. It does not rewrite MAI-001 or silently resolve disputed source data.
 
 ## Contract rules
 
-1. **No automatic authority change.** The manifest stays marked `authority_state: proposed` until an explicit governance decision ratifies its role.
+1. **Schema authority is explicit.** The JSON Schema is the canonical shape used by runtime validation. Manifest data retains `authority_state: proposed`; this is a data-level state and does not change the schema’s role as the implementation reference.
 2. **One artifact per record.** Each `artifacts[]` item describes one artifact ID. Grouped source text must not be silently expanded into multiple records.
 3. **Preserve source wording.** Keep status text as written. Do not normalize `Approved (Candidate)` into `Approved` or infer missing versions.
 4. **Unknown is explicit.** Use `null` for an unverified path, unspecified version, or unresolved status. Do not invent values.
@@ -21,8 +21,8 @@ This proposal defines a separate JSON manifest shape that future tooling can val
 
 ## Fields
 
-- `schema_version`: fixed to `1.0.0` for this proposal.
-- `authority_state`: fixed to `proposed` so the file cannot be mistaken for ratified state.
+- `schema_version`: fixed to `1.0.0` for this contract.
+- `authority_state`: fixed to `proposed` so the manifest data does not claim governance ratification.
 - `source_document`: source selected for preparation, or null until governance decides.
 - `artifact_id`: a single explicit artifact identifier.
 - `status`, `version`, `path`: source-backed values or null where unknown.
@@ -39,15 +39,9 @@ This proposal defines a separate JSON manifest shape that future tooling can val
 - Expected difference: the current JSON Schema does not encode repository path traversal safety; the application validator does.
 - Passing either layer does not establish source accuracy, path correctness, or governance authority. These are separate review questions.
 
-## Activation gates
+## Runtime boundary
 
-Before implementing a manifest importer or making these checks merge-blocking:
-
-- Ratify the manifest's authority and its relationship to MAI-001.
-- Define accepted artifact-ID syntax from actual repository conventions.
-- Agree on status vocabulary and whether versions may be absent.
-- Decide how grouped/ranged IDs are resolved and recorded.
-- Verify path semantics and duplicate-ID policy.
-- Replace or supplement synthetic fixtures with fixtures derived from reviewed source records, without guessing unresolved fields.
-
-Until those gates are closed, the existing validator remains narrow and the current MAI-001 remains unchanged. This proposal does not resolve the known disagreement between registry documents.
+- `schemas/registry-manifest.schema.json` is the canonical machine-readable shape used by the validator.
+- `tools/manifest_validator.py` applies Draft 2020-12 schema validation plus application checks for duplicate IDs and safe repository-relative paths.
+- `authority_state: proposed` prevents the manifest data from claiming governance ratification; selecting the schema as the implementation reference does not certify source accuracy or settle disputed artifact status.
+- The validator is read-only and never edits MAI-001, secondary indexes, or artifact files. Source-data reconciliation remains separate from running the code.
