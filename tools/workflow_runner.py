@@ -13,6 +13,7 @@ from typing import Any
 from tools.registry_runtime import ManifestValidationError, RegistryRuntime
 from tools.rules_engine import RulesConfigurationError, RulesEngine
 from tools.execution_history import HistoryWriteError, append_history
+from tools.workflow_state import WorkflowStateError, read_state, resolve_state_path, workflow_fingerprint, write_state
 
 
 class WorkflowConfigurationError(ValueError):
@@ -161,18 +162,64 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("workflow", type=Path, help="path to workflow definition JSON")
     parser.add_argument("--report", help="optional report path relative to the workflow directory")
     parser.add_argument("--history", help="optional append-only JSONL history path relative to the workflow directory")
+    parser.add_argument("--state", help="optional checkpoint file path relative to the workflow directory")
+    parser.add_argument("--resume", action="store_true", help="reuse a matching completed result; requires --state")
     args = parser.parse_args(argv)
+    if args.resume and not args.state:
+        parser.error("--resume requires --state")
 
     started = time.perf_counter()
     run_id = str(uuid.uuid4())
     result: dict[str, Any] | None = None
     error_message: str | None = None
+    state_path: Path | None = None
+    fingerprint: str | None = None
     try:
-        result = run_workflow(args.workflow)
+        if args.state:
+            state_path = resolve_state_path(args.workflow, args.state)
+            # Preserve the gate boundary: inspect only workflow/rules/context first.
+            workflow_doc = _validate_workflow(_load_json(args.workflow.resolve(), "workflow"))
+            workflow_base = args.workflow.resolve().parent
+            pre_rules = _resolve_file(workflow_base, workflow_doc["rules_path"], "rules_path")
+            pre_context_path = _resolve_file(workflow_base, workflow_doc["context_path"], "context_path")
+            pre_context = _load_json(pre_context_path, "context")
+            if not isinstance(pre_context, dict):
+                raise WorkflowConfigurationError("context JSON root must be an object")
+            pre_gate = RulesEngine.from_file(pre_rules).evaluate(pre_context)
+            # The manifest is fingerprinted only after the rules gate allows the run.
+            fingerprint = workflow_fingerprint(args.workflow) if pre_gate["decision"] == "allow" else "blocked-before-manifest"
+            prior_state = read_state(state_path)
+            if args.resume and prior_state and prior_state.get("status") == "completed" and prior_state.get("fingerprint") == fingerprint:
+                cached = prior_state.get("result")
+                if not isinstance(cached, dict):
+                    raise WorkflowStateError("completed state has no valid result")
+                result = dict(cached)
+                result["resumed"] = True
+            else:
+                write_state(state_path, {
+                    "state_schema_version": "1.0",
+                    "workflow_id": None,
+                    "status": "running",
+                    "fingerprint": fingerprint,
+                    "started_at": datetime.now(timezone.utc).isoformat(),
+                    "result": None,
+                })
+                result = run_workflow(args.workflow)
+        else:
+            result = run_workflow(args.workflow)
+        if state_path and fingerprint and result is not None and not result.get("resumed"):
+            write_state(state_path, {
+                "state_schema_version": "1.0",
+                "workflow_id": result.get("workflow_id"),
+                "status": result.get("status", "error"),
+                "fingerprint": fingerprint,
+                "finished_at": datetime.now(timezone.utc).isoformat(),
+                "result": result,
+            })
         if args.report:
             report_path = _write_report(args.workflow, args.report, result)
             result["report_path"] = str(report_path.relative_to(args.workflow.resolve().parent))
-    except (WorkflowConfigurationError, RulesConfigurationError, ManifestValidationError, OSError, TypeError) as exc:
+    except (WorkflowConfigurationError, RulesConfigurationError, ManifestValidationError, WorkflowStateError, OSError, TypeError) as exc:
         error_message = str(exc)
         print(json.dumps({"status": "error", "error": error_message}, ensure_ascii=False, indent=2), file=sys.stderr)
 
