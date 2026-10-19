@@ -11,7 +11,7 @@ python tools/workflow_runner.py examples/workflows/registry-lookup/workflow.json
 python tools/workflow_runner.py examples/workflows/registry-lookup/workflow.json --state state.json --resume
 ```
 
-The state file must be a relative path inside the workflow directory, its parent directory must already exist, and it cannot overwrite workflow inputs. Writes use a temporary file and atomic replacement. `--resume` requires `--state`.
+The state file must be a relative path inside the workflow directory, its parent directory must already exist, and it cannot overwrite workflow inputs. Writes use a temporary file and atomic replacement. `--resume` requires `--state`. The rules gate is evaluated before the manifest is fingerprinted or a cached result is reused; a denied gate does not read the manifest.
 
 ## Behavior
 
