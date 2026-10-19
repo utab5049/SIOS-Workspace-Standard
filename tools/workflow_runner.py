@@ -184,7 +184,7 @@ def main(argv: list[str] | None = None) -> int:
             "run_id": run_id,
             "timestamp": datetime.now(timezone.utc).isoformat(),
             "workflow_id": result.get("workflow_id") if result else None,
-            "status": result.get("status", "error") if result else "error",
+            "status": "error" if error_message else (result.get("status", "error") if result else "error"),
             "duration_ms": round((time.perf_counter() - started) * 1000, 3),
             "gate_decision": gate.get("decision"),
             "operation_type": operation.get("type"),
