@@ -20,6 +20,7 @@ class MultiStepWorkflowError(ValueError):
 
 
 _ALLOWED_OPERATIONS = {"registry.list", "registry.get", "registry.search"}
+_CONDITION_OPERATORS = {"equals", "not_equals", "in", "contains", "exists", "truthy"}
 _WORKFLOW_KEYS = {"schema_version", "workflow_id", "manifest_path", "rules_path", "context_path", "steps"}
 
 
