@@ -198,7 +198,7 @@ def main(argv: list[str] | None = None) -> int:
             print(json.dumps({"status": "history_error", "error": str(exc)}, ensure_ascii=False, indent=2), file=sys.stderr)
             return 1
 
-    if result is None:
+    if result is None or error_message is not None:
         return 1
     print(json.dumps(result, ensure_ascii=False, indent=2))
     if result["status"] == "blocked":
