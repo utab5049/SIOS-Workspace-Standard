@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -124,12 +125,38 @@ def run_workflow(workflow_path: Path) -> dict[str, Any]:
     return envelope
 
 
+def _write_report(workflow_path: Path, report_value: str, result: dict[str, Any]) -> Path:
+    base = workflow_path.resolve().parent
+    report = Path(report_value)
+    if report.is_absolute():
+        raise WorkflowConfigurationError("report path must be relative to the workflow directory")
+    resolved = (base / report).resolve()
+    if resolved == base or base not in resolved.parents:
+        raise WorkflowConfigurationError("report path must stay inside the workflow directory")
+    if resolved == workflow_path.resolve():
+        raise WorkflowConfigurationError("report path must not overwrite the workflow definition")
+    if not resolved.parent.is_dir():
+        raise WorkflowConfigurationError("report directory must already exist")
+    payload = {
+        "report_schema_version": "1.0",
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "workflow_file": workflow_path.name,
+        "result": result,
+    }
+    resolved.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    return resolved
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Run a gated, read-only SIOS registry workflow.")
     parser.add_argument("workflow", type=Path, help="path to workflow definition JSON")
+    parser.add_argument("--report", help="optional report path relative to the workflow directory")
     args = parser.parse_args(argv)
     try:
         result = run_workflow(args.workflow)
+        if args.report:
+            report_path = _write_report(args.workflow, args.report, result)
+            result["report_path"] = str(report_path.relative_to(args.workflow.resolve().parent))
     except (WorkflowConfigurationError, RulesConfigurationError, ManifestValidationError, OSError, TypeError) as exc:
         print(json.dumps({"status": "error", "error": str(exc)}, ensure_ascii=False, indent=2), file=sys.stderr)
         return 1
