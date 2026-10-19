@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0.0",
+  "authority_state": "proposed",
+  "source_document": null,
+  "artifacts": [
+    {
+      "artifact_id": "DEMO-001",
+      "status": "Frozen",
+      "version": "1.0",
+      "path": null,
+      "record_state": "explicit",
+      "source_location": "Example fixture",
+      "notes": [
+        "synthetic demonstration record",
+        "workflow smoke test"
+      ]
+    },
+    {
+      "artifact_id": "DEMO-002",
+      "status": "Draft",
+      "version": null,
+      "path": null,
+      "record_state": "unverified",
+      "source_location": "Example fixture",
+      "notes": [
+        "second synthetic record"
+      ]
+    }
+  ]
+}
