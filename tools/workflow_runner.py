@@ -177,7 +177,17 @@ def main(argv: list[str] | None = None) -> int:
     try:
         if args.state:
             state_path = resolve_state_path(args.workflow, args.state)
-            fingerprint = workflow_fingerprint(args.workflow)
+            # Preserve the gate boundary: inspect only workflow/rules/context first.
+            workflow_doc = _validate_workflow(_load_json(args.workflow.resolve(), "workflow"))
+            workflow_base = args.workflow.resolve().parent
+            pre_rules = _resolve_file(workflow_base, workflow_doc["rules_path"], "rules_path")
+            pre_context_path = _resolve_file(workflow_base, workflow_doc["context_path"], "context_path")
+            pre_context = _load_json(pre_context_path, "context")
+            if not isinstance(pre_context, dict):
+                raise WorkflowConfigurationError("context JSON root must be an object")
+            pre_gate = RulesEngine.from_file(pre_rules).evaluate(pre_context)
+            # The manifest is fingerprinted only after the rules gate allows the run.
+            fingerprint = workflow_fingerprint(args.workflow) if pre_gate["decision"] == "allow" else "blocked-before-manifest"
             prior_state = read_state(state_path)
             if args.resume and prior_state and prior_state.get("status") == "completed" and prior_state.get("fingerprint") == fingerprint:
                 cached = prior_state.get("result")
