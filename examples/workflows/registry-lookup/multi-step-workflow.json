@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0",
+  "workflow_id": "WF-DEMO-MULTISTEP-REGISTRY",
+  "manifest_path": "manifest.json",
+  "rules_path": "rules.json",
+  "context_path": "context.json",
+  "steps": [
+    {"step_id": "list_records", "depends_on": [], "operation": {"type": "registry.list"}},
+    {"step_id": "find_demo", "depends_on": ["list_records"], "operation": {"type": "registry.search", "query": "workflow smoke test"}},
+    {"step_id": "get_demo", "depends_on": ["find_demo"], "operation": {"type": "registry.get", "artifact_id": "DEMO-001"}}
+  ]
+}
