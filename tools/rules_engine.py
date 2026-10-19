@@ -62,7 +62,7 @@ def _validate_rules(document: Any) -> tuple[dict[str, Any], ...]:
         if rule["operator"] not in _ALLOWED_OPERATORS:
             raise RulesConfigurationError(f"{prefix}.operator is unsupported: {rule['operator']}")
         severity = rule.get("severity", "block")
-        if severity not in _ALLOWED_SEVERITIES:
+        if not isinstance(severity, str) or severity not in _ALLOWED_SEVERITIES:
             raise RulesConfigurationError(f"{prefix}.severity must be 'block' or 'warning'")
         if "enabled" in rule and not isinstance(rule["enabled"], bool):
             raise RulesConfigurationError(f"{prefix}.enabled must be a boolean")
