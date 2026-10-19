@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0",
+  "workflow_id": "WF-DEMO-REGISTRY-LOOKUP",
+  "manifest_path": "manifest.json",
+  "rules_path": "rules.json",
+  "context_path": "context.json",
+  "operation": {
+    "type": "registry.search",
+    "query": "workflow smoke test"
+  }
+}
