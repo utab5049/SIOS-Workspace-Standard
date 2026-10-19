@@ -345,22 +345,28 @@ def run_multi_step(workflow_path: Path, *, state_path: Path | None = None, resum
             item = {"step_id": step_id, "status": "skipped", "outcome": "skipped", "reason": "dependency_not_completed"}
             step_results[step_id] = item
             ordered_results.append(item)
+            checkpoint("operation_failed" if final_status == "operation_failed" else "running")
             continue
         if "when" in step and not _condition_matches(step["when"], step_results, step_id):
             item = {"step_id": step_id, "status": "skipped", "outcome": "skipped", "reason": "condition_not_met"}
             step_results[step_id] = item
             ordered_results.append(item)
-            checkpoint("running")
+            checkpoint("operation_failed" if final_status == "operation_failed" else "running")
             continue
         cached = step_results.get(step_id)
         if reusable and isinstance(cached, dict) and cached.get("status") == "completed":
             item = {**cached, "resumed": True}
+            step_results[step_id] = item
             ordered_results.append(item)
             continue
+
         try:
             resolved_operation = _resolve_operation(step, step_results)
             max_attempts = step.get("retry", {}).get("max_attempts", 1)
             retry_history: list[dict[str, Any]] = []
+            op_status = "failed"
+            value: Any = None
+            step_failed = False
             for attempt in range(1, max_attempts + 1):
                 try:
                     op_status, value = _dispatch(runtime, resolved_operation)
@@ -377,15 +383,17 @@ def run_multi_step(workflow_path: Path, *, state_path: Path | None = None, resum
                             "status": "failed", "outcome": "failed", "attempts": attempt,
                             "error": message,
                             "error_detail": {"code": "TRANSIENT_IO_ERROR", "message": message, "retryable": True},
+                            "retry_history": retry_history,
                         }
-                        item["retry_history"] = retry_history
-                        step_results[step_id] = item
-                        ordered_results.append(item)
-                        final_status = "operation_failed"
-                        checkpoint(final_status)
+                        step_failed = True
                         break
-            if final_status != "completed":
-                break
+            if step_failed:
+                step_results[step_id] = item
+                ordered_results.append(item)
+                final_status = "operation_failed"
+                checkpoint(final_status)
+                continue
+
             item = {
                 "step_id": step_id, "operation_type": step["operation"]["type"],
                 "status": op_status, "attempts": attempt,
@@ -406,8 +414,6 @@ def run_multi_step(workflow_path: Path, *, state_path: Path | None = None, resum
             step_results[step_id] = item
             ordered_results.append(item)
             checkpoint("running" if final_status == "completed" else final_status)
-            if final_status != "completed":
-                break
         except MultiStepWorkflowError as exc:
             item = {"step_id": step_id, "operation_type": step["operation"]["type"],
                     "status": "failed", "outcome": "failed", "error": str(exc),
@@ -416,7 +422,6 @@ def run_multi_step(workflow_path: Path, *, state_path: Path | None = None, resum
             ordered_results.append(item)
             final_status = "operation_failed"
             checkpoint(final_status)
-            break
         except (ManifestValidationError, OSError, TypeError, ValueError) as exc:
             item = {"step_id": step_id, "operation_type": step["operation"]["type"],
                     "status": "failed", "outcome": "failed", "error": str(exc),
@@ -425,11 +430,10 @@ def run_multi_step(workflow_path: Path, *, state_path: Path | None = None, resum
             ordered_results.append(item)
             final_status = "operation_failed"
             checkpoint(final_status)
-            break
     completed_ids = {item["step_id"] for item in ordered_results}
     for step in document["_ordered_steps"]:
         if step["step_id"] not in completed_ids:
-            item = {"step_id": step["step_id"], "status": "skipped", "outcome": "skipped", "reason": "workflow_stopped_after_failure"}
+            item = {"step_id": step["step_id"], "status": "skipped", "outcome": "skipped", "reason": "workflow_step_not_processed"}
             ordered_results.append(item)
             step_results[step["step_id"]] = item
     checkpoint(final_status)
