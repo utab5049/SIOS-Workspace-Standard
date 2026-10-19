@@ -73,6 +73,7 @@ class ConditionalWorkflowTests(unittest.TestCase):
             })
             document = json.loads(workflow.read_text(encoding="utf-8"))
             document["steps"][1]["depends_on"] = []
+            document["steps"][1]["operation"]["artifact_id"] = "DEMO-001"
             write_json(workflow, document)
             with self.assertRaisesRegex(MultiStepWorkflowError, "condition source.*direct dependency"):
                 run_multi_step(workflow)
