@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "rule_id": "PRE-DEMO-001",
+      "field": "request.approved",
+      "operator": "equals",
+      "value": true,
+      "severity": "block",
+      "message": "Request approval is required"
+    },
+    {
+      "rule_id": "PRE-DEMO-002",
+      "field": "request.purpose",
+      "operator": "equals",
+      "value": "demonstration",
+      "severity": "block",
+      "message": "Purpose must be demonstration"
+    }
+  ]
+}
