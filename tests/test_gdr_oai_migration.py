@@ -180,5 +180,31 @@ class GdrOaiMigrationValidationTests(unittest.TestCase):
         self.assertEqual("unresolved", c1["status"])
 
 
+    def test_phase_36_locates_ers001_but_does_not_overclaim_schema_completeness(self):
+        audit_path = ROOT / "02-Research/Registry/migration/phase-36-authoritative-contract-locator.json"
+        audit = json.loads(audit_path.read_text(encoding="utf-8"))
+        ers_path = ROOT / "02-Research/Evidence/ERS-001.md"
+        batch_path = ROOT / "02-Research/Evidence/Records/EV-BATCH-001.md"
+        cir_path = ROOT / "02-Research/Corpus/CIR-001.md"
+        eir_path = ROOT / "02-Research/Evidence/EIR-001.md"
+        self.assertTrue(ers_path.is_file())
+        self.assertTrue(batch_path.is_file())
+        self.assertTrue(cir_path.is_file())
+        self.assertTrue(eir_path.is_file())
+        ers = ers_path.read_text(encoding="utf-8")
+        self.assertIn("§6.1", ers)
+        self.assertIn("ERS-R-001", ers)
+        self.assertIn("ERS-R-002", ers)
+        self.assertNotIn("required fields", ers.lower())
+        self.assertTrue(audit["conclusions"]["ers001_path_verified"])
+        self.assertFalse(audit["conclusions"]["ers001_full_field_level_contract_verified"])
+        self.assertFalse(audit["conclusions"]["candidate_promotion_authorized"])
+        self.assertFalse(audit["invariants"]["canonical_cir_eir_changed"])
+        self.assertFalse(audit["invariants"]["staged_oai_or_gdr_changed"])
+        self.assertFalse(audit["invariants"]["migration_map_changed"])
+        self.assertFalse(audit["invariants"]["merge_authorized"])
+        self.assertEqual("unresolved", audit["invariants"]["c1_status"])
+
+
 if __name__ == "__main__":
     unittest.main()
