@@ -3,6 +3,7 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 
 from tools.workflow_runner import WorkflowConfigurationError, _write_report, main, run_workflow
 
