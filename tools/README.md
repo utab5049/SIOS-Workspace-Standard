@@ -207,3 +207,14 @@ The runner can persist a local checkpoint and reuse a completed result when the 
     python tools/workflow_runner.py examples/workflows/registry-lookup/workflow.json --state state.json --resume
 
 The state file is written atomically and must remain inside the workflow directory; it cannot overwrite workflow inputs. A changed workflow, rules file, or context invalidates the checkpoint and causes a fresh run. `--resume` requires `--state`. This first version checkpoints the current single-operation workflow, not arbitrary multi-step jobs. State files contain the stored result and should be treated as local data; they are not tamper-proof, distributed locks, or governance evidence. If the process stops while marked `running`, a subsequent invocation starts the read-only workflow again rather than assuming the operation completed.
+
+
+## Conditional multi-step workflow routing
+
+Multi-step workflow definitions may add a `when` condition to a step. The condition reads a value from a completed direct dependency and applies a fixed operator (`equals`, `not_equals`, `in`, `contains`, `exists`, or `truthy`). If false, the step is marked skipped; independent eligible steps may continue, while steps requiring a skipped dependency remain skipped.
+
+Example:
+
+    python tools/multi_step_workflow.py examples/workflows/conditional-routing/workflow.json
+
+Condition references use `{"$ref":{"step_id":"search_records","path":"result.0.artifact_id"}}`. Paths traverse JSON object keys and numeric list indexes only. Conditions cannot run expressions or arbitrary code. The main rules gate still runs before manifest loading; registry operations remain allowlisted and read-only. The example uses synthetic DEMO records. See `02-Research/Audit/PHASE-47-CONDITIONAL-WORKFLOW.md`.
