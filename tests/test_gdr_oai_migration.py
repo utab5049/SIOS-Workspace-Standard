@@ -136,6 +136,26 @@ class GdrOaiMigrationValidationTests(unittest.TestCase):
         self.assertEqual(len(decision_ids), len(set(decision_ids)))
         self.assertEqual({"G1", "G2", "G3", "G4"}, {item["gate"] for item in gate["release_gates"]})
 
+    def test_phase_34_contract_audit_preserves_unverified_boundaries(self):
+        audit_path = ROOT / "02-Research/Registry/migration/phase-34-cir-eir-contract-audit.json"
+        audit = json.loads(audit_path.read_text(encoding="utf-8"))
+        self.assertEqual("proposed_contract_audit_not_applied", audit["status"])
+        self.assertEqual("5bc0ff427e7937139e85d3222e65cb0f4b1ab11b", audit["source_snapshot_commit"])
+        source_ids = {item["instance_id"] for item in audit["source_contract_audit"]}
+        evidence_ids = {item["instance_id"] for item in audit["evidence_contract_audit"]}
+        self.assertEqual({"SRC-000017", "SRC-000018", "SRC-000019"}, source_ids)
+        self.assertEqual({"EV-000006", "EV-000007", "EV-000008", "EV-000009", "EV-000012"}, evidence_ids)
+        self.assertTrue(all(item["contract_status"] != "verified" for item in audit["source_contract_audit"]))
+        self.assertTrue(all(item["contract_status"] != "verified" for item in audit["evidence_contract_audit"]))
+        for collection in (audit["source_contract_audit"], audit["evidence_contract_audit"]):
+            for item in collection:
+                self.assertTrue((ROOT / item["path"]).is_file(), item["path"])
+        self.assertFalse(audit["invariants"]["canonical_cir_eir_changed"])
+        self.assertFalse(audit["invariants"]["staged_oai_or_gdr_changed"])
+        self.assertFalse(audit["invariants"]["migration_map_changed"])
+        self.assertFalse(audit["invariants"]["merge_authorized"])
+        self.assertEqual("unresolved", audit["invariants"]["c1_status"])
+
     def test_c1_record_remains_unresolved(self):
         c1_path = STAGED_GDR / "GOV-DEC-C1.json"
         c1 = json.loads(c1_path.read_text(encoding="utf-8"))
