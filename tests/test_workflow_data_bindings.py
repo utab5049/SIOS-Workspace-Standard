@@ -66,8 +66,11 @@ class WorkflowDataBindingTests(unittest.TestCase):
             doc = json.loads(workflow.read_text(encoding="utf-8"))
             doc["steps"][1]["operation"]["artifact_id"]["$ref"]["path"] = "result.99.artifact_id"
             put(workflow, doc)
-            with self.assertRaisesRegex(MultiStepWorkflowError, "reference path"):
-                run_multi_step(workflow)
+            result = run_multi_step(workflow)
+        self.assertEqual(result["status"], "operation_failed")
+        self.assertEqual(result["steps"][1]["outcome"], "failed")
+        self.assertEqual(result["steps"][1]["error_detail"]["code"], "INVALID_STEP_INPUT")
+        self.assertIn("reference path", result["steps"][1]["error"])
 
 
 if __name__ == "__main__":
