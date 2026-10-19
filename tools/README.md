@@ -197,3 +197,13 @@ Examples from the repository root:
     python tools/workflow_inspector.py path/to/history.jsonl --since 2026-10-01T00:00:00Z --until 2026-10-19T23:59:59Z --limit 20
 
 Time bounds must include a timezone. Malformed JSONL records and invalid timestamps return exit code 1 with a concise error. The inspector is read-only: it does not modify history, rerun workflows, or treat local logs as tamper-proof evidence or governance approval. See `02-Research/Audit/PHASE-43-WORKFLOW-INSPECTOR.md`.
+
+
+## Workflow checkpoint state and resume
+
+The runner can persist a local checkpoint and reuse a completed result when the workflow inputs match:
+
+    python tools/workflow_runner.py examples/workflows/registry-lookup/workflow.json --state state.json
+    python tools/workflow_runner.py examples/workflows/registry-lookup/workflow.json --state state.json --resume
+
+The state file is written atomically and must remain inside the workflow directory; it cannot overwrite workflow inputs. A changed workflow, rules file, or context invalidates the checkpoint and causes a fresh run. `--resume` requires `--state`. This first version checkpoints the current single-operation workflow, not arbitrary multi-step jobs. State files contain the stored result and should be treated as local data; they are not tamper-proof, distributed locks, or governance evidence. If the process stops while marked `running`, a subsequent invocation starts the read-only workflow again rather than assuming the operation completed.
