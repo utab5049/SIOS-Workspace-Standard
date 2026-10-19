@@ -1,0 +1,182 @@
+{
+  "audit_id": "CONTRACT-AUDIT-034",
+  "source_snapshot_commit": "5bc0ff427e7937139e85d3222e65cb0f4b1ab11b",
+  "reviewed_branch": "work/phase-33-cir-eir-owner-decision-gate",
+  "status": "proposed_contract_audit_not_applied",
+  "purpose": "Inspect record boundaries and observable contract evidence for disputed CIR/EIR instances. This audit does not invent a new schema or substitute presence in a report for contract conformance.",
+  "method": [
+    "Use the existing source/evidence record structure and explicit schema-authority references present in repository documents.",
+    "Distinguish a dedicated record file from an ID section embedded in a batch, resolution, extraction, or completion report.",
+    "Mark field-level contract conformance as unverified where no authoritative machine-readable contract is available in the reviewed material.",
+    "Do not promote candidates, adjudicate lifecycle conflicts, or alter canonical registries."
+  ],
+  "source_contract_audit": [
+    {
+      "instance_id": "SRC-000017",
+      "path": "02-Research/Corpus/Sources/SRC-000017-Studer.md",
+      "boundary": "source section plus embedded OBSU-000026 and registry-update assertions",
+      "observed_fields": [
+        "Source ID",
+        "Title",
+        "Authors",
+        "Year",
+        "Journal",
+        "DOI",
+        "Open Access Copy",
+        "Domain",
+        "Corpus",
+        "Status"
+      ],
+      "boundary_status": "mixed_source_and_observation_document",
+      "contract_status": "partially_observable_not_authoritatively_verified",
+      "findings": [
+        "The file labels the source Accepted, Full-Text and includes bibliographic identity fields.",
+        "The same file embeds an observation and prescriptive CIR/EIR/KOM update instructions; these are not themselves proof of an authorized registry decision."
+      ],
+      "required_follow_up": "Owner confirms source inclusion and separates/links observation and registry decision artifacts."
+    },
+    {
+      "instance_id": "SRC-000018",
+      "path": "02-Research/Corpus/Sources/SRC-000018-19.md",
+      "boundary": "source subsection embedded in mixed-purpose P2.2/P2.3 completion report",
+      "observed_fields": [
+        "Source ID",
+        "Title",
+        "Author",
+        "Year",
+        "Journal",
+        "DOI",
+        "Domain",
+        "Status",
+        "Full-text access note"
+      ],
+      "boundary_status": "embedded_in_mixed_completion_report",
+      "contract_status": "not_verified_as_individual_source_record",
+      "findings": [
+        "The report provides identifiable bibliographic metadata but combines two sources, multiple observations, EV-000012, and roadmap closure claims.",
+        "No evidence in this audit establishes that the source subsection satisfies the complete controlling source contract."
+      ],
+      "required_follow_up": "Review SRC-000018 independently against the actual controlling source contract and decide whether to materialize a dedicated record."
+    },
+    {
+      "instance_id": "SRC-000019",
+      "path": "02-Research/Corpus/Sources/SRC-000018-19.md",
+      "boundary": "source subsection embedded in mixed-purpose P2.2/P2.3 completion report",
+      "observed_fields": [
+        "Source ID",
+        "Title",
+        "Source URL",
+        "Domain",
+        "Status",
+        "Full-text note"
+      ],
+      "boundary_status": "embedded_in_mixed_completion_report",
+      "contract_status": "not_verified_as_individual_source_record",
+      "findings": [
+        "The report supplies identifiable source details but combines two source records and other artifacts.",
+        "No evidence in this audit establishes complete source-contract conformance."
+      ],
+      "required_follow_up": "Review SRC-000019 independently against the actual controlling source contract and decide whether to materialize a dedicated record."
+    }
+  ],
+  "evidence_contract_audit": [
+    {
+      "instance_id": "EV-000006",
+      "path": "02-Research/Corpus/Sources/SRC-000016-RESOLUTION.md",
+      "boundary": "evidence entry embedded in a source-resolution document",
+      "boundary_status": "embedded_record",
+      "contract_status": "not_verified",
+      "observed_fields": [
+        "Evidence ID is referenced by the reconciliation matrix",
+        "Lifecycle claim is reported as Approved in EIR"
+      ],
+      "missing_or_unverified": [
+        "Exact evidence-section boundary and all required ERS-001 sections were not established by the prior reconciliation artifacts"
+      ],
+      "required_follow_up": "Inspect the full EV-000006 section against the controlling ERS-001 definition; separate source-resolution metadata from evidence fields."
+    },
+    {
+      "instance_id": "EV-000007",
+      "path": "02-Research/Corpus/Sources/SRC-000015-EXTRACTION.md",
+      "boundary": "evidence entry embedded in a source-extraction document",
+      "boundary_status": "embedded_record",
+      "contract_status": "not_verified",
+      "observed_fields": [
+        "Evidence ID is referenced by the reconciliation matrix",
+        "Lifecycle claim is reported as Approved in EIR"
+      ],
+      "missing_or_unverified": [
+        "Exact evidence-section boundary and all required ERS-001 sections were not established by the prior reconciliation artifacts"
+      ],
+      "required_follow_up": "Inspect the full EV-000007 section against the controlling ERS-001 definition; separate extraction metadata from evidence fields."
+    },
+    {
+      "instance_id": "EV-000008",
+      "path": "02-Research/Observation/Records/FULLTEXT-UPGRADE-005-012.md",
+      "boundary": "evidence-like entry embedded in a multi-ID full-text upgrade report",
+      "boundary_status": "embedded_in_multi_id_report",
+      "contract_status": "not_verified",
+      "observed_fields": [
+        "Evidence ID is listed in the EIR/matrix reconciliation",
+        "Lifecycle claim is reported as Approved in EIR"
+      ],
+      "missing_or_unverified": [
+        "Dedicated evidence-record boundary and complete ERS-001 section coverage"
+      ],
+      "required_follow_up": "Identify the exact EV-000008 block and compare it with the controlling evidence-record structure before migration."
+    },
+    {
+      "instance_id": "EV-000009",
+      "path": "02-Research/Observation/Records/FULLTEXT-UPGRADE-005-012.md",
+      "boundary": "evidence-like entry embedded in a multi-ID full-text upgrade report; referenced as superseding EV-000005",
+      "boundary_status": "embedded_in_multi_id_report",
+      "contract_status": "not_verified",
+      "observed_fields": [
+        "Evidence ID and supersession relationship are reported",
+        "Lifecycle claim is reported as Approved in EIR"
+      ],
+      "missing_or_unverified": [
+        "Dedicated record boundary and full contract coverage; authoritative supersession/version semantics"
+      ],
+      "required_follow_up": "Validate the full EV-000009 block and confirm EV-000005 → EV-000009 lineage against the controlling contract."
+    },
+    {
+      "instance_id": "EV-000012",
+      "path": "02-Research/Corpus/Sources/SRC-000018-19.md",
+      "boundary": "evidence summary embedded in mixed-purpose completion report",
+      "boundary_status": "embedded_in_mixed_completion_report",
+      "contract_status": "not_verified_as_individual_evidence_record",
+      "observed_fields": [
+        "Primary Type",
+        "Linked RQ",
+        "Claim",
+        "Context Summary",
+        "Support Level",
+        "Confidence",
+        "Traceability"
+      ],
+      "missing_or_unverified": [
+        "A dedicated Identity/Source/Lifecycle/Governance structure is not established by the report section; exact ERS-001 conformance remains unverified"
+      ],
+      "required_follow_up": "Review evidence identity, linked source IDs, support/traceability, lifecycle, and approval against the actual ERS-001 contract; keep out of EIR until approved."
+    }
+  ],
+  "cross_cutting_findings": [
+    "EV-BATCH-001.md explicitly names ERS-001 as the schema authority and describes it as a full 9-section structure; this audit does not redefine those sections.",
+    "The observed issue is often record-boundary ambiguity, not simply missing filenames: an ID can appear in a batch or mixed report without a separately validated instance.",
+    "A claimed lifecycle status in a report is not equivalent to owner adjudication or independent review.",
+    "Phase 28 and Phase 30 already record these candidates as unverified; Phase 34 preserves rather than overwrites that state."
+  ],
+  "release_conditions": [
+    "Locate and inspect the authoritative source-record contract and ERS-001 definition before declaring field-level conformance.",
+    "Record owner decisions in Phase 33 gate with owner identity, date, rationale, and evidence references.",
+    "Only then update proposed CIR/EIR drafts and validate them in a separate migration PR."
+  ],
+  "invariants": {
+    "canonical_cir_eir_changed": false,
+    "staged_oai_or_gdr_changed": false,
+    "migration_map_changed": false,
+    "merge_authorized": false,
+    "c1_status": "unresolved"
+  }
+}
