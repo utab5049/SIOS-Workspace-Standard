@@ -88,7 +88,10 @@ def _resolve_operation(step: dict[str, Any], prior_results: dict[str, dict[str, 
         if not isinstance(source, dict) or source.get("status") != "completed" or "result" not in source:
             raise MultiStepWorkflowError(f"step {step['step_id']}: reference source {source_id} has no completed result")
         current: Any = source["result"]
-        for segment in path.split("."):
+        segments = path.split(".")
+        if segments and segments[0] == "result":
+            segments = segments[1:]
+        for segment in segments:
             if isinstance(current, dict) and segment in current:
                 current = current[segment]
             elif isinstance(current, list) and segment.isdigit() and int(segment) < len(current):
