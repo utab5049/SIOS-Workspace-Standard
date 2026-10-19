@@ -24,3 +24,8 @@ Multi-step workflow steps may opt into a bounded retry policy with `"retry": {"m
 ## Workflow failure recovery
 
 The multi-step runner continues evaluating independent branches after a step fails. Steps whose declared dependencies did not complete are marked `skipped`; independent steps may still complete. The overall workflow status remains `operation_failed` if any step fails or an exact registry lookup is not found, even when other steps succeed. This is best-effort branch recovery, not rollback or compensation. Workflow operations remain read-only, and no governance state is changed.
+
+## Workflow summary reports
+
+Multi-step workflow results include a `summary` alongside the existing detailed `steps` array. The summary reports total, successful, empty, not-found, failed, skipped, and not-run counts, plus a compact per-step view with dependencies, skip reasons, errors, and dependencies that prevented a step from running. The detailed step results remain available for compatibility. A rules-gate denial reports all steps as `not_run`; summaries are diagnostic only and do not change execution or governance decisions.
+
