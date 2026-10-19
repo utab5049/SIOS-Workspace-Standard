@@ -59,11 +59,13 @@ def _validate_workflow(document: Any) -> dict[str, Any]:
     if not isinstance(document["workflow_id"], str) or not document["workflow_id"].strip():
         raise WorkflowConfigurationError("workflow_id must be a non-empty string")
     operation = document["operation"]
-    if not isinstance(operation, dict) or set(operation) - {"type", "artifact_id", "query"}:
-        raise WorkflowConfigurationError("operation must contain only type and its supported arguments")
+    if not isinstance(operation, dict):
+        raise WorkflowConfigurationError("operation must be an object")
     operation_type = operation.get("type")
-    if operation_type not in _ALLOWED_OPERATIONS:
+    if not isinstance(operation_type, str) or operation_type not in _ALLOWED_OPERATIONS:
         raise WorkflowConfigurationError(f"unsupported operation type: {operation_type}")
+    if set(operation) - {"type", "artifact_id", "query"}:
+        raise WorkflowConfigurationError("operation contains unsupported arguments")
     if operation_type == "registry.get":
         if not isinstance(operation.get("artifact_id"), str) or not operation["artifact_id"].strip():
             raise WorkflowConfigurationError("registry.get requires a non-empty artifact_id")
