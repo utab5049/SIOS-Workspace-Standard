@@ -134,3 +134,30 @@ Run from the repository root:
 Supported operators are exists, equals, not_equals, in, contains, and truthy. Rules default to blocking severity; failed warning rules are reported but do not deny the decision. Disabled rules are marked skipped. Nested dictionary paths use dot notation. Exit code 0 means allow, 2 means deny, and 1 means invalid configuration or input.
 
 The engine returns a decision only. It does not execute operations, mutate the manifest, or grant governance authority. See 02-Research/Audit/PHASE-39-RULES-ENGINE.md.
+
+
+## Gated workflow runner
+
+`workflow_runner.py` connects the rules engine to a deliberately small set of read-only registry operations. A workflow JSON file points to a rules file, a context file, a manifest, and one allowlisted operation. All referenced files must exist under the workflow file's directory; absolute paths and directory traversal are rejected.
+
+Example workflow definition:
+
+    {
+      "schema_version": "1.0",
+      "workflow_id": "WF-REGISTRY-001",
+      "manifest_path": "manifest.json",
+      "rules_path": "rules.json",
+      "context_path": "context.json",
+      "operation": {
+        "type": "registry.get",
+        "artifact_id": "SIOS-001"
+      }
+    }
+
+Run it from the repository root:
+
+    python tools/workflow_runner.py path/to/workflow.json
+
+Allowed operations are registry.list, registry.get, and registry.search. The rules gate runs before the manifest is loaded or an operation is dispatched. A denied gate returns status blocked and exit code 2; invalid configuration returns exit code 1; an unknown requested artifact returns exit code 3. A successful read-only operation returns exit code 0.
+
+This is a minimal local workflow runner, not a general-purpose job executor. It does not execute shell commands, arbitrary Python, network calls, writes, or manifest changes. Rule approval and governance authority remain external to the engine.
