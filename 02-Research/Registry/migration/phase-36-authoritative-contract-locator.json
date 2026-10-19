@@ -1,0 +1,70 @@
+{
+  "audit_id": "AUTHORITATIVE-CONTRACT-LOCATOR-036",
+  "parent_phase": "PHASE-35",
+  "source_snapshot_commit": "5bc0ff427e7937139e85d3222e65cb0f4b1ab11b",
+  "status": "locator_audit_proposed_not_applied",
+  "findings": [
+    {
+      "id": "F36-01",
+      "topic": "ERS-001 location",
+      "path": "02-Research/Evidence/ERS-001.md",
+      "result": "located",
+      "evidence": "The file exists in the Phase 35 branch tree. The prior phase's assumed path under 01-Foundation/Registry was incorrect."
+    },
+    {
+      "id": "F36-02",
+      "topic": "ERS-001 completeness",
+      "path": "02-Research/Evidence/ERS-001.md",
+      "result": "authoritative_definition_incomplete_or_fragmentary",
+      "evidence": "The retrieved file contains a title identifying Frozen v1.1.0, a one-line list of nine architecture sections, and §6.1 Claim Granularity Principle with rules ERS-R-001 and ERS-R-002. It does not define the nine sections' required fields, types, cardinality, or validation constraints."
+    },
+    {
+      "id": "F36-03",
+      "topic": "Observed record structure",
+      "path": "02-Research/Evidence/Records/EV-BATCH-001.md",
+      "result": "structural_example_not_substitute_for_complete_contract",
+      "evidence": "The batch explicitly declares ERS-001 as schema authority and contains examples with headings Identity, Source, Research Context, Evidence Content, Classification, Quality Profile, Relationships, Lifecycle, and Governance. That supports the observed nine-section pattern but does not supply missing normative field-level rules."
+    },
+    {
+      "id": "F36-04",
+      "topic": "CIR-001 schema",
+      "path": "02-Research/Corpus/CIR-001.md",
+      "result": "located_and_explicit",
+      "evidence": "§2 lists Source ID, Title, Corpus, Domain, Status, Full-Text Status, and Detail Location. The current §3 table omits an explicit Corpus column and its summary/counts conflict with the 14 displayed rows; these issues remain for the existing owner decision gate."
+    },
+    {
+      "id": "F36-05",
+      "topic": "EIR-001 schema",
+      "path": "02-Research/Evidence/EIR-001.md",
+      "result": "registry_table_located_record_contract_not_defined_here",
+      "evidence": "§2 presents an index with Evidence ID, Claim (short), Type, Status, and Detail Location. It does not define the full evidence-record contract, which is delegated to ERS-001."
+    }
+  ],
+  "conclusions": {
+    "ers001_path_verified": true,
+    "ers001_full_field_level_contract_verified": false,
+    "nine_section_pattern_observed": true,
+    "source_record_contract_independently_established": false,
+    "candidate_promotion_authorized": false,
+    "canonical_cir_eir_changed": false,
+    "staged_oai_or_gdr_changed": false,
+    "migration_map_changed": false,
+    "merge_authorized": false,
+    "c1_status": "unresolved"
+  },
+  "required_actions": [
+    "Ask the authorized schema owner to restore or publish the complete normative ERS-001 v1.1.0 definition at the located path, including required fields, types, cardinality, lifecycle and governance constraints.",
+    "Record owner decision for whether the existing fragment is intentional, incomplete, or superseded; do not infer the answer from batch examples.",
+    "After the contract is authorized, rerun per-instance conformance for EV-000006 through EV-000009 and EV-000012.",
+    "Resolve the existing Phase 33 owner decisions before changing canonical CIR-001 or EIR-001.",
+    "Keep GOV-DEC-C1 unresolved until an authorized governance decision and its evidence are recorded."
+  ],
+  "invariants": {
+    "canonical_cir_eir_changed": false,
+    "staged_oai_or_gdr_changed": false,
+    "migration_map_changed": false,
+    "candidates_promoted": false,
+    "merge_authorized": false,
+    "c1_status": "unresolved"
+  }
+}
