@@ -1,16 +1,16 @@
-"""Tests for the read-only validator for the proposed machine-readable manifest."""
+"""Tests for schema-driven, read-only registry manifest validation."""
 import json
 from pathlib import Path
 import tempfile
 import unittest
 
-from tools.manifest_validator import main, validate_manifest, validate_manifest_file
+from tools.manifest_validator import DEFAULT_SCHEMA_PATH, main, validate_manifest, validate_manifest_file
 
 
 def valid_manifest():
     return {
         "schema_version": "1.0.0",
-        "authority_state": "proposed",
+        "authority_state": "authoritative",
         "source_document": None,
         "artifacts": [
             {
@@ -27,7 +27,7 @@ def valid_manifest():
 
 
 class ManifestValidatorTests(unittest.TestCase):
-    def test_accepts_valid_proposed_manifest(self):
+    def test_accepts_valid_manifest_against_canonical_schema(self):
         self.assertEqual(validate_manifest(valid_manifest()), [])
 
     def test_empty_artifact_list_is_valid_and_does_not_infer_records(self):
@@ -95,9 +95,9 @@ class ManifestValidatorTests(unittest.TestCase):
                 data["artifacts"][0]["path"] = unsafe_path
                 self.assertIn("PATH_UNSAFE", {f.code for f in validate_manifest(data)})
 
-    def test_unknown_fields_and_non_proposed_authority_are_errors(self):
+    def test_unknown_fields_and_wrong_authority_state_are_errors(self):
         data = valid_manifest()
-        data["authority_state"] = "ratified"
+        data["authority_state"] = "proposed"
         data["unexpected"] = True
         findings = validate_manifest(data)
         self.assertIn("AUTHORITY_STATE", {f.code for f in findings})
@@ -146,6 +146,19 @@ class ManifestValidatorTests(unittest.TestCase):
             before = file_path.read_bytes()
             validate_manifest_file(file_path, repo_root=Path(directory))
             self.assertEqual(file_path.read_bytes(), before)
+
+
+    def test_cli_accepts_explicit_schema_path(self):
+        with tempfile.TemporaryDirectory() as directory:
+            manifest_path = Path(directory) / "manifest.json"
+            manifest_path.write_text(json.dumps(valid_manifest()), encoding="utf-8")
+            self.assertEqual(main([str(manifest_path), "--schema", str(DEFAULT_SCHEMA_PATH)]), 0)
+
+    def test_schema_validation_rejects_unknown_record_state(self):
+        data = valid_manifest()
+        data["artifacts"][0]["record_state"] = "approved"
+        findings = validate_manifest(data)
+        self.assertIn("SCHEMA_VALIDATION", {finding.code for finding in findings})
 
 
 if __name__ == "__main__":
