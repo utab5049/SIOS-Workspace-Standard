@@ -19,3 +19,8 @@ This is the SIOS Enterprise Workspace, as originally frozen 2026-07-14, **plus t
 ## Controlled workflow retries
 
 Multi-step workflow steps may opt into a bounded retry policy with `"retry": {"max_attempts": 2}`. The value includes the initial attempt and must be an integer from 1 to 3. Omitting the policy means one attempt, with no retry. Only `OSError` raised during the read-only operation dispatch is retried; validation errors, invalid bindings, and exact-ID misses are not. Results expose the total `attempts` and, when retries occur, a concise `retry_history`. Retries are immediate and bounded; this does not add retries for side effects or make local history tamper-proof.
+
+
+## Workflow failure recovery
+
+The multi-step runner continues evaluating independent branches after a step fails. Steps whose declared dependencies did not complete are marked `skipped`; independent steps may still complete. The overall workflow status remains `operation_failed` if any step fails or an exact registry lookup is not found, even when other steps succeed. This is best-effort branch recovery, not rollback or compensation. Workflow operations remain read-only, and no governance state is changed.
