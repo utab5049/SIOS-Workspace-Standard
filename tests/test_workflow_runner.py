@@ -133,6 +133,20 @@ class WorkflowRunnerTests(unittest.TestCase):
             self.assertEqual(report["result"]["status"], "completed")
             self.assertIn("generated_at", report)
 
+    def test_cli_appends_execution_history(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            workflow = self.make_files(root)
+            with patch("sys.stdout"), patch("sys.stderr"):
+                self.assertEqual(main([str(workflow), "--history", "history.jsonl"]), 0)
+                self.assertEqual(main([str(workflow), "--history", "history.jsonl"]), 0)
+            records = [json.loads(line) for line in (root / "history.jsonl").read_text(encoding="utf-8").splitlines()]
+        self.assertEqual(len(records), 2)
+        self.assertNotEqual(records[0]["run_id"], records[1]["run_id"])
+        self.assertTrue(all(record["status"] == "completed" for record in records))
+        self.assertTrue(all(record["operation_status"] == "completed" for record in records))
+        self.assertTrue(all(record["history_schema_version"] == "1.0" for record in records))
+
     def test_report_cannot_overwrite_inputs_or_escape_directory(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
