@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0",
+  "workflow_id": "WF-DEMO-DATA-BINDING",
+  "manifest_path": "manifest.json",
+  "rules_path": "rules.json",
+  "context_path": "context.json",
+  "steps": [
+    {"step_id": "search_records", "depends_on": [], "operation": {"type": "registry.search", "query": "binding demonstration"}},
+    {"step_id": "load_first_match", "depends_on": ["search_records"], "operation": {"type": "registry.get", "artifact_id": {"\u0024ref": {"step_id": "search_records", "path": "result.0.artifact_id"}}}}
+  ]
+}
