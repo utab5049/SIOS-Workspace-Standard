@@ -10,7 +10,7 @@ from tools.manifest_validator import DEFAULT_SCHEMA_PATH, main, validate_manifes
 def valid_manifest():
     return {
         "schema_version": "1.0.0",
-        "authority_state": "authoritative",
+        "authority_state": "proposed",
         "source_document": None,
         "artifacts": [
             {
@@ -97,7 +97,7 @@ class ManifestValidatorTests(unittest.TestCase):
 
     def test_unknown_fields_and_wrong_authority_state_are_errors(self):
         data = valid_manifest()
-        data["authority_state"] = "proposed"
+        data["authority_state"] = "ratified"
         data["unexpected"] = True
         findings = validate_manifest(data)
         self.assertIn("AUTHORITY_STATE", {f.code for f in findings})
