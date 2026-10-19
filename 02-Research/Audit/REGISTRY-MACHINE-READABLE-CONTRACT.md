@@ -10,7 +10,7 @@ This contract defines the JSON manifest shape used by runtime tooling. It does n
 
 ## Contract rules
 
-1. **Schema authority is explicit.** Manifest files validated under this contract use `authority_state: authoritative`. This identifies the selected runtime contract; it does not grant artifact records governance approval.
+1. **Schema authority is explicit.** The JSON Schema is the canonical shape used by runtime validation. Manifest data retains `authority_state: proposed`; this is a data-level state and does not change the schema’s role as the implementation reference.
 2. **One artifact per record.** Each `artifacts[]` item describes one artifact ID. Grouped source text must not be silently expanded into multiple records.
 3. **Preserve source wording.** Keep status text as written. Do not normalize `Approved (Candidate)` into `Approved` or infer missing versions.
 4. **Unknown is explicit.** Use `null` for an unverified path, unspecified version, or unresolved status. Do not invent values.
@@ -22,7 +22,7 @@ This contract defines the JSON manifest shape used by runtime tooling. It does n
 ## Fields
 
 - `schema_version`: fixed to `1.0.0` for this contract.
-- `authority_state`: fixed to `authoritative` to identify the selected runtime contract.
+- `authority_state`: fixed to `proposed` so the manifest data does not claim governance ratification.
 - `source_document`: source selected for preparation, or null until governance decides.
 - `artifact_id`: a single explicit artifact identifier.
 - `status`, `version`, `path`: source-backed values or null where unknown.
@@ -43,5 +43,5 @@ This contract defines the JSON manifest shape used by runtime tooling. It does n
 
 - `schemas/registry-manifest.schema.json` is the canonical machine-readable shape used by the validator.
 - `tools/manifest_validator.py` applies Draft 2020-12 schema validation plus application checks for duplicate IDs and safe repository-relative paths.
-- `authority_state: authoritative` identifies the selected runtime contract; it does not certify source accuracy or settle disputed artifact status.
+- `authority_state: proposed` prevents the manifest data from claiming governance ratification; selecting the schema as the implementation reference does not certify source accuracy or settle disputed artifact status.
 - The validator is read-only and never edits MAI-001, secondary indexes, or artifact files. Source-data reconciliation remains separate from running the code.
