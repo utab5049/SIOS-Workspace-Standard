@@ -4,7 +4,7 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from tools.workflow_runner import WorkflowConfigurationError, run_workflow
+from tools.workflow_runner import WorkflowConfigurationError, _write_report, main, run_workflow
 
 
 def manifest():
@@ -106,6 +106,40 @@ class WorkflowRunnerTests(unittest.TestCase):
             result = run_workflow(workflow)
         self.assertEqual(result["status"], "operation_failed")
         self.assertEqual(result["operation"]["status"], "not_found")
+
+
+
+    def test_example_workflow_is_reproducible(self):
+        example = Path(__file__).resolve().parents[1] / "examples" / "workflows" / "registry-lookup" / "workflow.json"
+        result = run_workflow(example)
+        self.assertEqual(result["workflow_id"], "WF-DEMO-REGISTRY-LOOKUP")
+        self.assertEqual(result["status"], "completed")
+        self.assertEqual(result["operation"]["result"][0]["artifact_id"], "DEMO-001")
+
+    def test_cli_persists_json_report(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            workflow = self.make_files(root)
+            with patch("sys.stdout"), patch("sys.stderr"):
+                code = main([str(workflow), "--report", "reports/run.json"])
+            self.assertEqual(code, 1)  # The report directory must already exist.
+            (root / "reports").mkdir()
+            with patch("sys.stdout"), patch("sys.stderr"):
+                code = main([str(workflow), "--report", "reports/run.json"])
+            self.assertEqual(code, 0)
+            report = json.loads((root / "reports" / "run.json").read_text(encoding="utf-8"))
+            self.assertEqual(report["report_schema_version"], "1.0")
+            self.assertEqual(report["result"]["status"], "completed")
+            self.assertIn("generated_at", report)
+
+    def test_report_cannot_overwrite_inputs_or_escape_directory(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            workflow = self.make_files(root)
+            with self.assertRaisesRegex(WorkflowConfigurationError, "overwrite"):
+                _write_report(workflow, "rules.json", {"status": "completed"})
+            with self.assertRaisesRegex(WorkflowConfigurationError, "inside"):
+                _write_report(workflow, "../outside.json", {"status": "completed"})
 
 
 if __name__ == "__main__":
