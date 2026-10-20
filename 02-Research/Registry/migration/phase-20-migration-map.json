@@ -1,0 +1,197 @@
+{
+  "migration_id": "MIG-020",
+  "status": "staged_not_applied",
+  "target_model": "GDR_OAI_SEPARATION",
+  "source_commit": "5bc0ff427e7937139e85d3222e65cb0f4b1ab11b",
+  "rules": [
+    "Preserve original source files and Git history.",
+    "Do not silently select a winner when source claims conflict.",
+    "Do not infer that missing evidence proves an event did not occur.",
+    "Apply canonical file changes only in a separately reviewed migration PR."
+  ],
+  "governance_decisions": [
+    {
+      "decision_id": "GOV-DEC-001",
+      "title": "Separate governance decision authority from operational artifact inventory",
+      "status": "approved",
+      "scope": "Target architecture for GDR and OAI responsibilities",
+      "authority": {
+        "owner_or_body": "Project owner",
+        "basis": "Explicit instruction in the project conversation dated 2026-10-18",
+        "approval_record": "This phase-20 migration package; repository adoption remains pending PR review and merge"
+      },
+      "selected_option": "Separate governance authority from operational asset inventory",
+      "rationale": "Avoid competing sources of truth by defining non-overlapping responsibilities and explicit precedence rules.",
+      "effective_date": "2026-10-18",
+      "evidence": [
+        {
+          "reference": "02-Research/Audit/PHASE-19-GOVERNANCE-OPERATIONAL-REGISTRY-SEPARATION.md",
+          "claim": "Proposed separation of GDR and OAI",
+          "verification_status": "verified"
+        }
+      ],
+      "affected_artifact_ids": [
+        "MAI-001",
+        "REGISTRY-README",
+        "REGISTRY-INDEX"
+      ],
+      "supersedes": null,
+      "superseded_by": null,
+      "implementation_requirements": [
+        "Adopt GDR and OAI schemas",
+        "Migrate records with source provenance",
+        "Preserve conflict records"
+      ],
+      "implementation_evidence": [
+        "02-Research/Registry/schemas/gdr.schema.json",
+        "02-Research/Registry/schemas/oai.schema.json",
+        "02-Research/Registry/migration/phase-20-migration-map.json"
+      ],
+      "history": [
+        {
+          "date": "2026-10-18",
+          "event": "Architecture direction approved by explicit project-owner instruction; repository adoption awaits review and merge",
+          "source": "Project conversation and Phase 20 PR"
+        }
+      ]
+    },
+    {
+      "decision_id": "GOV-DEC-C1",
+      "title": "C1 independent-review evidence status",
+      "status": "unresolved",
+      "scope": "Whether the evidence supports the claim that three qualifying independent reviews occurred",
+      "authority": {
+        "owner_or_body": "Authorized SIOS governance owner/body not yet confirmed in the repository record",
+        "basis": "Existing governance process and evidence reconciliation requirement",
+        "approval_record": "No new approval or ratification is made by this migration package"
+      },
+      "selected_option": null,
+      "rationale": "Available bounded repository search did not verify the claimed review packages; this does not establish that the reviews did not occur.",
+      "effective_date": null,
+      "evidence": [
+        {
+          "reference": "02-Research/Registry/C1-RATIFIED-FINAL.md",
+          "claim": "C1 is described as ratified and review tests are claimed",
+          "verification_status": "disputed"
+        },
+        {
+          "reference": "02-Research/Registry/DECISIONS-RECORDED.md",
+          "claim": "C1 is recorded as not yet ratified pending independent sample review",
+          "verification_status": "disputed"
+        },
+        {
+          "reference": "02-Research/Audit/REVIEW-LEDGER.md",
+          "claim": "Review evidence and reviewer independence fields remain unreconciled",
+          "verification_status": "unverified"
+        }
+      ],
+      "affected_artifact_ids": [
+        "MAI-001",
+        "C1-RATIFIED-FINAL",
+        "DECISIONS-RECORDED",
+        "REVIEW-LEDGER"
+      ],
+      "supersedes": null,
+      "superseded_by": null,
+      "implementation_requirements": [
+        "Recover and verify original review packages or record evidence unavailable after an authorized bounded search",
+        "Obtain explicit authorized governance decision before changing C1 status"
+      ],
+      "implementation_evidence": [],
+      "history": [
+        {
+          "date": "2026-10-18",
+          "event": "Status carried forward as unresolved; no C1 decision made by Phase 20",
+          "source": "Existing conflicting repository records and prior evidence reconciliation"
+        }
+      ]
+    }
+  ],
+  "operational_inventory": [
+    {
+      "artifact_id": "MAI-001",
+      "title": "Master Artifact Index",
+      "classification": "Registry",
+      "path": "01-Foundation/Registry/MAI-001.md",
+      "version": "1.1.0",
+      "lifecycle_state": "disputed",
+      "owner": null,
+      "domain": "01-Foundation",
+      "collection": "Registry",
+      "depends_on": [],
+      "source_decision_ids": [
+        "GOV-DEC-001",
+        "GOV-DEC-C1"
+      ],
+      "provenance": [
+        {
+          "source_path": "01-Foundation/Registry/MAI-001.md",
+          "source_commit": "5bc0ff427e7937139e85d3222e65cb0f4b1ab11b",
+          "source_version": "Frozen v1.1.0 (amended)",
+          "source_claim": "MAI-001 declares itself authoritative and lists registered artifacts",
+          "source_status": "conflicting"
+        }
+      ],
+      "reconciliation_status": "disputed",
+      "notes": [
+        "Historical claim preserved as source evidence; no change to the source file is made in this phase."
+      ]
+    },
+    {
+      "artifact_id": "REGISTRY-README",
+      "title": "12-Registry README",
+      "classification": "Registry landing page",
+      "path": "12-Registry/README.md",
+      "version": null,
+      "lifecycle_state": "disputed",
+      "owner": null,
+      "domain": "12-Registry",
+      "collection": "Registry",
+      "depends_on": [],
+      "source_decision_ids": [
+        "GOV-DEC-001"
+      ],
+      "provenance": [
+        {
+          "source_path": "12-Registry/README.md",
+          "source_commit": "5bc0ff427e7937139e85d3222e65cb0f4b1ab11b",
+          "source_version": null,
+          "source_claim": "States that no artifacts are currently registered",
+          "source_status": "conflicting"
+        }
+      ],
+      "reconciliation_status": "disputed",
+      "notes": [
+        "Conflicts with MAI-001; preserved without choosing a canonical source in this migration map."
+      ]
+    },
+    {
+      "artifact_id": "REGISTRY-INDEX",
+      "title": "12-Registry Index",
+      "classification": "Registry index",
+      "path": "12-Registry/INDEX.md",
+      "version": null,
+      "lifecycle_state": "disputed",
+      "owner": null,
+      "domain": "12-Registry",
+      "collection": "Registry",
+      "depends_on": [],
+      "source_decision_ids": [
+        "GOV-DEC-001"
+      ],
+      "provenance": [
+        {
+          "source_path": "12-Registry/INDEX.md",
+          "source_commit": "5bc0ff427e7937139e85d3222e65cb0f4b1ab11b",
+          "source_version": null,
+          "source_claim": "States that no artifacts are currently registered",
+          "source_status": "conflicting"
+        }
+      ],
+      "reconciliation_status": "disputed",
+      "notes": [
+        "Conflicts with MAI-001; preserved without choosing a canonical source in this migration map."
+      ]
+    }
+  ]
+}
